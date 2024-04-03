@@ -1,4 +1,17 @@
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
 
-npx lint-staged –relative
+if [ "$branch" = "main" ]]; then
+  echo '  ____________________________________'
+  echo ' / One does not simply commit to main \'
+  echo ' \ or dev branch! Please create PR.   /'
+  echo '  -----------------------------------'
+  echo '         \   ^__^ '
+  echo '          \  (oo)\_______'
+  echo '             (__)\       )\/\'
+  echo '                 ||----w |'
+  echo '                 ||     ||'
+  exit 1
+fi
+
+npx --no-install lint-staged -v
