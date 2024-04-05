@@ -1,32 +1,311 @@
 {
+  "root": true,
   "ignorePatterns": ["**/*"],
+  "plugins": ["@nx", "unused-imports", "jest", "import"],
   "overrides": [
+    // Jest
     {
-      "files": ["*.ts", "*.tsx", "*.js", "*.jsx"],
+      "files": ["*.spec.ts", "*.integration-spec.ts"],
       "rules": {
-        "@nx/enforce-module-boundaries": [
+        "jest/consistent-test-it": "error",
+        "jest/expect-expect": [
           "error",
           {
-            "enforceBuildableLibDependency": true,
-            "allow": [],
-            "depConstraints": [
-              {
-                "sourceTag": "*",
-                "onlyDependOnLibsWithTags": ["*"]
-              }
+            "assertFunctionNames": [
+              "assert*",
+              "expect",
+              "verify",
+              "m.expect",
+              "http.verify",
+              "**.should",
+              "**.contains",
+              "supertest.**.expect"
             ]
+          }
+        ],
+        "jest/max-expects": "off",
+        "jest/max-nested-describe": "off",
+        "jest/no-alias-methods": "error",
+        "jest/no-commented-out-tests": "error",
+        "jest/no-conditional-expect": "error",
+        "jest/no-conditional-in-test": "error",
+        "jest/no-deprecated-functions": "error",
+        "jest/no-disabled-tests": "error",
+        "jest/no-done-callback": "error",
+        "jest/no-duplicate-hooks": "error",
+        "jest/no-export": "error",
+        "jest/no-focused-tests": "error",
+        "jest/no-hooks": "off",
+        "jest/no-identical-title": "error",
+        "jest/no-interpolation-in-snapshots": "error",
+        "jest/no-jasmine-globals": "error",
+        "jest/no-large-snapshots": "off",
+        "jest/no-mocks-import": "error",
+        "jest/no-restricted-jest-methods": "off",
+        "jest/no-restricted-matchers": "off",
+        "jest/no-standalone-expect": "error",
+        "jest/no-test-prefixes": "error",
+        "jest/no-test-return-statement": "off",
+        "jest/prefer-called-with": "off",
+        "jest/prefer-comparison-matcher": "error",
+        "jest/prefer-each": "error",
+        "jest/prefer-equality-matcher": "error",
+        "jest/prefer-expect-assertions": "off",
+        "jest/prefer-expect-resolves": "error",
+        "jest/prefer-hooks-in-order": "error",
+        "jest/prefer-hooks-on-top": "error",
+        "jest/prefer-lowercase-title": [
+          "error",
+          {
+            "ignore": ["describe"]
+          }
+        ],
+        "jest/prefer-mock-promise-shorthand": "error",
+        "jest/prefer-snapshot-hint": "error",
+        "jest/prefer-spy-on": "error",
+        "jest/prefer-strict-equal": "off",
+        "jest/prefer-to-be": "error",
+        "jest/prefer-to-contain": "error",
+        "jest/prefer-to-have-length": "error",
+        "jest/prefer-todo": "error",
+        "jest/require-hook": "off",
+        "jest/require-to-throw-message": "off",
+        "jest/require-top-level-describe": "error",
+        "jest/valid-describe-callback": "error",
+        "jest/valid-expect": "error",
+        "jest/valid-expect-in-promise": "error",
+        "jest/valid-title": "error"
+      }
+    },
+    // Cypress
+    {
+      "files": ["*.cy.ts"],
+      "rules": {
+        "jest/no-disabled-tests": "error",
+        "jest/no-focused-tests": "error",
+        "jest/prefer-lowercase-title": [
+          "error",
+          {
+            "ignore": ["describe"]
           }
         ]
       }
     },
+    // Module boundaries
+    {
+      "files": ["*.ts", "*.tsx", "*.js", "*.jsx"],
+      "excludedFiles": [
+        "*.spec.ts",
+        "*.integration-spec.ts",
+        "*.cy.ts",
+        "*.fixture.ts"
+      ]
+    },
+    // Typescript
     {
       "files": ["*.ts", "*.tsx"],
-      "rules": {}
+      "extends": ["plugin:@nx/typescript"],
+      "plugins": ["import"],
+      "rules": {
+        "no-restricted-imports": [
+          "error",
+          {
+            "name": ".",
+            "message": "Importing barrel files from the same or parent folder can lead to hard-to-find circular dependendies. Import the file directly."
+          },
+          {
+            "name": "..",
+            "message": "Importing barrel files from the same or parent folder can lead to hard-to-find circular dependendies. Import the file directly."
+          },
+          {
+            "name": "../..",
+            "message": "Importing barrel files from the same or parent folder can lead to hard-to-find circular dependendies. Import the file directly."
+          }
+        ],
+        "no-restricted-globals": [
+          "error",
+          {
+            "name": "window",
+            "message": "Please use injected references:\n `@Inject(WINDOW) private readonly window: Window`"
+          },
+          {
+            "name": "document",
+            "message": "Please use injected references:\n `@Inject(DOCUMENT) private readonly document: Document`"
+          }
+        ],
+        "eqeqeq": ["error", "always"],
+        "no-await-in-loop": "error",
+        "no-constructor-return": "error",
+        "no-promise-executor-return": "error",
+        "no-duplicate-imports": [
+          "error",
+          {
+            "includeExports": true
+          }
+        ],
+        "no-self-compare": "error",
+        "no-template-curly-in-string": "error",
+        "camelcase": "warn",
+        "curly": "error",
+        "default-case": "error",
+        "default-case-last": "error",
+        "no-alert": "error",
+        "no-var": "error",
+        "prefer-const": "error",
+        "prefer-template": "error",
+        "unused-imports/no-unused-imports-ts": 2,
+        "@typescript-eslint/no-explicit-any": "error",
+        "@typescript-eslint/explicit-function-return-type": [
+          "error",
+          {
+            "allowExpressions": true
+          }
+        ],
+        "@typescript-eslint/no-unused-vars": [
+          "error",
+          {
+            "argsIgnorePattern": "^_"
+          }
+        ]
+      }
     },
+    // ngrx stores
+    {
+      "files": ["*store.ts"],
+      "rules": {
+        "@nx/workspace/no-duplicate-action-names": ["error"]
+      }
+    },
+    // JavaScript
     {
       "files": ["*.js", "*.jsx"],
+      "extends": ["plugin:@nx/javascript"],
+      "rules": {
+        "eqeqeq": ["error", "always"],
+        "no-await-in-loop": "error",
+        "no-constructor-return": "error",
+        "no-promise-executor-return": "error",
+        "no-duplicate-imports": [
+          "error",
+          {
+            "includeExports": true
+          }
+        ],
+        "no-self-compare": "error",
+        "no-template-curly-in-string": "error",
+        "camelcase": "warn",
+        "curly": "error",
+        "default-case": "error",
+        "default-case-last": "error",
+        "no-alert": "error",
+        "no-var": "error",
+        "prefer-const": "error",
+        "prefer-template": "error",
+        "unused-imports/no-unused-imports-ts": 2
+      }
+    },
+    // All test related files
+    {
+      "files": [
+        "*.spec.ts",
+        "*.cy.ts",
+        "*.integration-spec.ts",
+        "*.po.ts",
+        // cypress page objects
+        "**/support/*.ts",
+        // cypress commands, e2e etc
+        "**/fixtures/**/*",
+        // cypress fixtures,
+        "**/e2e/**/*.ts",
+        // cypress fixtures,
+        "**/global.setup.ts",
+        // cypress fixtures,
+        "*.stories.ts",
+        "**/test-setup.ts",
+        "**/setup-app.ts"
+      ],
+      "rules": {
+        "@nx/enforce-module-boundaries": "off",
+        "@typescript-eslint/no-namespace": "off",
+        "no-restricted-globals": "off",
+        "no-console": "off"
+      }
+    },
+    // All stubs and test helpers
+    {
+      "files": ["*.stub.ts", "*.test-helper.ts"],
+      "rules": {
+        "@nx/enforce-module-boundaries": [
+          "error",
+          {
+            "allow": [],
+            "allowCircularSelfDependency": true,
+            "depConstraints": [
+              {
+                "sourceTag": "*",
+                "onlyDependOnLibsWithTags": ["*"]
+              },
+              // Dimension: CONTEXT
+              // Available contexts: node, nestjs, angular, typescript, native-mobile, cypress
+              {
+                "sourceTag": "context:node",
+                "bannedExternalImports": [
+                  "@angular*",
+                  "@nestjs*",
+                  "@ngrx*",
+                  "@capacitor*",
+                  "@ionic*"
+                ],
+                "onlyDependOnLibsWithTags": [
+                  "context:node",
+                  "context:typescript"
+                ]
+              },
+              {
+                "sourceTag": "context:nestjs",
+                "bannedExternalImports": [
+                  "@angular*",
+                  "@ionic*",
+                  "*-cordova-*",
+                  "@ngrx*"
+                ],
+                "onlyDependOnLibsWithTags": [
+                  "context:nestjs",
+                  "context:typescript"
+                ]
+              },
+              {
+                "sourceTag": "context:angular",
+                "bannedExternalImports": ["@nestjs*"],
+                "onlyDependOnLibsWithTags": [
+                  "context:angular",
+                  "context:typescript"
+                ]
+              },
+              {
+                "sourceTag": "context:typescript",
+                "bannedExternalImports": ["@angular*", "@nestjs*", "@ngrx*"],
+                "onlyDependOnLibsWithTags": ["context:typescript"]
+              },
+              {
+                "sourceTag": "context:native-mobile",
+                "onlyDependOnLibsWithTags": [
+                  "context:native-mobile",
+                  "context:angular",
+                  "context:typescript"
+                ]
+              }
+            ]
+          }
+        ],
+        "@typescript-eslint/no-namespace": "off",
+        "no-restricted-globals": "off"
+      }
+    },
+    {
+      "files": "*.json",
+      "parser": "jsonc-eslint-parser",
       "rules": {}
     }
-  ],
-  "extends": ["./.eslintrc.json"]
+  ]
 }

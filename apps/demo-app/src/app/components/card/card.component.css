@@ -1,44 +1,44 @@
 :host {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    padding: 1rem;
-    border: 1px solid;
-    background: rgb(255, 255, 255);
-    color: rgb(0, 0, 0);
-    border-radius: 8px;
-    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1rem;
+  border: 1px solid;
+  background: rgb(255, 255, 255);
+  color: rgb(0, 0, 0);
+  border-radius: 8px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
 }
 
 .sk-title {
-    font-size: 1.2rem;
-    line-height: 2rem;
-    width: 100%;
-    border-bottom: 1px rgb(0, 0, 0) solid;
+  font-size: 1.2rem;
+  line-height: 2rem;
+  width: 100%;
+  border-bottom: 1px rgb(0, 0, 0) solid;
 }
 
 .sk-actions {
-    display: flex;
-    justify-content: flex-end;
-    gap: 1rem;
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
 
-    a {
-        -webkit-appearance: none;
-        text-decoration: none;
-        padding: 0.5rem 1rem;
-        border-radius: 100svh;
-        background: rgb(252, 0, 84);
-        color: rgb(255, 255, 255);
-        transition: background 0.3s ease-in-out;
+  a {
+    -webkit-appearance: none;
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    border-radius: 100svh;
+    background: rgb(252, 0, 84);
+    color: rgb(255, 255, 255);
+    transition: background 0.3s ease-in-out;
 
-        @media (hover) {
-            &:hover {
-                background: rgba(255, 0, 84, 0.6);
-            }
-        }
-
-        &:active {
-            background: rgba(255, 0, 84, 0.8);
-        }
+    @media (hover) {
+      &:hover {
+        background: rgba(255, 0, 84, 0.6);
+      }
     }
+
+    &:active {
+      background: rgba(255, 0, 84, 0.8);
+    }
+  }
 }
