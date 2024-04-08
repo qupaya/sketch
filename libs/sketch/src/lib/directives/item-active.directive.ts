@@ -33,7 +33,6 @@ export class ItemActiveLinkDirective implements OnInit {
     event.preventDefault();
     event.stopPropagation();
     this.listService.setActive(this.skItemActiveLink());
-
     this.router.navigate([this.skItemActiveLink()], {
       relativeTo: this.activatedRoute.parent,
     });

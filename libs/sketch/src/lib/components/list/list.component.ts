@@ -19,7 +19,6 @@ export class ListService {
   registerItem(id: string, parentId?: string): void {
     const item = this.items().find((item) => item.id === id);
     if (!item && !this.items().find((item) => item.id === id)) {
-      console.log('registerItem', id, parentId);
       this.items.update((items) => [...items, { id, parentId, active: false }]);
     }
   }

@@ -1,4 +1,16 @@
-import { Route } from '@angular/router';
+import { Route, UrlSegment, UrlSegmentGroup } from '@angular/router';
+
+export function htmlFiles(
+  segments: UrlSegment[],
+  group: UrlSegmentGroup,
+  route: Route
+) {
+  console.log('htmlFiles', segments, group, route);
+  if (!segments?.length) {
+    return null;
+  }
+  return segments[0].path.indexOf('item-') > -1 ? { consumed: segments } : null;
+}
 
 export const appRoutes: Route[] = [
   {
@@ -17,28 +29,7 @@ export const appRoutes: Route[] = [
     path: 'list-sample',
     children: [
       {
-        path: '',
-        loadComponent: () =>
-          import('./pages/list-sample/list-sample.component').then(
-            (m) => m.ListSampleComponent
-          ),
-      },
-      {
-        path: ':rootId',
-        loadComponent: () =>
-          import('./pages/list-sample/list-sample.component').then(
-            (m) => m.ListSampleComponent
-          ),
-      },
-      {
-        path: ':rootId/:parentId',
-        loadComponent: () =>
-          import('./pages/list-sample/list-sample.component').then(
-            (m) => m.ListSampleComponent
-          ),
-      },
-      {
-        path: ':rootId/:parentId/:childId',
+        matcher: htmlFiles,
         loadComponent: () =>
           import('./pages/list-sample/list-sample.component').then(
             (m) => m.ListSampleComponent

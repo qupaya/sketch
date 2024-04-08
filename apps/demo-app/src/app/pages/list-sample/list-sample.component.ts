@@ -1,58 +1,20 @@
-import { Component, inject, Injectable, OnInit, signal } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  effect,
+  OnDestroy,
+  signal,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
   ItemActiveLinkDirective,
   ListComponent,
   ListItemComponent,
 } from '@qupaya/sketch';
-
-interface DemoItem {
-  label: string;
-  link: string;
-  children?: DemoItem[];
-}
-
-@Injectable({
-  providedIn: 'root',
-})
-export class DemoListService {
-  readonly items = signal<DemoItem[]>([]);
-
-  constructor() {
-    this.items.set(this.generateRandomList());
-  }
-
-  private generateRandomList(): DemoItem[] {
-    const items = Array.of<DemoItem>();
-    for (let i = 1; i <= 10; i++) {
-      const item = {
-        label: `Item ${i}`,
-        link: `item-${i}`,
-        children: Array.of<DemoItem>(),
-      };
-      const random = Math.floor(Math.random() * (1 - 10 + 1) + 1) * -1;
-      for (let j = 1; j <= random; j++) {
-        const child: DemoItem = {
-          label: `Child ${j}`,
-          link: `${item.link}/child-${j}`,
-          children: Array.of<DemoItem>(),
-        };
-        const subRandom = Math.floor(Math.random() * (1 - 5 + 1) + 1) * -1;
-        for (let k = 1; k <= subRandom; k++) {
-          const subChild: DemoItem = {
-            label: `Sub Child ${k}`,
-            link: `${child.link}/sub-child-${k}`,
-          };
-          child.children?.push(subChild);
-        }
-        item.children.push(child);
-      }
-      items.push(item);
-    }
-    console.log('items', items);
-    return items;
-  }
-}
+import { data } from './list-sample.data';
+import { query, transition, trigger } from '@angular/animations';
+import { slideFadeAnimationFactory } from '../../animations/slide.animation';
+import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-list-sample',
@@ -62,20 +24,33 @@ export class DemoListService {
     ItemActiveLinkDirective,
     ListComponent,
     ListItemComponent,
+    RouterOutlet,
   ],
   templateUrl: './list-sample.component.html',
   styleUrl: './list-sample.component.css',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  animations: [
+    trigger('skListAnimation', [
+      transition(':enter', [
+        query(':enter', slideFadeAnimationFactory(), { optional: true }),
+      ]),
+    ]),
+  ],
 })
-export class ListSampleComponent implements OnInit {
-  private readonly demoService = inject(DemoListService);
+export class ListSampleComponent implements OnDestroy {
   readonly rootActiveId = signal<string | undefined>(undefined);
   readonly childActiveId = signal<string | undefined>(undefined);
   readonly grandChildActiveId = signal<string | undefined>(undefined);
-  readonly items = signal<DemoItem[]>([]);
+  readonly items = signal(data, { equal: (a, b) => a.length === b.length });
 
-  ngOnInit(): void {
-    if (this.items().length === 0) {
-      this.items.set(this.demoService.items());
-    }
+  protected readonly test = effect(
+    () => {
+      console.log('ListSampleComponent.items', this.items());
+    },
+    { allowSignalWrites: true }
+  );
+
+  ngOnDestroy(): void {
+    console.log('ListSampleComponent.ngOnDestroy');
   }
 }
