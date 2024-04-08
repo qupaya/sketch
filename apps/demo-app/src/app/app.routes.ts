@@ -19,28 +19,28 @@ export const appRoutes: Route[] = [
       {
         path: '',
         loadComponent: () =>
-          import('./components/list-sample/list-sample.component').then(
+          import('./pages/list-sample/list-sample.component').then(
             (m) => m.ListSampleComponent
           ),
       },
       {
         path: ':rootId',
         loadComponent: () =>
-          import('./components/list-sample/list-sample.component').then(
+          import('./pages/list-sample/list-sample.component').then(
             (m) => m.ListSampleComponent
           ),
       },
       {
         path: ':rootId/:parentId',
         loadComponent: () =>
-          import('./components/list-sample/list-sample.component').then(
+          import('./pages/list-sample/list-sample.component').then(
             (m) => m.ListSampleComponent
           ),
       },
       {
         path: ':rootId/:parentId/:childId',
         loadComponent: () =>
-          import('./components/list-sample/list-sample.component').then(
+          import('./pages/list-sample/list-sample.component').then(
             (m) => m.ListSampleComponent
           ),
       },

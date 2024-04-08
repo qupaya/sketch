@@ -2,7 +2,6 @@ import {
   Component,
   computed,
   effect,
-  ElementRef,
   inject,
   signal,
   untracked,
@@ -10,7 +9,7 @@ import {
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ItemActiveLinkDirective } from '../../directives/item-active.directive';
-import { ListService } from '../list/list.component';
+import { ListComponent, ListService } from '../list/list.component';
 
 // TODO: rename with prefix sk
 @Component({
@@ -23,11 +22,15 @@ import { ListService } from '../list/list.component';
 })
 export class ListItemComponent {
   private readonly listService = inject(ListService);
-  private readonly element = inject(ElementRef, { optional: true });
+  // private readonly element = inject(ElementRef, { optional: true });
   private readonly activeLink = inject(ItemActiveLinkDirective, {
     optional: true,
   });
   readonly parent = inject(ListItemComponent, {
+    optional: true,
+    skipSelf: true,
+  });
+  readonly parentList = inject(ListComponent, {
     optional: true,
     skipSelf: true,
   });
@@ -40,9 +43,7 @@ export class ListItemComponent {
   );
   readonly parentActive = computed(() => {
     const id = this.activeLink?.skItemActiveLink();
-    const result = id ? this.listService.isParentActive(id) : true;
-    console.log('parentActive', id, result);
-    return result;
+    return id ? this.listService.isParentActive(id) : true;
   });
 
   readonly registerListItem = effect(
@@ -58,20 +59,24 @@ export class ListItemComponent {
     { allowSignalWrites: true }
   );
 
-  readonly updateCssClasses = effect(() => {
+  /*readonly updateCssClasses = effect(() => {
     this.element?.nativeElement?.setAttribute(
       'part',
       this.me()?.active ? 'sk-item sk-active' : 'sk-item'
     );
-  });
+  });*/
 
   readonly updateActiveState = effect(
     () => {
-      // TODO: maybe get the info from the service?
-      const items = this.listService.items();
-      const currentLink = untracked(this.activeLink!.skItemActiveLink);
-      const item = items.find(({ id }) => id === currentLink);
-      this.active.set(item?.active ?? false);
+      if (this.activeLink) {
+        const items = this.listService.items();
+        const currentLink = untracked(this.activeLink.skItemActiveLink);
+        const item = items.find(({ id }) => id === currentLink);
+        this.active.set(item?.active ?? false);
+        if (this.parentList && item?.active) {
+          this.parentList.activateItem(item?.id);
+        }
+      }
     },
     { allowSignalWrites: true }
   );

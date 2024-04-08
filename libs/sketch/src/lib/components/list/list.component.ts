@@ -1,6 +1,7 @@
 import {
   Component,
   Injectable,
+  output,
   signal,
   ViewEncapsulation,
 } from '@angular/core';
@@ -15,15 +16,15 @@ export class ListService {
     []
   );
 
-  registerItem(id: string, parentId?: string) {
+  registerItem(id: string, parentId?: string): void {
     const item = this.items().find((item) => item.id === id);
-    if (!item) {
+    if (!item && !this.items().find((item) => item.id === id)) {
+      console.log('registerItem', id, parentId);
       this.items.update((items) => [...items, { id, parentId, active: false }]);
     }
   }
 
-  setActive(id: string) {
-    console.log('setActive', id);
+  setActive(id: string): void {
     const ids = this.getActiveIds(id);
     this.items.update((items) =>
       items.map((item) => ({
@@ -60,4 +61,12 @@ export class ListService {
   styleUrl: './list.component.css',
   encapsulation: ViewEncapsulation.ShadowDom,
 })
-export class ListComponent {}
+export class ListComponent {
+  private readonly activeItemId = signal<string | undefined>(undefined);
+  activeIdChanged = output<string>();
+
+  activateItem(id: string): void {
+    this.activeItemId.update(() => id);
+    this.activeIdChanged.emit(id);
+  }
+}

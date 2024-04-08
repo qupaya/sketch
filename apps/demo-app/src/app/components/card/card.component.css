@@ -22,7 +22,7 @@
   justify-content: flex-end;
   gap: 1rem;
 
-  a {
+  .sk-link {
     -webkit-appearance: none;
     text-decoration: none;
     padding: 0.5rem 1rem;
