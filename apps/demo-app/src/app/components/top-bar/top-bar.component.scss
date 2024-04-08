@@ -1,0 +1,16 @@
+:host {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0 1rem;
+  height: var(--sk-top-bar-height);
+}
+
+.sk-container {
+  flex: 1;
+}
+
+img {
+  justify-self: flex-start;
+  height: 42px;
+}
