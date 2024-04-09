@@ -1,5 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ListSampleComponent } from './list-sample.component';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { RouterModule } from '@angular/router';
 
 describe('ListSampleComponent', () => {
   let component: ListSampleComponent;
@@ -7,7 +9,11 @@ describe('ListSampleComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ListSampleComponent],
+      imports: [
+        ListSampleComponent,
+        NoopAnimationsModule,
+        RouterModule.forRoot([]),
+      ],
     }).compileComponents();
 
     fixture = TestBed.createComponent(ListSampleComponent);

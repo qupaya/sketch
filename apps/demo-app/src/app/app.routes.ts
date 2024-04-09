@@ -1,16 +1,6 @@
-import { Route, UrlSegment, UrlSegmentGroup } from '@angular/router';
+import { Route } from '@angular/router';
 
-export function htmlFiles(
-  segments: UrlSegment[],
-  group: UrlSegmentGroup,
-  route: Route
-) {
-  console.log('htmlFiles', segments, group, route);
-  if (!segments?.length) {
-    return null;
-  }
-  return segments[0].path.indexOf('item-') > -1 ? { consumed: segments } : null;
-}
+const UUID_REGEX = /^[a-z,0-9,-]{36,36}$/;
 
 export const appRoutes: Route[] = [
   {
@@ -29,7 +19,17 @@ export const appRoutes: Route[] = [
     path: 'list-sample',
     children: [
       {
-        matcher: htmlFiles,
+        path: '',
+        loadComponent: () =>
+          import('./pages/list-sample/list-sample.component').then(
+            (m) => m.ListSampleComponent
+          ),
+      },
+      {
+        matcher: (segments) =>
+          segments.length && UUID_REGEX.test(segments[0].path)
+            ? { consumed: segments }
+            : null,
         loadComponent: () =>
           import('./pages/list-sample/list-sample.component').then(
             (m) => m.ListSampleComponent

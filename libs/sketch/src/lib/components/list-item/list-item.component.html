@@ -1,8 +1,0 @@
-@if (me(); as item) {
-  @if (!item.parentId || parentActive()) {
-    <ng-content></ng-content>
-  }
-  @if (item.active) {
-    <ng-content select="[sk-childs]"></ng-content>
-  }
-}

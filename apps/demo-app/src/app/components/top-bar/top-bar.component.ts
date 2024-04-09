@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-top-bar',
@@ -8,4 +9,10 @@ import { CommonModule } from '@angular/common';
   templateUrl: './top-bar.component.html',
   styleUrl: './top-bar.component.scss',
 })
-export class TopBarComponent {}
+export class TopBarComponent {
+  private readonly router = inject(Router);
+
+  async goBack(): Promise<void> {
+    await this.router.navigate(['/']);
+  }
+}

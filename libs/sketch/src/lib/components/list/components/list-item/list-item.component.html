@@ -1,0 +1,5 @@
+@if (listItem(); as item) { @if (!item.parentId || parentActive()) {
+<ng-content select="[sk-label]"></ng-content>
+} @if (item.active) {
+<ng-content select="[sk-childs]"></ng-content>
+} }

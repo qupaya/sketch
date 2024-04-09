@@ -1,17 +1,11 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  effect,
-  OnDestroy,
-  signal,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
-  ItemActiveLinkDirective,
   ListComponent,
+  ListItemActiveDirective,
   ListItemComponent,
 } from '@qupaya/sketch';
-import { data } from './list-sample.data';
+import { SAMPLE_DATA } from './list-sample.data';
 import { query, transition, trigger } from '@angular/animations';
 import { slideFadeAnimationFactory } from '../../animations/slide.animation';
 import { RouterOutlet } from '@angular/router';
@@ -21,7 +15,7 @@ import { RouterOutlet } from '@angular/router';
   standalone: true,
   imports: [
     CommonModule,
-    ItemActiveLinkDirective,
+    ListItemActiveDirective,
     ListComponent,
     ListItemComponent,
     RouterOutlet,
@@ -37,20 +31,11 @@ import { RouterOutlet } from '@angular/router';
     ]),
   ],
 })
-export class ListSampleComponent implements OnDestroy {
+export class ListSampleComponent {
   readonly rootActiveId = signal<string | undefined>(undefined);
   readonly childActiveId = signal<string | undefined>(undefined);
   readonly grandChildActiveId = signal<string | undefined>(undefined);
-  readonly items = signal(data, { equal: (a, b) => a.length === b.length });
-
-  protected readonly test = effect(
-    () => {
-      console.log('ListSampleComponent.items', this.items());
-    },
-    { allowSignalWrites: true }
-  );
-
-  ngOnDestroy(): void {
-    console.log('ListSampleComponent.ngOnDestroy');
-  }
+  readonly items = signal(SAMPLE_DATA, {
+    equal: (a, b) => a.length === b.length,
+  });
 }

@@ -10,7 +10,11 @@
   flex: 1;
 }
 
-img {
+.sk-logo {
+  cursor: pointer;
+}
+
+.sk-logo img {
   justify-self: flex-start;
   height: 42px;
 }

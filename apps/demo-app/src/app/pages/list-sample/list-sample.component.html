@@ -1,32 +1,67 @@
 <sk-list (activeIdChanged)="rootActiveId.set($event)">
   <div class="sk-list" @skListAnimation>
     @for (rootItem of items(); track rootItem.link) {
-      <sk-list-item [skItemActiveLink]="rootItem.link">
-        <span class="sk-label" [class.sk-active]="rootActiveId() === rootItem.link"> {{ rootItem.label }} </span>
-        @if (rootItem.children?.length) {
-          <sk-list class="sk-child-list" sk-childs (activeIdChanged)="childActiveId.set($event)">
-            <div class="sk-list sk-child-list" @skListAnimation>
-              @for (childItem of rootItem.children; track childItem.link) {
-                <sk-list-item [skItemActiveLink]="childItem.link">
-                  <span class="sk-label" [class.sk-active]="childActiveId() === childItem.link">{{ childItem.label }}</span>
-                  @if (childItem.children?.length) {
-                    <sk-list class="sk-grand-child-list" sk-childs (activeIdChanged)="grandChildActiveId.set($event)">
-                      <div class="sk-list sk-grand-child-list" @skListAnimation>
-                        @for (grandChildItem of childItem.children; track grandChildItem.link) {
-                          <sk-list-item [skItemActiveLink]="grandChildItem.link">
-                            <span class="sk-label" [class.sk-active]="grandChildActiveId() === grandChildItem.link">{{ grandChildItem.label }}</span>
-                          </sk-list-item>
-                        }
-                      </div>
-                    </sk-list>
-                  }
-                </sk-list-item>
-              }
+    <sk-list-item [skListItemId]="rootItem.link" [skEnableRouting]="true">
+      <div
+        class="sk-label"
+        [class.sk-active]="rootActiveId() === rootItem.link"
+        sk-label
+      >
+        <span> {{ rootItem.label }} </span>
+      </div>
+      @if (rootItem.children?.length && rootActiveId() === rootItem.link) {
+      <sk-list
+        class="sk-child-list"
+        sk-childs
+        (activeIdChanged)="childActiveId.set($event)"
+      >
+        <div class="sk-list sk-child-list" @skListAnimation>
+          @for (childItem of rootItem.children; track childItem.link) {
+          <sk-list-item
+            [skListItemId]="childItem.link"
+            [skEnableRouting]="true"
+          >
+            <div
+              class="sk-label"
+              [class.sk-active]="childActiveId() === childItem.link"
+              sk-label
+            >
+              <span> {{ childItem.label }} </span>
             </div>
-          </sk-list>
-        }
-      </sk-list-item>
+            @if (childItem.children?.length && childActiveId() ===
+            childItem.link) {
+            <sk-list
+              class="sk-grand-child-list"
+              sk-childs
+              (activeIdChanged)="grandChildActiveId.set($event)"
+            >
+              <div class="sk-list sk-grand-child-list" @skListAnimation>
+                @for (grandChildItem of childItem.children; track
+                grandChildItem.link) {
+                <sk-list-item
+                  [skListItemId]="grandChildItem.link"
+                  [skEnableRouting]="true"
+                >
+                  <div
+                    class="sk-label"
+                    [class.sk-active]="
+                      grandChildActiveId() === grandChildItem.link
+                    "
+                    sk-label
+                  >
+                    <span> {{ grandChildItem.label }} </span>
+                  </div>
+                </sk-list-item>
+                }
+              </div>
+            </sk-list>
+            }
+          </sk-list-item>
+          }
+        </div>
+      </sk-list>
+      }
+    </sk-list-item>
     }
   </div>
 </sk-list>
-<router-outlet></router-outlet>

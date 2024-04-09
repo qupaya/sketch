@@ -29,6 +29,7 @@
     border-radius: 100svh;
     background: rgb(252, 0, 84);
     color: rgb(255, 255, 255);
+    cursor: pointer;
     transition: background 0.3s ease-in-out;
 
     @media (hover) {

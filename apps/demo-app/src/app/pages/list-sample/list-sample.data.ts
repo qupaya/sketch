@@ -8,22 +8,20 @@ function generateRandomList(): DemoItem[] {
   const items = Array.of<DemoItem>();
   for (let i = 1; i <= 10; i++) {
     const item = {
-      label: `Item ${i}`,
-      link: `item-${i}`,
+      label: `${SAMPLE_DATA_ITEM_PREFIX} ${i}`,
+      link: crypto.randomUUID(),
       children: Array.of<DemoItem>(),
     };
-    const random = Math.floor(Math.random() * (1 - 10 + 1) + 1) * -1;
-    for (let j = 1; j <= random; j++) {
+    for (let j = 1; j <= 5; j++) {
       const child: DemoItem = {
-        label: `Child ${j}`,
-        link: `${item.link}/child-${j}`,
+        label: `${SAMPLE_DATA_ITEM_PREFIX} child ${j}`,
+        link: `${item.link}/${crypto.randomUUID()}`,
         children: Array.of<DemoItem>(),
       };
-      const subRandom = Math.floor(Math.random() * (1 - 5 + 1) + 1) * -1;
-      for (let k = 1; k <= subRandom; k++) {
+      for (let k = 1; k <= 3; k++) {
         const subChild: DemoItem = {
-          label: `Sub Child ${k}`,
-          link: `${child.link}/sub-child-${k}`,
+          label: `${SAMPLE_DATA_ITEM_PREFIX} grand child ${k}`,
+          link: `${child.link}/${crypto.randomUUID()}`,
         };
         child.children?.push(subChild);
       }
@@ -34,4 +32,5 @@ function generateRandomList(): DemoItem[] {
   return items;
 }
 
-export const data = generateRandomList();
+export const SAMPLE_DATA_ITEM_PREFIX = 'Item';
+export const SAMPLE_DATA = generateRandomList();
