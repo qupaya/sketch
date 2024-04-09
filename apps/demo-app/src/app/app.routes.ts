@@ -13,5 +13,11 @@ export const appRoutes: Route[] = [
         (m) => m.OverviewComponent
       ),
   },
-  // TODO: Add routes for the other samples
+  {
+    path: 'widget',
+    loadComponent: () =>
+      import('./pages/widget-sample/widget-sample.component').then(
+        (m) => m.WidgetSampleComponent
+      ),
+  },
 ];
