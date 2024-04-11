@@ -16,6 +16,13 @@ export const appRoutes: Route[] = [
       ),
   },
   {
+    path: 'select',
+    loadComponent: () =>
+      import('./pages/select-sample/select-sample.component').then(
+        (m) => m.SelectSampleComponent
+      ),
+  },
+  {
     path: 'list-sample',
     children: [
       {

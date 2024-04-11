@@ -1,0 +1,17 @@
+<div
+  [skCdkOverlay]="overlay"
+  [skCdkOverlayShow]="panelIsVisible()"
+  (skCdkOverlayShowChange)="panelIsVisible.set($event)"
+  [skCdkOverlayPositions]="overlayPositions"
+  (click)="panelIsVisible.set(true)"
+>
+  @if (selectedValue()) {
+  <span>{{ selectedValue() }}</span>
+  } @else {
+  <span>{{ placeholder() }}</span>
+  }
+</div>
+
+<ng-template cdkPortal #overlay="cdkPortal">
+  <ng-content></ng-content>
+</ng-template>
