@@ -15,7 +15,6 @@ export class SelectOptionComponent<T> {
 
   @HostListener('click', ['$event'])
   selectItem(): void {
-    console.log('selectItem', this.value(), typeof this.value());
     this.parent.selectionChanged(this.value());
   }
 }

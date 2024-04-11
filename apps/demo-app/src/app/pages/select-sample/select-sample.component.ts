@@ -1,4 +1,4 @@
-import { Component, model, signal } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
   MultipleDirective,
@@ -6,6 +6,7 @@ import {
   SelectOptionComponent,
 } from '@qupaya/sketch';
 import { FormsModule } from '@angular/forms';
+import { SelectOptionsSampleComponent } from './select-options-sample/select-options-sample.component';
 
 @Component({
   selector: 'app-select-sample',
@@ -16,18 +17,23 @@ import { FormsModule } from '@angular/forms';
     SelectOptionComponent,
     MultipleDirective,
     FormsModule,
+    SelectOptionsSampleComponent,
   ],
   templateUrl: './select-sample.component.html',
   styleUrl: './select-sample.component.css',
 })
 export class SelectSampleComponent {
-  test = model<string | string[]>();
   multiple = signal(false);
+  value: { data: number } | { data: number }[] | undefined;
+  selectedValue = signal<{ data: number } | { data: number }[] | undefined>(
+    undefined
+  );
 
   switchMultiple(event: Event): void {
-    console.log('event', event);
     if ('checked' in event.target!) {
       this.multiple.set(event.target.checked as boolean);
     }
   }
+
+  protected readonly Array = Array;
 }

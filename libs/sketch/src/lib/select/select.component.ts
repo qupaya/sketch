@@ -1,11 +1,12 @@
 import {
   ChangeDetectorRef,
   Component,
+  computed,
+  effect,
   forwardRef,
   inject,
-  input,
   signal,
-  ViewChild,
+  untracked,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
@@ -23,7 +24,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => SelectComponent),
+      useExisting: forwardRef(() => SelectComponent<unknown>),
       multi: true,
     },
   ],
@@ -33,16 +34,39 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 export class SelectComponent<T> implements ControlValueAccessor {
   private readonly multipleRef = inject(MultipleDirective, { optional: true });
   private readonly changeDetectorRef = inject(ChangeDetectorRef);
-  private onChange?: (value: T | T[] | undefined) => void;
-  private onTouched?: () => void;
-  readonly placeholder = input('Select an option');
-  readonly selectedValue = signal<T | T[] | undefined>(undefined);
-  readonly panelIsVisible = signal(false);
 
+  readonly selectedValue = signal<T | T[] | undefined>(undefined);
+  readonly showPlaceholder = computed(() => {
+    const selectedValue = this.selectedValue();
+    const isArray = Array.isArray(selectedValue);
+    return (
+      (!isArray && !selectedValue) || (isArray && selectedValue.length <= 0)
+    );
+  });
+  readonly panelIsVisible = signal(false);
   readonly overlayPositions = DEFAULT_DROPOUT_POSITIONS;
 
-  @ViewChild(CdkOverlayDirective)
-  public overlay?: CdkOverlayDirective;
+  protected updateSelectionMode = effect(
+    () => {
+      const selectedValue = untracked(this.selectedValue);
+      if (!this.multipleRef?.multiple()) {
+        this.selectedValue.set(
+          Array.isArray(selectedValue) ? selectedValue[0] : selectedValue
+        );
+      } else {
+        this.selectedValue.set(
+          Array.isArray(selectedValue)
+            ? selectedValue
+            : selectedValue
+            ? [selectedValue]
+            : undefined
+        );
+      }
+      this.onChange?.(this.selectedValue());
+      this.onTouched?.();
+    },
+    { allowSignalWrites: true }
+  );
 
   selectionChanged(value: T): void {
     if (this.multipleRef?.multiple()) {
@@ -55,11 +79,12 @@ export class SelectComponent<T> implements ControlValueAccessor {
         return [value];
       });
     } else {
-      this.selectedValue.set(value);
+      this.selectedValue.set(
+        this.selectedValue() === value ? undefined : value
+      );
     }
-    this.onChange?.(
-      this.selectedValue() ?? this.multipleRef?.multiple() ? [] : undefined
-    );
+
+    this.onChange?.(this.selectedValue());
     this.onTouched?.();
   }
 
@@ -75,4 +100,8 @@ export class SelectComponent<T> implements ControlValueAccessor {
   registerOnTouched(fn: () => void): void {
     this.onTouched = fn;
   }
+
+  private onChange?: (value: T | T[] | undefined) => void;
+  private onTouched?: () => void;
+  protected readonly Array = Array;
 }

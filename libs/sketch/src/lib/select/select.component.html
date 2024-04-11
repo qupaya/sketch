@@ -5,10 +5,10 @@
   [skCdkOverlayPositions]="overlayPositions"
   (click)="panelIsVisible.set(true)"
 >
-  @if (selectedValue()) {
-  <span>{{ selectedValue() }}</span>
+  @if (showPlaceholder()) {
+    <ng-content select="[skSelectPlaceholder]"></ng-content>
   } @else {
-  <span>{{ placeholder() }}</span>
+    <ng-content select="[skSelectLabel]"></ng-content>
   }
 </div>
 

@@ -1,0 +1,28 @@
+:host {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    width: 100%;
+    margin-top: 0.5rem;
+    background-color: #fff;
+    color: #000;
+    border-radius: 8px;
+}
+
+sk-select-option {
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    transition: color .3s ease-in-out, font-weight .3s ease-in-out, font-size .3s ease-in-out;
+}
+
+@media (hover) {
+    sk-select-option:hover {
+        color: deeppink;
+        font-weight: bold;
+        font-size: 1.5em;
+    }
+}
+
+sk-select-option:not(:last-child) {
+    border-bottom: 1px solid #000;
+}
