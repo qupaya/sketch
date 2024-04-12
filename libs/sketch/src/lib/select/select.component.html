@@ -1,9 +1,10 @@
 <div
   [skCdkOverlay]="overlay"
   [skCdkOverlayShow]="panelIsVisible()"
-  (skCdkOverlayShowChange)="panelIsVisible.set($event)"
+  (skCdkOverlayShowChange)="togglePanel($event)"
   [skCdkOverlayPositions]="overlayPositions"
-  (click)="panelIsVisible.set(true)"
+  [skCdkOverlayDisposeDelay]="animationDelay()"
+  (click)="togglePanel(true)"
 >
   @if (showPlaceholder()) {
     <ng-content select="[skSelectPlaceholder]"></ng-content>

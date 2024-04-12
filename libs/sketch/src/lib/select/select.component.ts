@@ -5,8 +5,11 @@ import {
   effect,
   forwardRef,
   inject,
+  input,
+  output,
   signal,
   untracked,
+  ViewEncapsulation,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
@@ -30,10 +33,14 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
   ],
   templateUrl: './select.component.html',
   styleUrl: './select.component.css',
+  encapsulation: ViewEncapsulation.ShadowDom,
 })
 export class SelectComponent<T> implements ControlValueAccessor {
   private readonly multipleRef = inject(MultipleDirective, { optional: true });
   private readonly changeDetectorRef = inject(ChangeDetectorRef);
+
+  animationDelay = input(0);
+  open = output<boolean>();
 
   readonly selectedValue = signal<T | T[] | undefined>(undefined);
   readonly showPlaceholder = computed(() => {
@@ -67,6 +74,11 @@ export class SelectComponent<T> implements ControlValueAccessor {
     },
     { allowSignalWrites: true }
   );
+
+  togglePanel(visible: boolean): void {
+    this.panelIsVisible.set(visible);
+    this.open.emit(visible);
+  }
 
   selectionChanged(value: T): void {
     if (this.multipleRef?.multiple()) {

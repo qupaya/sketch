@@ -1,6 +1,11 @@
 Multiple: <input type="checkbox" (change)="switchMultiple($event)" />
 
-<sk-select [(ngModel)]="value" [skMultiple]="multiple()">
+<sk-select
+  [(ngModel)]="value"
+  [skMultiple]="multiple()"
+  [animationDelay]="350"
+  (open)="showAnimation.set($event)"
+>
   <div class="sk-label" skSelectPlaceholder>Please select an option</div>
   <div class="sk-label" skSelectLabel>
     @if (Array.isArray(value)) {
@@ -12,5 +17,15 @@ Multiple: <input type="checkbox" (change)="switchMultiple($event)" />
     }
   </div>
 
-  <app-select-options-sample></app-select-options-sample>
+  <app-select-options-sample
+    [show]="showAnimation()"
+  ></app-select-options-sample>
+  <!--<div class="sk-options" [@animation]="animateOptions()" (@animation.start)="logAnimationData($event)" (@animation.done)="logAnimationData($event)">
+    <sk-select-option class="sk-option" [value]="{ data: 1 }">Test 1</sk-select-option>
+    <sk-select-option class="sk-option" [value]="{ data: 2 }">Test 2</sk-select-option>
+    <sk-select-option class="sk-option" [value]="{ data: 3 }">Test 3</sk-select-option>
+    <sk-select-option class="sk-option" [value]="{ data: 4 }">Test 4</sk-select-option>
+    <sk-select-option class="sk-option" [value]="{ data: 5 }">Test 5</sk-select-option>
+  </div>-->
+
 </sk-select>

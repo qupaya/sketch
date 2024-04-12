@@ -1,9 +1,9 @@
 import {
   Directive,
+  effect,
   ElementRef,
   inject,
   input,
-  OnChanges,
   OnDestroy,
   OnInit,
   output,
@@ -11,7 +11,7 @@ import {
 import { CdkPortal } from '@angular/cdk/portal';
 import { ConnectedPosition, Overlay, OverlayRef } from '@angular/cdk/overlay';
 import { DOCUMENT } from '@angular/common';
-import { fromEvent, Subject, takeUntil } from 'rxjs';
+import { fromEvent, merge, Subject, takeUntil } from 'rxjs';
 
 export const DEFAULT_POSITIONS: ConnectedPosition[] = [
   { originX: 'end', originY: 'bottom', overlayX: 'end', overlayY: 'top' },
@@ -26,7 +26,7 @@ export const DEFAULT_DROPOUT_POSITIONS: ConnectedPosition[] = [
   selector: '[skCdkOverlay]',
   standalone: true,
 })
-export class CdkOverlayDirective implements OnChanges, OnInit, OnDestroy {
+export class CdkOverlayDirective implements OnInit, OnDestroy {
   private readonly overlay = inject(Overlay);
   private readonly elementRef = inject(ElementRef<HTMLElement>);
   private readonly window = inject(DOCUMENT).defaultView;
@@ -46,22 +46,22 @@ export class CdkOverlayDirective implements OnChanges, OnInit, OnDestroy {
   private _overlayRef?: OverlayRef;
   private _relatedElement?: HTMLElement;
 
-  public ngOnInit(): void {
-    this._relatedElement = this.relativeTo() || this.elementRef.nativeElement;
-    if (this.window) {
-      fromEvent(this.window, 'resize')
-        .pipe(takeUntil(this.destroy$$))
-        .subscribe(() => this._syncOverlayWidth());
-    }
-  }
-
-  public ngOnChanges(): void {
+  protected detectVisibleChange = effect(() => {
     if (this._relatedElement) {
       if (this.showOverlay()) {
         this.show();
       } else {
         this.hide();
       }
+    }
+  });
+
+  public ngOnInit(): void {
+    this._relatedElement = this.relativeTo() || this.elementRef.nativeElement;
+    if (this.window) {
+      fromEvent(this.window, 'resize')
+        .pipe(takeUntil(this.destroy$$))
+        .subscribe(() => this._syncOverlayWidth());
     }
   }
 
@@ -76,6 +76,7 @@ export class CdkOverlayDirective implements OnChanges, OnInit, OnDestroy {
   }
 
   private hide(): void {
+    this.showChange.emit(false);
     this.window?.setTimeout(
       () => this._overlayRef?.dispose(),
       this.disposeDelay()
@@ -106,13 +107,10 @@ export class CdkOverlayDirective implements OnChanges, OnInit, OnDestroy {
     this._syncOverlayWidth();
 
     this._overlayRef.attach(this.portal());
-    this._overlayRef.detachments().subscribe(() => {
-      this.hide();
-      this.showChange.emit(false);
-    });
-    this._overlayRef.backdropClick().subscribe(() => {
-      this._overlayRef?.detach();
-    });
+    merge(
+      this._overlayRef.backdropClick(),
+      this._overlayRef.detachments()
+    ).subscribe(() => this.hide());
   }
 
   private _syncOverlayWidth(): void {
