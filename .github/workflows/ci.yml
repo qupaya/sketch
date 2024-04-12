@@ -33,5 +33,5 @@ jobs:
         run: npx playwright install --with-deps
       - uses: nrwl/nx-set-shas@v4
 
-      # - run: npx nx-cloud record -- nx format:check
+      - run: npx nx format:check
       - run: npx nx affected -t lint test build e2e-ci
