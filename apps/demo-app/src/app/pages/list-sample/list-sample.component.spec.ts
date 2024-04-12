@@ -2,6 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ListSampleComponent } from './list-sample.component';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
+import { ListService } from '@qupaya/sketch';
 
 describe('ListSampleComponent', () => {
   let component: ListSampleComponent;
@@ -14,6 +15,7 @@ describe('ListSampleComponent', () => {
         NoopAnimationsModule,
         RouterModule.forRoot([]),
       ],
+      providers: [ListService],
     }).compileComponents();
 
     fixture = TestBed.createComponent(ListSampleComponent);

@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
+  ListCollectionComponent,
   ListComponent,
   ListItemActiveDirective,
   ListItemComponent,
@@ -16,8 +17,9 @@ import { RouterOutlet } from '@angular/router';
   imports: [
     CommonModule,
     ListItemActiveDirective,
-    ListComponent,
+    ListCollectionComponent,
     ListItemComponent,
+    ListComponent,
     RouterOutlet,
   ],
   templateUrl: './list-sample.component.html',

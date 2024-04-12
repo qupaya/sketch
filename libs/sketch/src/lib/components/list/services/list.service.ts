@@ -1,8 +1,6 @@
 import { Injectable, signal } from '@angular/core';
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable()
 export class ListService {
   readonly items = signal<{ id: string; parentId?: string; active: boolean }[]>(
     []

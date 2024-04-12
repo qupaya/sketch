@@ -8,7 +8,7 @@ import {
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ListItemActiveDirective } from '../../directives/list-item-active.directive';
-import { ListComponent } from '../../list.component';
+import { ListCollectionComponent } from '../list-collection/list-collection.component';
 import { ListService } from '../../services/list.service';
 
 @Component({
@@ -28,7 +28,7 @@ export class ListItemComponent {
     optional: true,
     skipSelf: true,
   });
-  private readonly parentList = inject(ListComponent, {
+  private readonly parentList = inject(ListCollectionComponent, {
     optional: true,
     skipSelf: true,
   });

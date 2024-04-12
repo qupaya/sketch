@@ -1,4 +1,5 @@
 import { Route } from '@angular/router';
+import { ListService } from '@qupaya/sketch';
 
 const UUID_REGEX = /^[a-z,0-9,-]{36,36}$/;
 
@@ -17,6 +18,7 @@ export const appRoutes: Route[] = [
   },
   {
     path: 'list-sample',
+    providers: [ListService],
     children: [
       {
         path: '',
