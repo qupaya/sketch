@@ -7,7 +7,8 @@
     "build": "nx build",
     "test": "nx test",
     "lint": "nx run-many --all --target=lint --fix --parallel",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "storybook": "nx run sketch:storybook"
   },
   "private": true,
   "dependencies": {

@@ -1,0 +1,8 @@
+{
+  "projectId": "Project:661d194a3f6d14d86c328554",
+  "autoAcceptChanges": "main",
+  "exitOnceUploaded": true,
+  "externals": ["public/**"],
+  "onlyChanged": true,
+  "storybookBuildDir": "dist/storybook/sketch"
+}

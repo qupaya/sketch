@@ -1,0 +1,47 @@
+name: 'Storybook Publish'
+
+on:
+  push:
+    branches:
+      - 'main'
+
+jobs:
+  storybook-deployment:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: 'package.json'
+          cache: 'npm'
+
+      - uses: nrwl/nx-set-shas@v4
+
+      - name: Install dependencies
+        run: |
+          npm ci
+
+      - name: Restore nx cache
+        id: nxcache
+        uses: actions/cache@v4
+        with:
+          path: node_modules/.cache/nx
+          key: ${{ runner.os }}-nxcache-${{ hashFiles('package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-nxcache-
+
+      - name: build storybook
+        run: nx run sketch:build-storybook
+
+      - name: Publish to Chromatic
+        # see https://github.com/chromaui/action/tags for versions
+        uses: chromaui/action@v11.3.0
+        with:
+          projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
+          storybookBuildDir: ./dist/storybook/sketch
