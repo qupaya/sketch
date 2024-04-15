@@ -53,7 +53,8 @@
         "outputDir": "dist/storybook/sketch",
         "configDir": "libs/sketch/.storybook",
         "browserTarget": "sketch:build-storybook",
-        "compodoc": false
+        "compodoc": false,
+        "webpackStatsJson": true
       },
       "configurations": {
         "ci": {
