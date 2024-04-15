@@ -37,7 +37,7 @@ jobs:
             ${{ runner.os }}-nxcache-
 
       - name: build storybook
-        run: nx run sketch:build-storybook
+        run: npx nx run sketch:build-storybook
 
       - name: Publish to Chromatic
         # see https://github.com/chromaui/action/tags for versions
