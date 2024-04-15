@@ -89,6 +89,5 @@
       "style": "css"
     }
   },
-  "defaultProject": "demo-app",
-  "nxCloudAccessToken": "ZDI5MjU3NmYtYWU2OS00OGJkLWI0ODEtY2I1NDM2MGM1MDJifHJlYWQtd3JpdGU="
+  "defaultProject": "demo-app"
 }
