@@ -34,9 +34,9 @@ export const slideDeleteAnimation = (): AnimationMetadata => {
 export const slideFadeAnimationFactory = (): AnimationMetadata[] => {
   return [
     style({ opacity: 0, transform: 'translateY(-1.5rem)', scale: 0.8 }),
-    stagger('80ms', [
+    stagger('32ms', [
       animate(
-        '350ms cubic-bezier(0.05, 0.7, 0.1, 1)',
+        '150ms cubic-bezier(0.05, 0.7, 0.1, 1)',
         style({ opacity: 1, transform: 'translateY(0)', scale: 1 })
       ),
     ]),
@@ -84,7 +84,7 @@ export const zoomFactory = (
       ),
       transition(
         '* => hidden',
-        query('sk-select-option', slideDeleteAnimation(), {
+        query('sk-select-option', fadeFactory(1, 0, '350ms'), {
           optional: true,
         })
       ),

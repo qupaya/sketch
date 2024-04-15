@@ -1,7 +1,9 @@
 import {
+  AfterViewInit,
   ChangeDetectorRef,
   Component,
   computed,
+  contentChildren,
   effect,
   forwardRef,
   inject,
@@ -11,7 +13,7 @@ import {
   untracked,
   ViewEncapsulation,
 } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DOCUMENT } from '@angular/common';
 import {
   CdkOverlayDirective,
   DEFAULT_DROPOUT_POSITIONS,
@@ -19,11 +21,12 @@ import {
 import { CdkPortal } from '@angular/cdk/portal';
 import { MultipleDirective } from './directives/multiple.directive';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { CdkTrapFocus } from '@angular/cdk/a11y';
 
 @Component({
   selector: 'sk-select',
   standalone: true,
-  imports: [CommonModule, CdkOverlayDirective, CdkPortal],
+  imports: [CommonModule, CdkOverlayDirective, CdkPortal, CdkTrapFocus],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
@@ -35,13 +38,13 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
   styleUrl: './select.component.css',
   encapsulation: ViewEncapsulation.ShadowDom,
 })
-export class SelectComponent<T> implements ControlValueAccessor {
+export class SelectComponent<T> implements ControlValueAccessor, AfterViewInit {
   private readonly multipleRef = inject(MultipleDirective, { optional: true });
   private readonly changeDetectorRef = inject(ChangeDetectorRef);
+  private readonly document = inject(DOCUMENT);
 
-  animationDelay = input(0);
-  open = output<boolean>();
-
+  readonly animationDelay = input(0);
+  readonly open = output<boolean>();
   readonly selectedValue = signal<T | T[] | undefined>(undefined);
   readonly showPlaceholder = computed(() => {
     const selectedValue = this.selectedValue();
@@ -51,6 +54,9 @@ export class SelectComponent<T> implements ControlValueAccessor {
     );
   });
   readonly panelIsVisible = signal(false);
+  readonly options = contentChildren('sk-select-option', {
+    descendants: true,
+  });
   readonly overlayPositions = DEFAULT_DROPOUT_POSITIONS;
 
   protected updateSelectionMode = effect(
@@ -78,9 +84,19 @@ export class SelectComponent<T> implements ControlValueAccessor {
   togglePanel(visible: boolean): void {
     this.panelIsVisible.set(visible);
     this.open.emit(visible);
+
+    if (visible) {
+      setTimeout(() => {
+        this.document.querySelector<HTMLElement>('sk-select-option')?.focus();
+      }, 32);
+    }
   }
 
-  selectionChanged(value: T): void {
+  ngAfterViewInit(): void {
+    console.log('SelectComponent.ngAfterViewInit', this.options());
+  }
+
+  selectionChanged(value: T, forceClose = false): void {
     if (this.multipleRef?.multiple()) {
       this.selectedValue.update((selected) => {
         if (Array.isArray(selected)) {
@@ -98,6 +114,10 @@ export class SelectComponent<T> implements ControlValueAccessor {
 
     this.onChange?.(this.selectedValue());
     this.onTouched?.();
+
+    if (forceClose) {
+      this.togglePanel(false);
+    }
   }
 
   writeValue(obj: T | T[] | undefined): void {

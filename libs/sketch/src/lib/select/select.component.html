@@ -5,6 +5,8 @@
   [skCdkOverlayPositions]="overlayPositions"
   [skCdkOverlayDisposeDelay]="animationDelay()"
   (click)="togglePanel(true)"
+  [tabIndex]="1"
+  (keydown.enter)="togglePanel(!this.panelIsVisible())"
 >
   @if (showPlaceholder()) {
     <ng-content select="[skSelectPlaceholder]"></ng-content>
