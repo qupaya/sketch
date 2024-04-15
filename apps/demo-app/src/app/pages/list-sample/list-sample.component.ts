@@ -1,10 +1,10 @@
 import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
-  ListCollectionComponent,
   ListComponent,
   ListItemActiveDirective,
   ListItemComponent,
+  ListProviderDirective,
 } from '@qupaya/sketch';
 import { SAMPLE_DATA } from './list-sample.data';
 import { query, transition, trigger } from '@angular/animations';
@@ -17,10 +17,10 @@ import { RouterOutlet } from '@angular/router';
   imports: [
     CommonModule,
     ListItemActiveDirective,
-    ListCollectionComponent,
     ListItemComponent,
     ListComponent,
     RouterOutlet,
+    ListProviderDirective,
   ],
   templateUrl: './list-sample.component.html',
   styleUrl: './list-sample.component.css',

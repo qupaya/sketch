@@ -6,15 +6,13 @@ import {
   untracked,
   ViewEncapsulation,
 } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { ListItemActiveDirective } from '../../directives/list-item-active.directive';
-import { ListCollectionComponent } from '../list-collection/list-collection.component';
 import { ListService } from '../../services/list.service';
+import { ListComponent } from '../../list.component';
 
 @Component({
   selector: 'sk-list-item',
   standalone: true,
-  imports: [CommonModule],
   templateUrl: './list-item.component.html',
   styleUrl: './list-item.component.css',
   encapsulation: ViewEncapsulation.ShadowDom,
@@ -28,7 +26,7 @@ export class ListItemComponent {
     optional: true,
     skipSelf: true,
   });
-  private readonly parentList = inject(ListCollectionComponent, {
+  private readonly parentList = inject(ListComponent, {
     optional: true,
     skipSelf: true,
   });

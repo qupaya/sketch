@@ -1,13 +1,17 @@
-import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { ListService } from './services/list.service';
+import { Component, output, signal } from '@angular/core';
 
 @Component({
   selector: 'sk-list',
   standalone: true,
-  imports: [CommonModule],
-  providers: [ListService],
   templateUrl: './list.component.html',
   styleUrl: './list.component.css',
 })
-export class ListComponent {}
+export class ListComponent {
+  private readonly activeItemId = signal<string | undefined>(undefined);
+  activeIdChanged = output<string>();
+
+  activateItem(id: string): void {
+    this.activeItemId.update(() => id);
+    this.activeIdChanged.emit(id);
+  }
+}

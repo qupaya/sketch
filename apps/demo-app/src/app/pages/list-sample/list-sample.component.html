@@ -1,4 +1,4 @@
-<sk-list-collection (activeIdChanged)="rootActiveId.set($event)">
+<sk-list skListProvider (activeIdChanged)="rootActiveId.set($event)">
   <div class="sk-list" @skListAnimation>
     @for (rootItem of items(); track rootItem.link) {
     <sk-list-item [skListItemId]="rootItem.link" [skEnableRouting]="true">
@@ -10,7 +10,7 @@
         <span> {{ rootItem.label }} </span>
       </div>
       @if (rootItem.children?.length && rootActiveId() === rootItem.link) {
-      <sk-list-collection
+      <sk-list
         class="sk-child-list"
         sk-childs
         (activeIdChanged)="childActiveId.set($event)"
@@ -30,7 +30,7 @@
             </div>
             @if (childItem.children?.length && childActiveId() ===
             childItem.link) {
-            <sk-list-collection
+            <sk-list
               class="sk-grand-child-list"
               sk-childs
               (activeIdChanged)="grandChildActiveId.set($event)"
@@ -54,14 +54,14 @@
                 </sk-list-item>
                 }
               </div>
-            </sk-list-collection>
+            </sk-list>
             }
           </sk-list-item>
           }
         </div>
-      </sk-list-collection>
+      </sk-list>
       }
     </sk-list-item>
     }
   </div>
-</sk-list-collection>
+</sk-list>
