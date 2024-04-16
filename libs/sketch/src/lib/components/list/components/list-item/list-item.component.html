@@ -1,11 +1,8 @@
-@if (listItem(); as item) {
-  @if (!item.parentId || parentActive()) {
-    <!--TODO: remove this with Angular 18-->
-    <div class="sk-label" [class.sk-active-item]="active()">
-      <ng-content select="[skLabel]"></ng-content>
-    </div>
-  }
-  @if (item.active) {
-    <ng-content select="[skChilds]"></ng-content>
-  }
-}
+@if (listItem(); as item) { @if (!item.parentId || parentActive()) {
+<!--TODO: remove this with Angular 18-->
+<div class="sk-label" [class.sk-active-item]="active()">
+  <ng-content select="[skLabel]"></ng-content>
+</div>
+} @if (item.active) {
+<ng-content select="[skChilds]"></ng-content>
+} }
