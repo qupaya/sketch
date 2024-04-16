@@ -1,0 +1,16 @@
+<button (click)="openDialog()">open Dialog!</button>
+
+<sk-dialog
+        [open]="isDialogOpen"
+        dialogId="some-tag"
+        (closeRequested)="isDialogOpen = false"
+        [contentTemplate]="contentTemplate"
+>
+        <!--[backdropClass]="backdropClass"
+        [showCloseButton]="showCloseButton"
+        [contentShadow]="contentShadow"
+        [fullscreen]="false"-->
+    <ng-template #contentTemplate>
+      <p>here comes some content</p>
+    </ng-template>
+</sk-dialog>
