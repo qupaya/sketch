@@ -8,9 +8,9 @@ import {
   inject,
   input,
   output,
-  signal,
   viewChild,
   OnDestroy,
+  model,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CdkTrapFocus } from '@angular/cdk/a11y';
@@ -32,14 +32,10 @@ export class DialogComponent implements OnDestroy {
   private readonly dialogService = inject(DialogService);
   private readonly viewContainerRef = inject(ViewContainerRef);
 
-  readonly dialogContentTemplate = signal<TemplateRef<unknown> | undefined>(
-    undefined
-  );
-
   @HostBinding('attr.data-dialog-tag')
   private _dialogId!: string;
 
-  open = input(false);
+  open = model(false);
 
   backdropClass = input<string[]>([DialogComponent.defaultBackgroundClass]);
 
