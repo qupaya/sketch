@@ -1,8 +1,10 @@
 import {
   AfterViewInit,
+  booleanAttribute,
   Directive,
   forwardRef,
   inject,
+  input,
   OnInit,
   viewChild,
 } from '@angular/core';
@@ -20,6 +22,11 @@ export class ListProviderDirective implements OnInit, AfterViewInit {
     skipSelf: true,
   });
   private readonly listComponent = viewChild(forwardRef(() => ListComponent));
+
+  enableRouting = input(false, {
+    alias: 'skEnableRouting',
+    transform: booleanAttribute,
+  });
 
   ngOnInit(): void {
     if (this.possibleParentList) {

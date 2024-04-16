@@ -1,0 +1,63 @@
+<sk-list
+  class="sk-list"
+  skListProvider
+  skEnableRouting
+  (activeIdChanged)="rootActiveId.set($event)"
+  @skListAnimation
+>
+  @for (rootItem of items(); track rootItem.route) {
+    <sk-list-item [skListItemId]="rootItem.route">
+      <div
+        class="sk-label"
+        [class.sk-active]="rootActiveId() === rootItem.route"
+        skLabel
+      >
+        <span> {{ rootItem.label }} </span>
+      </div>
+      @if (rootItem.children?.length && rootActiveId() === rootItem.route) {
+        <sk-list
+          class="sk-list sk-child-list"
+          skChilds
+          @skListAnimation
+          (activeIdChanged)="childActiveId.set($event)"
+        >
+          @for (childItem of rootItem.children; track childItem.route) {
+            <sk-list-item [skListItemId]="childItem.route">
+              <div
+                class="sk-label"
+                [class.sk-active]="childActiveId() === childItem.route"
+                skLabel
+              >
+                <span> {{ childItem.label }} </span>
+              </div>
+              @if (childItem.children?.length && childActiveId() === childItem.route) {
+                <sk-list
+                  class="sk-list sk-grand-child-list"
+                  skChilds
+                  @skListAnimation
+                  (activeIdChanged)="grandChildActiveId.set($event)"
+                >
+                  @for (grandChildItem of childItem.children; track
+                    grandChildItem.route) {
+                    <sk-list-item
+                      [skListItemId]="grandChildItem.route"
+                      skEnableRouting
+                    >
+                      <div
+                        class="sk-label"
+                        [class.sk-active]="grandChildActiveId() === grandChildItem.route"
+                        skLabel
+                      >
+                        <span> {{ grandChildItem.label }} </span>
+                      </div>
+                    </sk-list-item>
+                  }
+                </sk-list>
+              }
+            </sk-list-item>
+          }
+        </sk-list>
+      }
+    </sk-list-item>
+  }
+</sk-list>

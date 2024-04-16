@@ -1,0 +1,28 @@
+<sk-list skListProvider>
+  @for (rootItem of items(); track rootItem.route) {
+    <sk-list-item [skListItemId]="rootItem.route">
+      <div skLabel>
+        <span> {{ rootItem.label }} </span>
+      </div>
+      <sk-list skChilds>
+        @for (childItem of rootItem.children; track childItem.route) {
+          <sk-list-item [skListItemId]="childItem.route">
+            <div skLabel>
+              <span> {{ childItem.label }} </span>
+            </div>
+            <sk-list skChilds>
+              @for (grandChildItem of childItem.children; track
+                grandChildItem.route) {
+                <sk-list-item [skListItemId]="grandChildItem.route">
+                  <div skLabel>
+                    <span> {{ grandChildItem.label }} </span>
+                  </div>
+                </sk-list-item>
+              }
+            </sk-list>
+          </sk-list-item>
+        }
+      </sk-list>
+    </sk-list-item>
+  }
+</sk-list>

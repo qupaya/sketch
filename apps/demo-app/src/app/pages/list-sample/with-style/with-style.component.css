@@ -1,0 +1,53 @@
+:host {
+  padding: 0 1rem;
+}
+
+sk-list-item {
+  --sk-list-item-label-background: transparent;
+  --sk-list-item-label-padding: 0;
+  --sk-list-item-label-border: transparent;
+  --sk-list-item-label-active-color: #fc0054;
+  gap: 1rem;
+}
+
+.sk-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
+  &.sk-grand-child-list {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  }
+}
+
+.sk-child-list,
+.sk-grand-child-list {
+  gap: 0.5rem;
+}
+
+.sk-child-list {
+  margin: 0 0 0.5rem 0.5rem;
+}
+
+.sk-grand-child-list {
+  margin-bottom: 1rem;
+}
+
+.sk-label {
+  height: 32px;
+  width: 100%;
+  padding: 1rem;
+  background: white;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  border-radius: 0.5rem;
+}
+
+.sk-active.sk-label span {
+  will-change: transform;
+  transition: transform 0.3s ease-in-out;
+  transform: scale(1.05) translateX(0.5rem);
+}

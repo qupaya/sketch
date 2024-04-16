@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { map } from 'rxjs';
 import { ListService } from '../services/list.service';
+import { ListProviderDirective } from './list-provider.directive';
 
 @Directive({
   standalone: true,
@@ -10,6 +11,9 @@ import { ListService } from '../services/list.service';
 })
 export class ListItemActiveDirective implements OnInit {
   private readonly listService = inject(ListService);
+  private readonly listProvider = inject(ListProviderDirective, {
+    skipSelf: true,
+  });
   private readonly router = inject(Router);
   private readonly activatedRoute = inject(ActivatedRoute);
 
@@ -18,14 +22,13 @@ export class ListItemActiveDirective implements OnInit {
   );
 
   itemId = input.required<string>({ alias: 'skListItemId' });
-  enableRouting = input<boolean>(false, { alias: 'skEnableRouting' });
 
   @HostListener('click', ['$event'])
   onClick(event: MouseEvent): void {
     event.preventDefault();
     event.stopPropagation();
     this.listService.setActive(this.itemId());
-    if (this.enableRouting()) {
+    if (this.listProvider.enableRouting()) {
       this.router
         .navigate([this.itemId()], {
           relativeTo: this.activatedRoute.parent,
@@ -35,7 +38,7 @@ export class ListItemActiveDirective implements OnInit {
   }
 
   ngOnInit(): void {
-    if (!this.enableRouting()) {
+    if (!this.listProvider.enableRouting()) {
       return;
     }
     const active = this.activatedUrl()?.includes(this.itemId());

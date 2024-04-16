@@ -3,6 +3,7 @@ import {
   computed,
   effect,
   inject,
+  signal,
   untracked,
   ViewEncapsulation,
 } from '@angular/core';
@@ -31,6 +32,7 @@ export class ListItemComponent {
     skipSelf: true,
   });
 
+  readonly active = signal(false);
   readonly listItem = computed(() =>
     this.listService.items().find(({ id }) => id === this.activeItem?.itemId())
   );
@@ -58,6 +60,7 @@ export class ListItemComponent {
         if (this.parentList && item?.active) {
           this.parentList.activateItem(item?.id);
         }
+        this.active.set(item?.active ?? false);
       }
     },
     { allowSignalWrites: true }

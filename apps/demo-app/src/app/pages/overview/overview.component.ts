@@ -1,6 +1,6 @@
-import { Component, inject } from '@angular/core';
+import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Router, RouterLink } from '@angular/router';
+import { RouterLink } from '@angular/router';
 import { CardComponent } from '../../components/card/card.component';
 import { SAMPLE_DATA } from '../list-sample/list-sample.data';
 
@@ -12,26 +12,43 @@ import { SAMPLE_DATA } from '../list-sample/list-sample.data';
   styleUrl: './overview.component.css',
 })
 export class OverviewComponent {
-  private readonly router = inject(Router);
+  readonly listviewLinks = [
+    {
+      route: this.randomListSampleRoute(),
+      label: 'List Sample with routing',
+    },
+    {
+      route: '/list-sample',
+      label: 'List Sample Headless Default',
+    },
+  ];
 
-  async openListSample(): Promise<boolean> {
-    let link = 'list-sample';
+  readonly widgetLinks = [
+    {
+      route: '/widget-sample',
+      label: 'Widget Sample',
+    },
+  ];
+
+  private randomListSampleRoute(): string {
+    let route = 'list-sample/with-styles';
     let random = Math.floor(Math.random() * SAMPLE_DATA.length);
     const item = SAMPLE_DATA[random];
     if (item.children?.length) {
-      link = item.link;
+      route = item.route;
       random = Math.floor(Math.random() * item.children.length);
       const child = item.children[random];
       if (child.children?.length) {
-        link = child.link;
+        route = child.route;
         random = Math.floor(Math.random() * child.children.length);
         const grandChild = child.children[random];
-        if (grandChild.link) {
-          link = grandChild.link;
+        if (grandChild.route) {
+          route = grandChild.route;
         }
       }
     }
-    link = link === 'list-sample' ? link : `list-sample/${link}`;
-    return await this.router.navigate([`${link}`]);
+    return route === '/list-sample/with-styles'
+      ? route
+      : `/list-sample/with-styles/${route}`;
   }
 }

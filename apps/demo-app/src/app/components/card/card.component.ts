@@ -10,6 +10,6 @@ import { RouterLink } from '@angular/router';
   styleUrl: './card.component.css',
 })
 export class CardComponent {
-  link = input<string>();
+  routes = input<{ route: string; label: string }[]>();
   label = input.required<string>();
 }
