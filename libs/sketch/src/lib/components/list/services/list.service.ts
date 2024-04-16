@@ -14,6 +14,10 @@ export class ListService {
   }
 
   setActive(id: string): void {
+    if (this.items().find((item) => item.id === id)?.active) {
+      return;
+    }
+
     const ids = this.getActiveIds(id);
     this.items.update((items) =>
       items.map((item) => ({

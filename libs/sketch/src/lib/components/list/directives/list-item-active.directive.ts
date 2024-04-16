@@ -44,13 +44,14 @@ export class ListItemActiveDirective {
     }
   }
 
-  protected readonly updateActiveItemId = effect(() => {
-    const id = untracked(this.itemId);
-    const active = this.activatedUrl()?.includes(id);
-    if (active) {
-      setTimeout(() => {
+  protected readonly updateActiveItemId = effect(
+    () => {
+      const id = untracked(this.itemId);
+      const active = this.activatedUrl()?.includes(id);
+      if (active) {
         this.listService.setActive(id);
-      }, 16);
-    }
-  });
+      }
+    },
+    { allowSignalWrites: true }
+  );
 }
