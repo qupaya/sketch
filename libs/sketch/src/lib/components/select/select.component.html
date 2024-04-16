@@ -9,12 +9,14 @@
   (keydown.enter)="togglePanel(!this.panelIsVisible())"
 >
   @if (showPlaceholder()) {
-    <ng-content select="[skSelectPlaceholder]"></ng-content>
+  <ng-content select="[skSelectPlaceholder]"></ng-content>
   } @else {
-    <ng-content select="[skSelectLabel]"></ng-content>
+  <ng-content select="[skSelectLabel]"></ng-content>
   }
 </div>
 
 <ng-template cdkPortal #overlay="cdkPortal">
-  <ng-content></ng-content>
+  <ng-container cdkTrapFocus>
+    <ng-content></ng-content>
+  </ng-container>
 </ng-template>
