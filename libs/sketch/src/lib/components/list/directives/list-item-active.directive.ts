@@ -1,4 +1,11 @@
-import { Directive, HostListener, inject, input, OnInit } from '@angular/core';
+import {
+  Directive,
+  effect,
+  HostListener,
+  inject,
+  input,
+  untracked,
+} from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { map } from 'rxjs';
@@ -9,7 +16,7 @@ import { ListProviderDirective } from './list-provider.directive';
   standalone: true,
   selector: '[skListItemId]',
 })
-export class ListItemActiveDirective implements OnInit {
+export class ListItemActiveDirective {
   private readonly listService = inject(ListService);
   private readonly listProvider = inject(ListProviderDirective, {
     skipSelf: true,
@@ -21,7 +28,7 @@ export class ListItemActiveDirective implements OnInit {
     this.activatedRoute.url.pipe(map((url) => url.join('/')))
   );
 
-  itemId = input.required<string>({ alias: 'skListItemId' });
+  readonly itemId = input.required<string>({ alias: 'skListItemId' });
 
   @HostListener('click', ['$event'])
   onClick(event: MouseEvent): void {
@@ -37,15 +44,13 @@ export class ListItemActiveDirective implements OnInit {
     }
   }
 
-  ngOnInit(): void {
-    if (!this.listProvider.enableRouting()) {
-      return;
-    }
-    const active = this.activatedUrl()?.includes(this.itemId());
+  protected readonly updateActiveItemId = effect(() => {
+    const id = untracked(this.itemId);
+    const active = this.activatedUrl()?.includes(id);
     if (active) {
       setTimeout(() => {
-        this.listService.setActive(this.itemId());
+        this.listService.setActive(id);
       }, 16);
     }
-  }
+  });
 }
