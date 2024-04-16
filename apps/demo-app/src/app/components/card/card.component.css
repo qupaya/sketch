@@ -22,13 +22,14 @@
   justify-content: flex-end;
   gap: 1rem;
 
-  a {
+  .sk-link {
     -webkit-appearance: none;
     text-decoration: none;
     padding: 0.5rem 1rem;
     border-radius: 100svh;
     background: rgb(252, 0, 84);
     color: rgb(255, 255, 255);
+    cursor: pointer;
     transition: background 0.3s ease-in-out;
 
     @media (hover) {

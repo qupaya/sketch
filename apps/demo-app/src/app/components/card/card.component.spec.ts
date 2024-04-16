@@ -14,7 +14,7 @@ describe('CardComponent', () => {
 
     fixture = TestBed.createComponent(CardComponent);
     fixture.componentRef.setInput('label', 'Test 1');
-    fixture.componentRef.setInput('link', '1');
+    fixture.componentRef.setInput('routes', [{ route: '1', label: 'Test 1' }]);
     component = fixture.componentInstance;
 
     fixture.detectChanges();

@@ -1,5 +1,7 @@
 import { Route } from '@angular/router';
 
+const UUID_REGEX = /^[a-z,0-9,-]{36,36}$/;
+
 export const appRoutes: Route[] = [
   {
     path: '',
@@ -13,5 +15,38 @@ export const appRoutes: Route[] = [
         (m) => m.OverviewComponent
       ),
   },
-  // TODO: Add routes for the other samples
+  {
+    path: 'list-sample',
+    children: [
+      {
+        path: '',
+        loadComponent: () =>
+          import(
+            './pages/list-sample/pure-headless/pure-headless.component'
+          ).then((m) => m.PureHeadlessComponent),
+      },
+      {
+        path: 'with-styles',
+        children: [
+          {
+            path: '',
+            loadComponent: () =>
+              import(
+                './pages/list-sample/with-style/with-style.component'
+              ).then((m) => m.WithStyleComponent),
+          },
+          {
+            matcher: (segments) =>
+              segments.length && UUID_REGEX.test(segments[0].path)
+                ? { consumed: segments }
+                : null,
+            loadComponent: () =>
+              import(
+                './pages/list-sample/with-style/with-style.component'
+              ).then((m) => m.WithStyleComponent),
+          },
+        ],
+      },
+    ],
+  },
 ];

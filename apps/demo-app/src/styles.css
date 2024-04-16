@@ -2,6 +2,10 @@
 :root {
   --sk-top-bar-height: 84px;
   --sk-font-family: Montserrat, 'Helevetika Neue', sans-serif;
+  --sk-primary-color-rgb: 252, 0, 84;
+  --sk-primary-color: rgb(var(--sk-primary-color-rgb));
+  --sk-secondary-color-rgb: 59, 61, 64;
+  --sk-secondary-color: rgb(var(--sk-secondary-color-rgb));
 }
 
 * {
@@ -17,8 +21,8 @@ body {
   background: rgb(59, 61, 64);
   background: linear-gradient(
     149deg,
-    rgba(59, 61, 64, 1) 0%,
-    rgba(252, 0, 84, 1) 100%
+    rgba(var(--sk-secondary-color-rgb), 1) 0%,
+    rgba(var(--sk-primary-color-rgb), 1) 100%
   );
   background-repeat: no-repeat;
   height: 100svh;

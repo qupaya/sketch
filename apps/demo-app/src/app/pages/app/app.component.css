@@ -5,7 +5,13 @@
   justify-content: center;
 }
 
-.sk-content {
+.sk-main {
   width: 100%;
   max-width: max(400px, 70vw);
+}
+
+.sk-content-container {
+  height: calc(100vh - var(--sk-top-bar-height));
+  overflow: auto;
+  padding-right: 1rem;
 }
