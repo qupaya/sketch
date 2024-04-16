@@ -3,9 +3,9 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "start": "nx serve",
-    "build": "nx build",
-    "test": "nx test",
+    "start": "nx serve demo-app",
+    "build": "nx run-many --all --target=build --parallel",
+    "test": "nx run-many --all --target=test --parallel",
     "lint": "nx run-many --all --target=lint --fix --parallel",
     "prepare": "husky install",
     "storybook": "nx run sketch:storybook"
