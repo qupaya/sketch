@@ -4,6 +4,8 @@
   [(open)]="isDialogOpen"
   dialogId="test-dialog-id"
   (closeRequested)="isDialogOpen = false"
+  [showCloseButton]="true"
+  [closeButtonProperties]="closeButtonProperties"
 >
   <div class="my-super-styling-class">
     <p>here comes some content</p>

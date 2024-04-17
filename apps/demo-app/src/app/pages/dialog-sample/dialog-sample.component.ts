@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { DialogComponent } from '@qupaya/sketch';
+import { CloseButtonProperties, DialogComponent } from '@qupaya/sketch';
 
 @Component({
   selector: 'app-dialog-sample',
@@ -11,4 +11,21 @@ import { DialogComponent } from '@qupaya/sketch';
 })
 export class DialogSampleComponent {
   isDialogOpen = false;
+
+  closeButtonProperties: CloseButtonProperties = {
+    title: 'Close me',
+    iconSrc: '../../../assets/cross.svg',
+    styles: {
+      iconWidth: 20,
+      iconHeight: 20,
+      backgroundColor: 'transparent',
+      border: 'none',
+      padding: '0',
+      margin: '0',
+    },
+  };
+
+  constructor() {
+    console.log(this.closeButtonProperties.title);
+  }
 }

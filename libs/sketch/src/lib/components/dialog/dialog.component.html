@@ -10,10 +10,22 @@
     @if (showCloseButton()) {
     <button
       type="button"
-      [title]="closeButtonTitle()"
+      [title]="buttonProps().title"
       (click)="closeRequested.emit()"
+      [style.width.px]="buttonProps().styles?.buttonWidth"
+      [style.height.px]="buttonProps().styles?.buttonHeight"
+      [style.borderRadius.px]="buttonProps().styles?.borderRadius"
+      [style.backgroundColor]="buttonProps().styles?.backgroundColor"
+      [style.border]="buttonProps().styles?.border"
+      [style.padding]="buttonProps().styles?.padding"
+      [style.margin]="buttonProps().styles?.margin"
     >
-      <img [src]="closeButtonIcon()" [alt]="closeButtonTitle()" />
+      <img
+        [src]="buttonProps().iconSrc"
+        [alt]="buttonProps().title"
+        [style.width.px]="buttonProps().styles?.iconWidth"
+        [style.height.px]="buttonProps().styles?.iconHeight"
+      />
     </button>
     }
   </div>
