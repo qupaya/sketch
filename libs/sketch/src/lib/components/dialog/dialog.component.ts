@@ -24,7 +24,7 @@ export class DialogComponent {
 
   open = model(false);
 
-  backdropClass = input<string[]>([DialogComponent.defaultBackgroundClass]);
+  //backdropClass = input<string[]>([DialogComponent.defaultBackgroundClass]);
 
   /**
    * It will be appended to the rendered overlay in this way:
@@ -40,7 +40,7 @@ export class DialogComponent {
 
   showCloseButton = input<boolean>(true);
 
-  fullscreen = input<boolean>(false);
+  //fullscreen = input<boolean>(false);
 
   closeRequested = output<void>();
 

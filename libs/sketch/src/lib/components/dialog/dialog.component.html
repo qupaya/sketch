@@ -1,8 +1,8 @@
 <dialog
   #dialogElement
   skClickBackdrop
-  (keydown.escape)="closeRequested.emit()"
   (clickedBackdrop)="closeRequested.emit()"
+  (keydown.escape)="closeRequested.emit()"
 >
   <div>
     <ng-content></ng-content>
