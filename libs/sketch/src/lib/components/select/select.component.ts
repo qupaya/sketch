@@ -1,9 +1,8 @@
 import {
-  AfterViewInit,
+  booleanAttribute,
   ChangeDetectorRef,
   Component,
   computed,
-  contentChildren,
   effect,
   forwardRef,
   inject,
@@ -14,12 +13,8 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { CommonModule, DOCUMENT } from '@angular/common';
-import {
-  CdkOverlayDirective,
-  DEFAULT_DROPOUT_POSITIONS,
-} from './directives/overlay.directive';
+import { CdkOverlayDirective } from './directives/overlay.directive';
 import { CdkPortal } from '@angular/cdk/portal';
-import { MultipleDirective } from './directives/multiple.directive';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { CdkTrapFocus } from '@angular/cdk/a11y';
 
@@ -30,7 +25,7 @@ import { CdkTrapFocus } from '@angular/cdk/a11y';
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => SelectComponent<unknown>),
+      useExisting: forwardRef(() => SelectComponent),
       multi: true,
     },
   ],
@@ -38,14 +33,15 @@ import { CdkTrapFocus } from '@angular/cdk/a11y';
   styleUrl: './select.component.css',
   encapsulation: ViewEncapsulation.ShadowDom,
 })
-export class SelectComponent<T> implements ControlValueAccessor, AfterViewInit {
-  private readonly multipleRef = inject(MultipleDirective, { optional: true });
+export class SelectComponent<T> implements ControlValueAccessor {
   private readonly changeDetectorRef = inject(ChangeDetectorRef);
   private readonly document = inject(DOCUMENT);
 
-  readonly animationDelay = input(0);
-  readonly open = output<boolean>();
+  animationDelay = input(0);
+  closeOnSelect = input(false);
+  multiple = input(false, { transform: booleanAttribute });
   readonly selectedValue = signal<T | T[] | undefined>(undefined);
+  readonly panelIsVisible = signal(false);
   readonly showPlaceholder = computed(() => {
     const selectedValue = this.selectedValue();
     const isArray = Array.isArray(selectedValue);
@@ -53,16 +49,12 @@ export class SelectComponent<T> implements ControlValueAccessor, AfterViewInit {
       (!isArray && !selectedValue) || (isArray && selectedValue.length <= 0)
     );
   });
-  readonly panelIsVisible = signal(false);
-  readonly options = contentChildren('sk-select-option', {
-    descendants: true,
-  });
-  readonly overlayPositions = DEFAULT_DROPOUT_POSITIONS;
+  readonly open = output<boolean>();
 
-  protected updateSelectionMode = effect(
+  protected readonly updateSelectionMode = effect(
     () => {
       const selectedValue = untracked(this.selectedValue);
-      if (!this.multipleRef?.multiple()) {
+      if (!this.multiple()) {
         this.selectedValue.set(
           Array.isArray(selectedValue) ? selectedValue[0] : selectedValue
         );
@@ -84,20 +76,10 @@ export class SelectComponent<T> implements ControlValueAccessor, AfterViewInit {
   togglePanel(visible: boolean): void {
     this.panelIsVisible.set(visible);
     this.open.emit(visible);
-
-    if (visible) {
-      setTimeout(() => {
-        this.document.querySelector<HTMLElement>('sk-select-option')?.focus();
-      }, 32);
-    }
   }
 
-  ngAfterViewInit(): void {
-    console.log('SelectComponent.ngAfterViewInit', this.options());
-  }
-
-  selectionChanged(value: T, forceClose = false): void {
-    if (this.multipleRef?.multiple()) {
+  selectionChanged(value: T): void {
+    if (this.multiple()) {
       this.selectedValue.update((selected) => {
         if (Array.isArray(selected)) {
           return selected.includes(value)
@@ -115,8 +97,28 @@ export class SelectComponent<T> implements ControlValueAccessor, AfterViewInit {
     this.onChange?.(this.selectedValue());
     this.onTouched?.();
 
-    if (forceClose) {
+    if (this.closeOnSelect()) {
       this.togglePanel(false);
+    }
+  }
+
+  keyArrowUp({ target }: Event): void {
+    console.log('Arrow Down', target);
+    if (target instanceof HTMLElement) {
+      console.log('Element', target.previousElementSibling);
+      if (target.previousElementSibling instanceof HTMLElement) {
+        target.previousElementSibling.focus();
+      }
+    }
+  }
+
+  keyArrowDown({ target }: Event): void {
+    console.log('Arrow Down', target);
+    if (target instanceof HTMLElement) {
+      console.log('Element', target.nextElementSibling);
+      if (target.nextElementSibling instanceof HTMLElement) {
+        target.nextElementSibling.focus();
+      }
     }
   }
 
@@ -135,5 +137,4 @@ export class SelectComponent<T> implements ControlValueAccessor, AfterViewInit {
 
   private onChange?: (value: T | T[] | undefined) => void;
   private onTouched?: () => void;
-  protected readonly Array = Array;
 }

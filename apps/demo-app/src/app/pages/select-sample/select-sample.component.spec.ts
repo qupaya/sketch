@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { SelectSampleComponent } from './select-sample.component';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 describe('SelectSampleComponent', () => {
   let component: SelectSampleComponent;
@@ -7,7 +8,7 @@ describe('SelectSampleComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [SelectSampleComponent],
+      imports: [SelectSampleComponent, NoopAnimationsModule],
     }).compileComponents();
 
     fixture = TestBed.createComponent(SelectSampleComponent);

@@ -1,0 +1,4 @@
+.sk-select-trigger:focus {
+  outline: none;
+  border: 1px solid deeppink;
+}

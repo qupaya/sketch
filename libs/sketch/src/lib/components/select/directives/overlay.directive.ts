@@ -4,33 +4,30 @@ import {
   ElementRef,
   inject,
   input,
-  OnDestroy,
-  OnInit,
   output,
 } from '@angular/core';
 import { CdkPortal } from '@angular/cdk/portal';
 import { ConnectedPosition, Overlay, OverlayRef } from '@angular/cdk/overlay';
 import { DOCUMENT } from '@angular/common';
-import { fromEvent, merge, Subject, takeUntil } from 'rxjs';
+import { fromEvent, merge } from 'rxjs';
+import { toSignal } from '@angular/core/rxjs-interop';
 
 export const DEFAULT_POSITIONS: ConnectedPosition[] = [
   { originX: 'end', originY: 'bottom', overlayX: 'end', overlayY: 'top' },
-];
-
-export const DEFAULT_DROPOUT_POSITIONS: ConnectedPosition[] = [
-  { originX: 'start', originY: 'bottom', overlayX: 'start', overlayY: 'top' },
-  { originX: 'start', originY: 'top', overlayX: 'start', overlayY: 'bottom' },
 ];
 
 @Directive({
   selector: '[skCdkOverlay]',
   standalone: true,
 })
-export class CdkOverlayDirective implements OnInit, OnDestroy {
+export class CdkOverlayDirective {
   private readonly overlay = inject(Overlay);
   private readonly elementRef = inject(ElementRef<HTMLElement>);
-  private readonly window = inject(DOCUMENT).defaultView;
-  private readonly destroy$$ = new Subject<void>();
+  private readonly window = inject(DOCUMENT)?.defaultView;
+
+  private readonly windowResize = this.window
+    ? toSignal(fromEvent(this.window, 'resize'))
+    : undefined;
 
   portal = input<CdkPortal | undefined>(undefined, { alias: 'skCdkOverlay' });
   showOverlay = input(false, { alias: 'skCdkOverlayShow' });
@@ -41,47 +38,30 @@ export class CdkOverlayDirective implements OnInit, OnDestroy {
   relativeTo = input<HTMLElement | undefined>(undefined, {
     alias: 'skCdkOverlayRelativeTo',
   });
-  showChange = output<boolean>({ alias: 'skCdkOverlayShowChange' });
+  backdropClass = input<string>('cdk-overlay-transparent-backdrop', {
+    alias: 'skCdkOverlayBackdropClass',
+  });
+  visible = output<boolean>({ alias: 'skCdkOverlayVisible' });
 
   private _overlayRef?: OverlayRef;
-  private _relatedElement?: HTMLElement;
+  private _relatedElement?: HTMLElement =
+    this.relativeTo() || this.elementRef.nativeElement;
 
-  protected detectVisibleChange = effect(() => {
+  protected readonly detectVisibleChange = effect(() => {
     if (this._relatedElement) {
       if (this.showOverlay()) {
-        this.show();
+        this.createOverlay();
       } else {
         this.hide();
       }
     }
   });
 
-  public ngOnInit(): void {
-    this._relatedElement = this.relativeTo() || this.elementRef.nativeElement;
-    if (this.window) {
-      fromEvent(this.window, 'resize')
-        .pipe(takeUntil(this.destroy$$))
-        .subscribe(() => this._syncOverlayWidth());
+  protected readonly updateOverlayPortal = effect(() => {
+    if (this.windowResize && this.windowResize()) {
+      this.syncOverlayWidth();
     }
-  }
-
-  public ngOnDestroy(): void {
-    this.hide();
-    this.destroy$$.next();
-    this.destroy$$.complete();
-  }
-
-  private show(): void {
-    this.createOverlay();
-  }
-
-  private hide(): void {
-    this.showChange.emit(false);
-    this.window?.setTimeout(
-      () => this._overlayRef?.dispose(),
-      this.disposeDelay()
-    );
-  }
+  });
 
   private createOverlay(): void {
     if (!this._relatedElement) {
@@ -97,14 +77,14 @@ export class CdkOverlayDirective implements OnInit, OnDestroy {
 
     this._overlayRef = this.overlay.create({
       hasBackdrop: true,
-      backdropClass: 'cdk-overlay-transparent-backdrop',
+      backdropClass: this.backdropClass(),
       positionStrategy,
       scrollStrategy: this.overlay.scrollStrategies.reposition({
         autoClose: true,
       }),
     });
 
-    this._syncOverlayWidth();
+    this.syncOverlayWidth();
 
     this._overlayRef.attach(this.portal());
     merge(
@@ -113,7 +93,12 @@ export class CdkOverlayDirective implements OnInit, OnDestroy {
     ).subscribe(() => this.hide());
   }
 
-  private _syncOverlayWidth(): void {
+  private hide(): void {
+    this.visible.emit(false);
+    setTimeout(() => this._overlayRef?.dispose(), this.disposeDelay());
+  }
+
+  private syncOverlayWidth(): void {
     this._overlayRef?.updateSize({
       width: this._relatedElement?.getBoundingClientRect().width,
     });

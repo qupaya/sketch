@@ -1,77 +1,16 @@
 import { Component, effect, HostBinding, input } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {
-  animate,
-  AnimationMetadata,
-  query,
-  sequence,
-  stagger,
-  style,
-  transition,
-  trigger,
-} from '@angular/animations';
+import { query, transition, trigger } from '@angular/animations';
 import { SelectOptionComponent } from '@qupaya/sketch';
-
-export const slideDeleteAnimation = (): AnimationMetadata => {
-  return stagger('80ms', [
-    sequence([
-      animate(
-        `200ms cubic-bezier(0.3, 0, 0.8, 0.15)`,
-        style({
-          transform: `translateX(-200%)`,
-        })
-      ),
-      animate(
-        `200ms ease`,
-        style({
-          height: 0,
-        })
-      ),
-    ]),
-  ]);
-};
-
-export const slideFadeAnimationFactory = (): AnimationMetadata[] => {
-  return [
-    style({ opacity: 0, transform: 'translateY(-1.5rem)', scale: 0.8 }),
-    stagger('32ms', [
-      animate(
-        '150ms cubic-bezier(0.05, 0.7, 0.1, 1)',
-        style({ opacity: 1, transform: 'translateY(0)', scale: 1 })
-      ),
-    ]),
-  ];
-};
-
-export const fadeFactory = (
-  from: number,
-  to: number,
-  duration = '200ms'
-): AnimationMetadata[] => {
-  return [
-    style({ opacity: from }),
-    animate(`${duration} ease`, style({ opacity: to })),
-  ];
-};
-
-export const zoomFactory = (
-  from: number,
-  to: number,
-  duration = '500ms'
-): AnimationMetadata[] => {
-  return [
-    style({ opacity: from, scale: from }),
-    animate(
-      `${duration} cubic-bezier(0.05, 0.7, 0.1, 1)`,
-      style({ opacity: to, scale: to })
-    ),
-  ];
-};
+import { slideFadeAnimationFactory } from '../../../animations/slide.animation';
+import { fadeFactory } from '../../../animations/fade.animations';
+import { FaIconComponent } from '@fortawesome/angular-fontawesome';
+import { SelectDemoOption } from '../select-sample.component';
 
 @Component({
   selector: 'app-select-options-sample',
   standalone: true,
-  imports: [CommonModule, SelectOptionComponent],
+  imports: [CommonModule, SelectOptionComponent, FaIconComponent],
   templateUrl: './select-options-sample.component.html',
   styleUrl: './select-options-sample.component.css',
   animations: [
@@ -98,6 +37,7 @@ export const zoomFactory = (
   ],
 })
 export class SelectOptionsSampleComponent {
+  options = input.required<SelectDemoOption[]>();
   @HostBinding('@animation') animateOptions = 'hidden';
 
   show = input.required<boolean>();

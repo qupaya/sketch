@@ -1,0 +1,8 @@
+:host {
+  border: 1px solid white;
+}
+
+:host:focus {
+  outline: none;
+  border-color: deeppink;
+}

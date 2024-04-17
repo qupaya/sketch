@@ -1,5 +1,6 @@
-<sk-select-option [value]="{ data: 1 }">Test 1</sk-select-option>
-<sk-select-option [value]="{ data: 2 }">Test 2</sk-select-option>
-<sk-select-option [value]="{ data: 3 }">Test 3</sk-select-option>
-<sk-select-option [value]="{ data: 4 }">Test 4</sk-select-option>
-<sk-select-option [value]="{ data: 5 }">Test 5</sk-select-option>
+@for (option of options(); track option.value) {
+<sk-select-option [value]="option.value">
+  <fa-icon [icon]="option.icon"></fa-icon>
+  <span>{{ option.label }}</span>
+</sk-select-option>
+}

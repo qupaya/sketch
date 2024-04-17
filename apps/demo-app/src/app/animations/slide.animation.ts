@@ -1,6 +1,7 @@
 import {
   animate,
   AnimationMetadata,
+  sequence,
   stagger,
   style,
 } from '@angular/animations';
@@ -15,4 +16,23 @@ export const slideFadeAnimationFactory = (): AnimationMetadata[] => {
       ),
     ]),
   ];
+};
+
+export const slideDeleteAnimation = (): AnimationMetadata => {
+  return stagger('80ms', [
+    sequence([
+      animate(
+        `200ms cubic-bezier(0.3, 0, 0.8, 0.15)`,
+        style({
+          transform: `translateX(-200%)`,
+        })
+      ),
+      animate(
+        `200ms ease`,
+        style({
+          height: 0,
+        })
+      ),
+    ]),
+  ]);
 };

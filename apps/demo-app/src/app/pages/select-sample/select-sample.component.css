@@ -1,51 +1,31 @@
 sk-select {
-    display: block;
-    margin-top: 1rem;
+  display: block;
+  margin-top: 1rem;
 }
 
 .sk-label {
-    padding: 0.5rem 1rem;
-    border-radius: 8px;
-    background: rgba(255, 255, 255, 0.1);
-    color: #fefefe;
-    box-shadow: rgba(255, 255, 255, 0.05) 0px 6px 24px 0px, rgba(255, 255, 255, 0.08) 0px 0px 0px 1px;
-}
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  background: rgb(255 255 255 / 10%);
+  color: #fefefe;
+  box-shadow: rgb(255 255 255 / 5%) 0 6px 24px 0,
+    rgb(255 255 255 / 8%) 0 0 0 1px;
 
-.sk-options {
+  .sk-label-item {
     display: flex;
-    flex-direction: column;
+    align-items: center;
     gap: 0.25rem;
-    width: 100%;
-    margin-top: 0.5rem;
-}
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 90%;
 
-sk-select-option {
-    background-color: #fff;
-    color: #000;
-    padding: 0.5rem 1rem;
-    cursor: pointer;
-    transition: color 0.3s ease-in-out, font-weight 0.3s ease-in-out,
-    font-size 0.3s ease-in-out;
-}
-
-sk-select-option:first-child {
-    border-top-left-radius: 0.25rem;
-    border-top-right-radius: 0.25rem;
-}
-
-sk-select-option:last-child {
-    border-bottom-left-radius: 0.25rem;
-    border-bottom-right-radius: 0.25rem;
-}
-
-@media (hover) {
-    sk-select-option:hover {
-        color: deeppink;
-        font-weight: bold;
-        font-size: 1.5em;
+    fa-icon {
+      width: 1.5rem;
+      height: 1.5rem;
     }
-}
-
-sk-select-option:not(:last-child) {
-    border-bottom: 1px solid #000;
+  }
 }

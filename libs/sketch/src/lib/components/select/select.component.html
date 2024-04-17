@@ -1,12 +1,13 @@
 <div
+  class="sk-select-trigger"
   [skCdkOverlay]="overlay"
   [skCdkOverlayShow]="panelIsVisible()"
-  (skCdkOverlayShowChange)="togglePanel($event)"
-  [skCdkOverlayPositions]="overlayPositions"
   [skCdkOverlayDisposeDelay]="animationDelay()"
+  [tabIndex]="0"
   (click)="togglePanel(true)"
-  [tabIndex]="1"
   (keydown.enter)="togglePanel(!this.panelIsVisible())"
+  (keydown.space)="togglePanel(!this.panelIsVisible())"
+  (skCdkOverlayVisible)="togglePanel($event)"
 >
   @if (showPlaceholder()) {
   <ng-content select="[skSelectPlaceholder]"></ng-content>
@@ -15,8 +16,16 @@
   }
 </div>
 
+<!--TODO: Discuss if we need a directive for keyboard navigation? -->
 <ng-template cdkPortal #overlay="cdkPortal">
-  <ng-container cdkTrapFocus>
+  <div
+    class="sk-overlay-panel"
+    style="width: 100%"
+    (keydown.arrowUp)="keyArrowUp($event)"
+    (keydown.arrowDown)="keyArrowDown($event)"
+    cdkTrapFocus
+    [cdkTrapFocusAutoCapture]="true"
+  >
     <ng-content></ng-content>
-  </ng-container>
+  </div>
 </ng-template>
