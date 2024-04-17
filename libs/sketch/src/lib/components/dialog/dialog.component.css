@@ -4,3 +4,12 @@ dialog {
   outline: none;
   background-color: transparent;
 }
+
+img {
+  width: 20px;
+  height: 20px;
+}
+
+button {
+  cursor: pointer;
+}

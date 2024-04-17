@@ -36,6 +36,10 @@ export class DialogComponent {
    */
   dialogId = input('');
 
+  closeButtonTitle = input('Close');
+
+  closeButtonIcon = input('../../../assets/cross.svg');
+
   // contentShadow = input<boolean>(true);
 
   showCloseButton = input<boolean>(true);

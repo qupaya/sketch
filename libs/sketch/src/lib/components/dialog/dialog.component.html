@@ -6,15 +6,14 @@
 >
   <div>
     <ng-content></ng-content>
+
     @if (showCloseButton()) {
     <button
       type="button"
-      title="Schließen"
-      data-testId="q-common-cdk-dialog-close-button"
+      [title]="closeButtonTitle()"
       (click)="closeRequested.emit()"
     >
-      close
-      <!--TODO: add SVG-->
+      <img [src]="closeButtonIcon()" [alt]="closeButtonTitle()" />
     </button>
     }
   </div>
