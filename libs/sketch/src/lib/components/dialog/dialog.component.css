@@ -1,3 +1,8 @@
+:host {
+  --sk-dialog-background: black;
+  --sk-dialog-background-opacity: 0.5;
+}
+
 dialog {
   padding: 0;
   border: none;
@@ -7,4 +12,9 @@ dialog {
 
 button {
   cursor: pointer;
+}
+
+dialog::backdrop {
+  background: var(--sk-dialog-background);
+  opacity: var(--sk-dialog-background-opacity);
 }

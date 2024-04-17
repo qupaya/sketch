@@ -11,3 +11,14 @@ button {
   border-radius: 50px;
   padding: 10px;
 }
+
+::part(dialog) {
+  --sk-dialog-background: linear-gradient(
+    45deg,
+    magenta,
+    rebeccapurple,
+    dodgerblue,
+    green
+  );
+  --sk-dialog-background-opacity: 0.3;
+}

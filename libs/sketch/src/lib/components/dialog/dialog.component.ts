@@ -52,11 +52,7 @@ const initalButtonProps: CloseButtonProperties = {
   encapsulation: ViewEncapsulation.ShadowDom,
 })
 export class DialogComponent {
-  public static readonly defaultBackgroundClass = 'bg-[#00070ba1]';
-
   open = model(false);
-
-  //backdropClass = input<string[]>([DialogComponent.defaultBackgroundClass]);
 
   /**
    * It will be appended to the rendered overlay in this way:
