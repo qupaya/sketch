@@ -24,8 +24,4 @@ export class DialogSampleComponent {
       margin: '0',
     },
   };
-
-  constructor() {
-    console.log(this.closeButtonProperties.title);
-  }
 }

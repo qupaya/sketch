@@ -30,7 +30,7 @@ export interface CloseButtonProperties {
   styles?: CloseButtonStyles;
 }
 
-const initalButtonProps: CloseButtonProperties = {
+const initialButtonProperties: CloseButtonProperties = {
   title: 'Close',
   iconSrc: '../../../assets/cross.svg',
   styles: {
@@ -64,20 +64,11 @@ export class DialogComponent {
    */
   dialogId = input('');
 
-  closeButtonProperties = input<CloseButtonProperties>();
-  readonly buttonProps = signal<CloseButtonProperties>(initalButtonProps);
+  showCloseButton = input<boolean>(false);
 
-  protected buttonPropsChanged = effect(
-    () => {
-      const newProps = this.closeButtonProperties();
-      this.buttonProps.update((props) => ({ ...props, ...newProps }));
-    },
-    { allowSignalWrites: true }
-  );
+  closeButtonProperties = input<CloseButtonProperties>();
 
   // contentShadow = input<boolean>(true);
-
-  showCloseButton = input<boolean>(false);
 
   //fullscreen = input<boolean>(false);
 
@@ -85,6 +76,21 @@ export class DialogComponent {
 
   private readonly dialogElement =
     viewChild.required<ElementRef<HTMLDialogElement>>('dialogElement');
+
+  readonly defaultCloseButtonProperties = signal<CloseButtonProperties>(
+    initialButtonProperties
+  );
+
+  protected buttonPropsChanged = effect(
+    () => {
+      const newButtonProperties = this.closeButtonProperties();
+      this.defaultCloseButtonProperties.update((defaultProps) => ({
+        ...defaultProps,
+        ...newButtonProperties,
+      }));
+    },
+    { allowSignalWrites: true }
+  );
 
   protected readonly openEvents = effect(
     () => {

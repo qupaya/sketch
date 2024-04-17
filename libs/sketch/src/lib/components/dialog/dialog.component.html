@@ -11,21 +11,25 @@
     @if (showCloseButton()) {
     <button
       type="button"
-      [title]="buttonProps().title"
+      [title]="defaultCloseButtonProperties().title"
       (click)="closeRequested.emit()"
-      [style.width.px]="buttonProps().styles?.buttonWidth"
-      [style.height.px]="buttonProps().styles?.buttonHeight"
-      [style.borderRadius.px]="buttonProps().styles?.borderRadius"
-      [style.backgroundColor]="buttonProps().styles?.backgroundColor"
-      [style.border]="buttonProps().styles?.border"
-      [style.padding]="buttonProps().styles?.padding"
-      [style.margin]="buttonProps().styles?.margin"
+      [style.width.px]="defaultCloseButtonProperties().styles?.buttonWidth"
+      [style.height.px]="defaultCloseButtonProperties().styles?.buttonHeight"
+      [style.borderRadius.px]="
+        defaultCloseButtonProperties().styles?.borderRadius
+      "
+      [style.backgroundColor]="
+        defaultCloseButtonProperties().styles?.backgroundColor
+      "
+      [style.border]="defaultCloseButtonProperties().styles?.border"
+      [style.padding]="defaultCloseButtonProperties().styles?.padding"
+      [style.margin]="defaultCloseButtonProperties().styles?.margin"
     >
       <img
-        [src]="buttonProps().iconSrc"
-        [alt]="buttonProps().title"
-        [style.width.px]="buttonProps().styles?.iconWidth"
-        [style.height.px]="buttonProps().styles?.iconHeight"
+        [src]="defaultCloseButtonProperties().iconSrc"
+        [alt]="defaultCloseButtonProperties().title"
+        [style.width.px]="defaultCloseButtonProperties().styles?.iconWidth"
+        [style.height.px]="defaultCloseButtonProperties().styles?.iconHeight"
       />
     </button>
     }
