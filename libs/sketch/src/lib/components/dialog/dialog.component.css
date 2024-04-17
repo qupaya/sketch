@@ -1,4 +1,161 @@
 :host {
-    display: block;
     position: relative;
 }
+
+.dialog-outer-wrapper {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    max-width: 100%;
+    max-height: 100vh;
+}
+
+.dialog-backdrop {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    min-width: 100%;
+    min-height: 100%;
+}
+
+.dialog-outer-content-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    max-width: 100%;
+    max-height: 100%;
+    pointer-events: none;
+}
+
+.hidden-overflow {
+    overflow: hidden !important;
+}
+
+.q-common-cdk-dialog-projected-content-with-shadow {
+    box-shadow: -1px 3px 10px -2px #1f1f1f;
+}
+
+.q-common-cdk-dialog-projected-content-wrapper {
+    position: relative;
+    pointer-events: all;
+    max-height: 100%;
+}
+
+.q-common-cdk-dialog-projected-content {
+    overflow: auto;
+    max-width: calc(100vw - 1rem);
+    max-height: calc(95vh - 3rem);
+    max-height: calc(100dvh - 3rem);
+    border-radius: 4px;
+    margin: auto;
+}
+
+.q-common-cdk-dialog-without-close-button
+.q-common-cdk-dialog-projected-content {
+    max-height: calc(95vh - 1rem);
+    max-height: calc(100dvh - 1rem);
+}
+
+.q-common-cdk-dialog-without-close-button.fullscreen
+.q-common-cdk-dialog-projected-content {
+    max-width: 95vw;
+    max-width: 100dvw;
+    max-height: 95vh;
+    max-height: 100dvh;
+}
+
+.q-common-cdk-dialog-projected-content.fullscreen {
+    max-width: 95vw;
+    max-width: 100dvw;
+    max-height: 95vh;
+    max-height: 100dvh;
+}
+
+.q-common-cdk-dialog-without-close-button
+.q-common-cdk-dialog-projected-content.fullscreen {
+    max-width: 95vw;
+    max-width: 100dvw;
+    max-height: 95vh;
+    max-height: 100dvh;
+}
+
+.q-common-cdk-dialog-close-button {
+    top: -1.5rem;
+    right: 0;
+    fill: black;
+    position: absolute;
+    cursor: pointer;
+}
+
+.q-common-cdk-dialog-close-button svg {
+    filter: drop-shadow(-1px 2px 2px #1f1f1f);
+}
+
+.cdk-overlay-pane {
+    border-radius: 8px;
+}
+
+/*
+@screen sm {
+    .q-common-cdk-dialog-projected-content {
+        overflow: auto;
+        max-width: calc(100vw - 4rem);
+        max-height: calc(95vh - 4rem);
+        max-height: calc(100dvh - 4rem);
+        margin: auto;
+    }
+
+    .q-common-cdk-dialog-without-close-button
+    .q-common-cdk-dialog-projected-content {
+        max-width: calc(100vw - 1rem);
+        max-height: calc(95vh - 1rem);
+        max-height: calc(100dvh - 1rem);
+    }
+
+    .q-common-cdk-dialog-close-button {
+        top: -1.5rem;
+        right: -1.5rem;
+    }
+}
+
+@screen md {
+    .q-common-cdk-dialog-projected-content-wrapper {
+        @apply relative m-8;
+    }
+}
+
+html.cdk-global-scrollblock {
+    @apply !overscroll-none;
+}
+
+!* print *!
+@media print {
+    html.cdk-global-scrollblock {
+        @apply !relative !overflow-visible;
+    }
+
+    html.cdk-global-scrollblock q-root,
+    html.cdk-global-scrollblock .cdk-overlay-backdrop {
+        @apply hidden;
+    }
+
+    html.cdk-global-scrollblock .cdk-overlay-container,
+    html.cdk-global-scrollblock .cdk-overlay-pane,
+    html.cdk-global-scrollblock .q-common-cdk-dialog-projected-content {
+        @apply !relative !w-full !h-auto max-h-none max-w-none;
+    }
+
+    html.cdk-global-scrollblock .q-common-cdk-dialog-projected-content-wrapper {
+        @apply m-0;
+    }
+} */

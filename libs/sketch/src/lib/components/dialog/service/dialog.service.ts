@@ -41,12 +41,20 @@ export class DialogService {
         `The Dialog service has already an overlay with the same tag "${params.tag}"`
       );
     }
+
+    const positionStrategy = this.overlay
+      .position()
+      .global()
+      .centerVertically()
+      .centerHorizontally();
+
     const overlayRef = this.overlay.create({
       hasBackdrop: true,
       backdropClass: params.backdropClass,
       width: '100%',
       height: '100%',
       disposeOnNavigation: true,
+      positionStrategy,
       scrollStrategy: this.scrollStrategyOptions.block(),
     });
     const dialogPortal = new TemplatePortal(

@@ -1,0 +1,13 @@
+.my-backdrop {
+  background-color: green;
+}
+
+button {
+  cursor: pointer;
+}
+
+.my-super-styling-class {
+  background-color: red;
+  border-radius: 50px;
+  padding: 10px;
+}

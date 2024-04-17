@@ -2,15 +2,17 @@
 
 <sk-dialog
   [(open)]="isDialogOpen"
-  dialogId="some-tag"
+  dialogId="test-dialog-id"
   (closeRequested)="isDialogOpen = false"
   [contentTemplate]="contentTemplate"
+  [showCloseButton]="true"
+  [fullscreen]="true"
+  [backdropClass]="['my-backdrop']"
+  [contentShadow]="true"
 >
-  <!--[backdropClass]="backdropClass"
-        [showCloseButton]="showCloseButton"
-        [contentShadow]="contentShadow"
-        [fullscreen]="false"-->
   <ng-template #contentTemplate>
-    <p>here comes some content</p>
+    <div class="my-super-styling-class">
+      <p>here comes some content</p>
+    </div>
   </ng-template>
 </sk-dialog>

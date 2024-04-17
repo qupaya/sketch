@@ -3,7 +3,6 @@ import {
   HostBinding,
   TemplateRef,
   ViewContainerRef,
-  ViewEncapsulation,
   effect,
   inject,
   input,
@@ -11,6 +10,7 @@ import {
   viewChild,
   OnDestroy,
   model,
+  ViewEncapsulation,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CdkTrapFocus } from '@angular/cdk/a11y';
@@ -24,7 +24,7 @@ import { DialogService } from './service/dialog.service';
   providers: [DialogService],
   templateUrl: './dialog.component.html',
   styleUrl: './dialog.component.css',
-  encapsulation: ViewEncapsulation.ShadowDom,
+  encapsulation: ViewEncapsulation.None,
 })
 export class DialogComponent implements OnDestroy {
   public static readonly defaultBackgroundClass = 'bg-[#00070ba1]';
@@ -46,12 +46,12 @@ export class DialogComponent implements OnDestroy {
    *
    * This can not be desired when the popup is really long and the first button is not visible at start, otherwise the popup will scroll to the first button position!
    */
-  readonly focusAutoCapture = input<boolean>(true);
+  focusAutoCapture = input<boolean>(true);
 
   /**
    * Useful when you want to control how your content is scrolled.
    */
-  readonly preventContentScrolling = input<boolean>(false);
+  preventContentScrolling = input<boolean>(false);
 
   /**
    * It will be appended to the rendered overlay in this way:
@@ -61,15 +61,15 @@ export class DialogComponent implements OnDestroy {
    * <div data-q-dialog-tag="my-tag-name">
    * ```
    */
-  readonly dialogId = input('');
+  dialogId = input('');
 
-  readonly contentShadow = input<boolean>(true);
+  contentShadow = input<boolean>(true);
 
-  readonly showCloseButton = input<boolean>(true);
+  showCloseButton = input<boolean>(true);
 
-  readonly fullscreen = input<boolean>(false);
+  fullscreen = input<boolean>(false);
 
-  readonly closeRequested = output<void>();
+  closeRequested = output<void>();
 
   private readonly contentWrapperTemplate = viewChild.required<
     TemplateRef<HTMLElement>
@@ -98,4 +98,6 @@ export class DialogComponent implements OnDestroy {
   ngOnDestroy(): void {
     this.dialogService.close(this._dialogId);
   }
+
+  protected readonly console = console;
 }
