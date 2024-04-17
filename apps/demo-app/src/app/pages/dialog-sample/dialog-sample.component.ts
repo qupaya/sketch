@@ -11,8 +11,4 @@ import { DialogComponent } from '@qupaya/sketch';
 })
 export class DialogSampleComponent {
   isDialogOpen = false;
-
-  openDialog(): void {
-    this.isDialogOpen = true;
-  }
 }

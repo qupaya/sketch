@@ -1,49 +1,21 @@
-<ng-template #contentWrapperTemplate>
-  <div
-    class="dialog-outer-wrapper"
-    [ngClass]="{
-      'q-common-cdk-dialog-without-close-button': !showCloseButton()
-    }"
-    role="dialog"
-  >
-    <div
-      class="dialog-backdrop"
-      data-testId="dialog-backdrop"
-      (click)="closeRequested.emit(); console.log('backdrop has been clicked')"
-    ></div>
-    <div class="dialog-outer-content-wrapper">
-      <div
-        class="q-common-cdk-dialog-projected-content-wrapper"
-        [ngClass]="{
-          'q-common-cdk-dialog-projected-content-with-shadow': contentShadow()
-        }"
-      >
-        <div
-          class="q-common-cdk-dialog-projected-content"
-          [ngClass]="{
-            fullscreen: fullscreen(),
-            'hidden-overflow': preventContentScrolling()
-          }"
-          [attr.data-q-dialog-tag]="dialogId()"
-          [cdkTrapFocus]="true"
-          [cdkTrapFocusAutoCapture]="focusAutoCapture()"
-          (keydown.escape)="closeRequested.emit()"
-          #projectedContent
-        >
-          <ng-container [ngTemplateOutlet]="contentTemplate()"></ng-container>
-        </div>
-        <button
-          *ngIf="showCloseButton()"
-          type="button"
-          title="Schließen"
-          class="q-common-cdk-dialog-close-button"
-          data-testId="q-common-cdk-dialog-close-button"
-          (click)="closeRequested.emit()"
-        >
-          close
-          <!--TODO: add SVG-->
-        </button>
-      </div>
-    </div>
+<dialog
+  #dialogElement
+  skClickBackdrop
+  (keydown.escape)="closeRequested.emit()"
+  (clickedBackdrop)="closeRequested.emit()"
+>
+  <div>
+    <ng-content></ng-content>
+    @if (showCloseButton()) {
+    <button
+      type="button"
+      title="Schließen"
+      data-testId="q-common-cdk-dialog-close-button"
+      (click)="closeRequested.emit()"
+    >
+      close
+      <!--TODO: add SVG-->
+    </button>
+    }
   </div>
-</ng-template>
+</dialog>
