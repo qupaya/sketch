@@ -156,12 +156,7 @@ Here is an example:
 
 ```css
 ::part(dialog) {
-  --sk-dialog-background: rgba(
-    92,
-    107,
-    192,
-    0.4
-  ); /*hsla(231, 44%, 56%, 0.4) or hex: #5c6bc066*/
+  --sk-dialog-background: rgba(92, 107, 192, 0.4); /*hsla(231, 44%, 56%, 0.4) or hex: #5c6bc066*/
   --sk-dialog-background-blur: 2px;
 }
 ```
@@ -178,6 +173,25 @@ Some basic styling could be a `background-color`, `padding`, `width` and `height
 ### Positioning
 
 By default, the Dialog is placed in the center of the screen.
+
+### Content Shadow
+
+The Dialog does not come with a Shadow for the content. However, you can add it yourself.
+
+If you have a wrapper class for your actual content (which is recommended), you can add a `box-shadow` and, depending on how large it is, a `margin` to have enough space for the shadow.
+
+Here is an example:
+
+```css
+.styled-wrapper {
+  box-shadow: rgba(0, 0, 0, 0.2) 0 10px 25px;
+  margin: 30px;
+}
+```
+
+### Scrolling
+
+If you have more content than the height of the content box, just add `overflow: scroll` to the wrapper class and you are able to scroll within the Dialog.
 
 ## Accessibility
 
