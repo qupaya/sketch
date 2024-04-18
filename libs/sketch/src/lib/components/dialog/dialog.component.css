@@ -1,6 +1,6 @@
 :host {
-  --sk-dialog-background: black;
-  --sk-dialog-background-opacity: 0.5;
+  --sk-dialog-background: rgb(0 0 0 / 50%);
+  --sk-dialog-background-blur: 0px;
 }
 
 dialog {
@@ -15,6 +15,6 @@ button {
 }
 
 dialog::backdrop {
-  background: var(--sk-dialog-background);
-  opacity: var(--sk-dialog-background-opacity);
+  background-color: var(--sk-dialog-background);
+  backdrop-filter: blur(var(--sk-dialog-background-blur));
 }

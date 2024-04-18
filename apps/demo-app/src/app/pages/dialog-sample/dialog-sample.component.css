@@ -7,18 +7,12 @@ button {
 }
 
 .my-super-styling-class {
-  background-color: red;
-  border-radius: 50px;
+  background-color: lightblue;
+  border-radius: 20px;
   padding: 10px;
 }
 
 ::part(dialog) {
-  --sk-dialog-background: linear-gradient(
-    45deg,
-    magenta,
-    rebeccapurple,
-    dodgerblue,
-    green
-  );
-  --sk-dialog-background-opacity: 0.3;
+  --sk-dialog-background: rgb(92 107 192 / 40%);
+  --sk-dialog-background-blur: 2px;
 }
