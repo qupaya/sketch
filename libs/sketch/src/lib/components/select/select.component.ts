@@ -39,6 +39,7 @@ export class SelectComponent<T> implements ControlValueAccessor {
   animationDelay = input(0);
   closeOnSelect = input(false);
   multiple = input(false, { transform: booleanAttribute });
+  readonly autoFocus = signal(false);
   readonly selectedValue = signal<T | T[] | undefined>(undefined);
   readonly panelIsVisible = signal(false);
   readonly showPlaceholder = computed(() => {
@@ -72,8 +73,9 @@ export class SelectComponent<T> implements ControlValueAccessor {
     { allowSignalWrites: true }
   );
 
-  togglePanel(visible: boolean): void {
+  togglePanel(visible: boolean, focus = true): void {
     this.panelIsVisible.set(visible);
+    this.autoFocus.set(focus);
     this.open.emit(visible);
   }
 

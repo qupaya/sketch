@@ -4,7 +4,7 @@
   [skCdkOverlayShow]="panelIsVisible()"
   [skCdkOverlayDisposeDelay]="animationDelay()"
   [tabIndex]="0"
-  (click)="togglePanel(true)"
+  (click)="togglePanel(true, false)"
   (keydown.enter)="togglePanel(!this.panelIsVisible())"
   (keydown.space)="togglePanel(!this.panelIsVisible())"
   (skCdkOverlayVisible)="togglePanel($event)"
@@ -23,7 +23,7 @@
     (keydown.arrowUp)="keyArrowUp($event)"
     (keydown.arrowDown)="keyArrowDown($event)"
     cdkTrapFocus
-    [cdkTrapFocusAutoCapture]="true"
+    [cdkTrapFocusAutoCapture]="autoFocus()"
   >
     <ng-content></ng-content>
   </div>

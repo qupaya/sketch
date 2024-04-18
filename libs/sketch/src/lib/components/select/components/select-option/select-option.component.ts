@@ -53,9 +53,6 @@ export class SelectOptionComponent<T> {
     } else {
       this.selected = selectedValue === value;
     }
-    console.log('selectedValue', selectedValue);
-    console.log('value', value);
-    console.log('this.selected', this.selected);
   });
 
   // WORKAROUND: This is a workaround until the HostBinding can also use as signal
