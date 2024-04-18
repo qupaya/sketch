@@ -1,0 +1,46 @@
+sk-select {
+  --sk-select-label-background: rgb(255 255 255 / 10%);
+  --sk-select-label-color: #fefefe;
+  --sk-select-label-padding: 0;
+  --sk-select-label-border-radius: 8px;
+  --sk-select-label-border-color: transparent;
+  --sk-select-label-border-focus-color: deeppink;
+
+  display: block;
+  margin-top: 1rem;
+}
+
+.sk-label {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.25rem;
+  border-radius: 8px;
+  padding: 0.5rem 1rem;
+  box-shadow: rgb(255 255 255 / 5%) 0 6px 24px 0,
+    rgb(255 255 255 / 8%) 0 0 0 1px;
+}
+
+.sk-label .sk-arrow {
+  transform: rotate(0);
+  transition: transform 0.3s ease-in-out;
+}
+
+.sk-label.open .sk-arrow {
+  transform: rotate(180deg);
+}
+
+.sk-label .sk-label-item {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 90%;
+}
+
+fa-icon {
+  width: 1.5rem;
+  height: 1.5rem;
+}

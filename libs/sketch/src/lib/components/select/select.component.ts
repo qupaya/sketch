@@ -12,7 +12,7 @@ import {
   untracked,
   ViewEncapsulation,
 } from '@angular/core';
-import { CommonModule, DOCUMENT } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { CdkOverlayDirective } from './directives/overlay.directive';
 import { CdkPortal } from '@angular/cdk/portal';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
@@ -35,7 +35,6 @@ import { CdkTrapFocus } from '@angular/cdk/a11y';
 })
 export class SelectComponent<T> implements ControlValueAccessor {
   private readonly changeDetectorRef = inject(ChangeDetectorRef);
-  private readonly document = inject(DOCUMENT);
 
   animationDelay = input(0);
   closeOnSelect = input(false);

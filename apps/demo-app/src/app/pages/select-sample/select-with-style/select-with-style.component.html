@@ -1,0 +1,29 @@
+Multiple: <input type="checkbox" (change)="switchMultiple($event)" />
+
+<sk-select
+  [ngModel]="value"
+  (ngModelChange)="valueChanged($event)"
+  [multiple]="multiple()"
+  [animationDelay]="250"
+  [closeOnSelect]="!multiple()"
+  (open)="showAnimation.set($event)"
+>
+  <div class="sk-label" [class.open]="showAnimation()" skSelectPlaceholder>
+    <span>Please select an option</span>
+    <fa-icon class="sk-arrow" [icon]="faArrowAltCircleDown"></fa-icon>
+  </div>
+  <div class="sk-label" [class.open]="showAnimation()" skSelectLabel>
+    <div class="sk-label-item">
+      @for (item of selectedValues(); track item.value) { @if
+      (selectedValues().length <= 1) {
+      <fa-icon [icon]="item.icon"></fa-icon>
+      }
+      {{ item.label }}
+      }
+    </div>
+    <fa-icon class="sk-arrow" [icon]="faArrowAltCircleDown"></fa-icon>
+  </div>
+
+  <app-select-options-sample [options]="options" [show]="showAnimation()">
+  </app-select-options-sample>
+</sk-select>

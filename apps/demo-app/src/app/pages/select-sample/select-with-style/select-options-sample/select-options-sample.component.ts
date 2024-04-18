@@ -2,10 +2,10 @@ import { Component, effect, HostBinding, input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { query, transition, trigger } from '@angular/animations';
 import { SelectOptionComponent } from '@qupaya/sketch';
-import { slideFadeAnimationFactory } from '../../../animations/slide.animation';
-import { fadeFactory } from '../../../animations/fade.animations';
+import { slideFadeAnimationFactory } from '../../../../animations/slide.animation';
+import { fadeFactory } from '../../../../animations/fade.animations';
 import { FaIconComponent } from '@fortawesome/angular-fontawesome';
-import { SelectDemoOption } from '../select-sample.component';
+import { SelectDemoOption } from '../../select-sample.component';
 
 @Component({
   selector: 'app-select-options-sample',

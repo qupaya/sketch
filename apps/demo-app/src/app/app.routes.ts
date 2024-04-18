@@ -1,4 +1,7 @@
 import { Route } from '@angular/router';
+import { SelectSampleComponent } from './pages/select-sample/select-sample.component';
+import { SelectDefaultComponent } from './pages/select-sample/select-default/select-default.component';
+import { SelectWithStyleComponent } from './pages/select-sample/select-with-style/select-with-style.component';
 
 const UUID_REGEX = /^[a-z,0-9,-]{36,36}$/;
 
@@ -17,10 +20,17 @@ export const appRoutes: Route[] = [
   },
   {
     path: 'select',
-    loadComponent: () =>
-      import('./pages/select-sample/select-sample.component').then(
-        (m) => m.SelectSampleComponent
-      ),
+    component: SelectSampleComponent,
+    children: [
+      {
+        path: '',
+        component: SelectDefaultComponent,
+      },
+      {
+        path: 'with-style',
+        component: SelectWithStyleComponent,
+      },
+    ],
   },
   {
     path: 'list-sample',

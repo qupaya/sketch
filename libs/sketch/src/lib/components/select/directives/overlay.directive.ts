@@ -41,6 +41,9 @@ export class CdkOverlayDirective {
   backdropClass = input<string>('cdk-overlay-transparent-backdrop', {
     alias: 'skCdkOverlayBackdropClass',
   });
+  panelClass = input<string>('cdk-overlay-panel', {
+    alias: 'skCdkOverlayPanelClass',
+  });
   visible = output<boolean>({ alias: 'skCdkOverlayVisible' });
 
   private _overlayRef?: OverlayRef;
@@ -73,11 +76,13 @@ export class CdkOverlayDirective {
       .flexibleConnectedTo(this._relatedElement)
       .withPositions(this.connectedPositions())
       .withPush(true)
+      .withDefaultOffsetY(10)
       .withFlexibleDimensions(false);
 
     this._overlayRef = this.overlay.create({
       hasBackdrop: true,
       backdropClass: this.backdropClass(),
+      panelClass: this.panelClass(),
       positionStrategy,
       scrollStrategy: this.overlay.scrollStrategies.reposition({
         autoClose: true,
