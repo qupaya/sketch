@@ -9,7 +9,7 @@ import {
 import { CdkPortal } from '@angular/cdk/portal';
 import { ConnectedPosition, Overlay, OverlayRef } from '@angular/cdk/overlay';
 import { DOCUMENT } from '@angular/common';
-import { fromEvent, merge } from 'rxjs';
+import { debounceTime, fromEvent, merge } from 'rxjs';
 import { toSignal } from '@angular/core/rxjs-interop';
 
 export const DEFAULT_POSITIONS: ConnectedPosition[] = [
@@ -26,7 +26,7 @@ export class CdkOverlayDirective {
   private readonly window = inject(DOCUMENT)?.defaultView;
 
   private readonly windowResize = this.window
-    ? toSignal(fromEvent(this.window, 'resize'))
+    ? toSignal(fromEvent(this.window, 'resize').pipe(debounceTime(500)))
     : undefined;
 
   portal = input<CdkPortal | undefined>(undefined, { alias: 'skCdkOverlay' });
@@ -43,6 +43,12 @@ export class CdkOverlayDirective {
   });
   panelClass = input<string>('cdk-overlay-panel', {
     alias: 'skCdkOverlayPanelClass',
+  });
+  offsetX = input<number>(0, {
+    alias: 'skCdkOverlayOffsetX',
+  });
+  offsetY = input<number>(0, {
+    alias: 'skCdkOverlayOffsetY',
   });
   visible = output<boolean>({ alias: 'skCdkOverlayVisible' });
 
@@ -76,7 +82,8 @@ export class CdkOverlayDirective {
       .flexibleConnectedTo(this._relatedElement)
       .withPositions(this.connectedPositions())
       .withPush(true)
-      .withDefaultOffsetY(10)
+      .withDefaultOffsetX(this.offsetX())
+      .withDefaultOffsetY(this.offsetY())
       .withFlexibleDimensions(false);
 
     this._overlayRef = this.overlay.create({

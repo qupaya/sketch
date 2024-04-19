@@ -39,6 +39,8 @@ export class SelectComponent<T> implements ControlValueAccessor {
 
   animationDelay = input(0);
   closeOnSelect = input(false);
+  panelOffsetX = input(0);
+  panelOffsetY = input(0);
   multiple = input(false, { transform: booleanAttribute });
 
   readonly autoFocus = signal(true);

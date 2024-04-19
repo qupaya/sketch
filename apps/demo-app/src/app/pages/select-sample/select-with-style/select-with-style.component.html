@@ -6,6 +6,7 @@ Multiple: <input type="checkbox" (change)="switchMultiple($event)" />
   [multiple]="multiple()"
   [animationDelay]="250"
   [closeOnSelect]="!multiple()"
+  [panelOffsetY]="10"
   (open)="showAnimation.set($event)"
 >
   <div class="sk-label" [class.open]="showAnimation()" skSelectPlaceholder>

@@ -3,6 +3,8 @@
   [skCdkOverlay]="overlay"
   [skCdkOverlayShow]="panelIsVisible()"
   [skCdkOverlayDisposeDelay]="animationDelay()"
+  [skCdkOverlayOffsetX]="panelOffsetX()"
+  [skCdkOverlayOffsetY]="panelOffsetY()"
   [tabIndex]="0"
   (click)="togglePanel(true)"
   (keydown.enter)="togglePanel(!this.panelIsVisible())"
