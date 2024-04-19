@@ -5,6 +5,7 @@ import {
   computed,
   effect,
   forwardRef,
+  HostListener,
   inject,
   input,
   output,
@@ -39,7 +40,8 @@ export class SelectComponent<T> implements ControlValueAccessor {
   animationDelay = input(0);
   closeOnSelect = input(false);
   multiple = input(false, { transform: booleanAttribute });
-  readonly autoFocus = signal(false);
+
+  readonly autoFocus = signal(true);
   readonly selectedValue = signal<T | T[] | undefined>(undefined);
   readonly panelIsVisible = signal(false);
   readonly showPlaceholder = computed(() => {
@@ -49,7 +51,15 @@ export class SelectComponent<T> implements ControlValueAccessor {
       (!isArray && !selectedValue) || (isArray && selectedValue.length <= 0)
     );
   });
+
   readonly open = output<boolean>();
+
+  @HostListener('document:keydown.escape')
+  closePanel(): void {
+    if (this.panelIsVisible()) {
+      this.togglePanel(false);
+    }
+  }
 
   protected readonly updateSelectionMode = effect(
     () => {
@@ -73,9 +83,8 @@ export class SelectComponent<T> implements ControlValueAccessor {
     { allowSignalWrites: true }
   );
 
-  togglePanel(visible: boolean, focus = true): void {
+  togglePanel(visible: boolean): void {
     this.panelIsVisible.set(visible);
-    this.autoFocus.set(focus);
     this.open.emit(visible);
   }
 
@@ -104,9 +113,7 @@ export class SelectComponent<T> implements ControlValueAccessor {
   }
 
   keyArrowUp({ target }: Event): void {
-    console.log('Arrow Down', target);
     if (target instanceof HTMLElement) {
-      console.log('Element', target.previousElementSibling);
       if (target.previousElementSibling instanceof HTMLElement) {
         target.previousElementSibling.focus();
       }
@@ -114,9 +121,7 @@ export class SelectComponent<T> implements ControlValueAccessor {
   }
 
   keyArrowDown({ target }: Event): void {
-    console.log('Arrow Down', target);
     if (target instanceof HTMLElement) {
-      console.log('Element', target.nextElementSibling);
       if (target.nextElementSibling instanceof HTMLElement) {
         target.nextElementSibling.focus();
       }

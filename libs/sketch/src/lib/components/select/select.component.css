@@ -13,6 +13,7 @@
   padding: var(--sk-select-label-padding);
   border: 1px solid var(--sk-select-label-border-color);
   border-radius: var(--sk-select-label-border-radius);
+  cursor: pointer;
 }
 
 .sk-select-trigger:focus {

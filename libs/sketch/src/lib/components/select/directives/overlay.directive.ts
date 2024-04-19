@@ -84,9 +84,6 @@ export class CdkOverlayDirective {
       backdropClass: this.backdropClass(),
       panelClass: this.panelClass(),
       positionStrategy,
-      scrollStrategy: this.overlay.scrollStrategies.reposition({
-        autoClose: true,
-      }),
     });
 
     this.syncOverlayWidth();
