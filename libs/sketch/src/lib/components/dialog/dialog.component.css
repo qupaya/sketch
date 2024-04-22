@@ -1,15 +1,37 @@
 dialog {
+  width: var(--sk-dialog-width, auto);
+  max-width: 100%;
   padding: 0;
   border: none;
   outline: none;
   background-color: transparent;
 }
 
+dialog:has(::backdrop) {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 button {
+  position: absolute;
   cursor: pointer;
+  top: 0;
+  right: 0;
 }
 
 dialog::backdrop {
   background-color: var(--sk-dialog-background, rgb(0 0 0 / 50%));
   backdrop-filter: blur(var(--sk-dialog-background-blur, 0));
+}
+
+.sk-wrapper {
+  position: relative;
+  overflow: hidden;
+  display: block;
+  margin: var(--sk-dialog-margin, 0);
+}
+
+.sk-inner-content-wrapper {
+  margin: var(--sk-dialog-inner-content-margin, 20px);
 }

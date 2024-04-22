@@ -10,9 +10,12 @@ button {
   background-color: lightblue;
   border-radius: 20px;
   padding: 10px;
+  _margin: 20px;
 }
 
 sk-dialog {
-  --sk-dialog-background: rgb(92 107 192 / 40%);
+  --sk-dialog-width: 100%;
+  --sk-dialog-margin: 50px 10px;
+  --sk-dialog-background: rgb(92 107 192 / 50%);
   --sk-dialog-background-blur: 2px;
 }

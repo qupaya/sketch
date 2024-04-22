@@ -4,9 +4,7 @@
   (clickedBackdrop)="closeRequested.emit()"
   (keydown.escape)="closeRequested.emit()"
 >
-  <div>
-    <ng-content></ng-content>
-
+  <div class="sk-wrapper">
     @if (showCloseButton()) {
     <button
       type="button"
@@ -32,5 +30,8 @@
       />
     </button>
     }
+    <div class="sk-inner-content-wrapper">
+      <ng-content></ng-content>
+    </div>
   </div>
 </dialog>
