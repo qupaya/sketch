@@ -11,6 +11,7 @@ import {
   signal,
 } from '@angular/core';
 import { ClickBackdropDirective } from './directive/click-backdrop.directive';
+import { NgClass } from '@angular/common';
 
 interface CloseButtonStyles {
   buttonWidth?: number | string;
@@ -46,7 +47,7 @@ const initialButtonProperties: CloseButtonProperties = {
 @Component({
   selector: 'sk-dialog[dialogId]',
   standalone: true,
-  imports: [ClickBackdropDirective],
+  imports: [ClickBackdropDirective, NgClass],
   templateUrl: './dialog.component.html',
   styleUrl: './dialog.component.css',
   encapsulation: ViewEncapsulation.ShadowDom,
@@ -65,6 +66,8 @@ export class DialogComponent {
   dialogId = input('');
 
   showCloseButton = input<boolean>(false);
+
+  innerCloseButton = input<boolean>(false);
 
   closeButtonProperties = input<CloseButtonProperties>();
 

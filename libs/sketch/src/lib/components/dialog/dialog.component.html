@@ -7,6 +7,7 @@
   <div class="sk-wrapper">
     @if (showCloseButton()) {
     <button
+      [ngClass]="{ 'inner-close-button': innerCloseButton() }"
       type="button"
       [title]="defaultCloseButtonProperties().title"
       (click)="closeRequested.emit()"
@@ -30,7 +31,10 @@
       />
     </button>
     }
-    <div class="sk-inner-content-wrapper">
+    <div
+      [ngClass]="{ 'sk-dialog-no-margin': innerCloseButton() }"
+      class="sk-inner-content-wrapper"
+    >
       <ng-content></ng-content>
     </div>
   </div>

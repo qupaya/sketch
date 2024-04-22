@@ -25,6 +25,11 @@ dialog::backdrop {
   backdrop-filter: blur(var(--sk-dialog-background-blur, 0));
 }
 
+.inner-close-button {
+  top: 10px;
+  right: 10px;
+}
+
 .sk-wrapper {
   position: relative;
   overflow: hidden;
@@ -34,4 +39,8 @@ dialog::backdrop {
 
 .sk-inner-content-wrapper {
   margin: var(--sk-dialog-inner-content-margin, 20px);
+}
+
+.sk-dialog-no-margin {
+  margin: 0;
 }
