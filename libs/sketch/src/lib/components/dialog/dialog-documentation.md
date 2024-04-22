@@ -20,7 +20,7 @@ First, let's have a look at the basic structure of the Dialog:
 
 This is all you need to get started! But let's have a closer look at the options.
 
-(It is recommended to place the dialog at the end of your code since it is not connected to anything.)
+> It is recommended to place the dialog at the end of your code since it is not connected to anything.
 
 ### open Dialog
 
@@ -30,7 +30,9 @@ To open the Dialog just create a starting point (a button for example) with a fu
 isDialogOpen = false;
 ```
 
-Use this variable in the model (`[(open)]="isDialogOpen"`) to bring your Dialog to life. Once the dialog is open, you can't interact with the underlying page, so pressing buttons or scrolling is not possible. When it is closed, you can interact with the page again.
+Use this variable in the model (`[(open)]="isDialogOpen"`) to bring your Dialog to life.
+Once the dialog is open, you can't interact with the underlying page, so pressing buttons or scrolling behind the dialog is not possible.
+When it is closed, you can interact with the page again.
 
 ### close Dialog
 
@@ -40,13 +42,18 @@ Closing can be performed in three different ways:
 2. Pressing Escape on the keyboard
 3. Clicking the [Close button](#close-button)
 
-All of these options are getting recognized by `(closeRequested)`. So just set your variable to false here and the Dialog will be closed.
+All of these options are getting recognized by `(closeRequested)`. So just set your variable to `false` here and the Dialog will be closed.
 
 ## Styling
 
 ### Close Button
 
 The close button is not shown by default. To show it, set `[showCloseButton]` to true.
+
+If you want to show it, you can decide if the button is placed inside or outside your content.
+By default, it is placed outside. To place it within the content set `[innerCloseButton]` to `true`.
+
+> When the Close Button is outside the content, you can define the margin of the actual content to the close button. Look at the [Content Section](#content) to see how.
 
 It is a transparent button positioned in the top right corner with a black cross in it.
 You can also adjust the styling of the button and the svg icon for your needs.
@@ -150,30 +157,44 @@ As you see in the table, none of the options are required. You can adjust one, t
 The Backdrop is the area around the content that covers the whole screen. When you click on it, it will close the Dialog.
 By default, it is black with an opacity of 50% (as `rgb()` value) and has no blur.
 
-To change the color, opacity and blur, you need to target the the `sk-dialog` and overwrite the default custom properties `--sk-dialog-background`and`--sk-dialog-background-blur`.
+To change the color, opacity and blur, you need to target the `sk-dialog` and overwrite the default custom properties `--sk-dialog-background`and`--sk-dialog-background-blur`.
 
 Here is an example:
 
 ```css
 sk-dialog {
-  --sk-dialog-background: rgba(
-    92,
-    107,
-    192,
-    0.4
-  ); /*rgb(92 107 192 / 40%) or hsl(231, 44%, 56% / 40%) or hsla(231, 44%, 56%, 0.4) or hex: #5c6bc066*/
+  --sk-dialog-background: rgb(92, 107, 192 / 40%);
+  /* 
+    other possible values:
+    rgba(92 107 192, 0.4) or 
+    hsl(231, 44%, 56% / 40%) / hsla(231, 44%, 56%, 0.4) or 
+    hex: #5c6bc066
+    */
   --sk-dialog-background-blur: 2px;
 }
 ```
 
-You can also use different color values like `hex` or `hsla` to define your color. It is just important to use a value where you can define the opacity. `rgba` or `hsla` are recommended here, since it is easier to adjust the opacity.
+You can also use different color values like `rgba`, `hsl/hsla` or `hex` to define your color. It is just important to use a value where you can define the opacity.
+`rgb/rgba` or `hsl/hsla` are recommended here, since it is easier to adjust the opacity.
+
+For the blur, a value up to `5px` is recommended because more make the background nearly invisible.
 
 ### Content
 
 The Content and the styling of it is completely up to you. It can be basic text or complex components.
 Wrapping your content with a styled container is recommended, because otherwise the content is displayed on a transparent background.
 
-Some basic styling could be a `background-color`, `padding`, `width` and `height`. Of course you can also use `display: flex` to adjust the layout for your needs and everything else possible with css.
+Some basic styling could be a `background-color`, `padding` and `border-radius`. Of course you can also use `display: flex` to adjust the layout for your needs and everything else possible with css.
+
+You have some other options for the styling and positioning of your content.
+
+- To change the width, target the `sk-dialog` and overwrite the default custom property `--sk-dialog-width`. The default is `auto` so you can freely decide what you need. When you don't overwrite it, it takes the full width of the screen.
+- To have a proper spacing to the sides, overwrite `--sk-dialog-margin` and set the margin as wanted. By default, this is `0`.
+- When the [Close Button](#close-button) is outside the content, you can define the margin of the actual content to the close button. In this way, you can move it further away if wanted. Just overwrite the `--sk-dialog-inner-content-margin` in the `sk-dialog`. It has a default of `20px`. If `innerCloseButton` is false, this is getting ignored. It is recommended to have at least the same inner content margin as the size of the close button icon.
+
+> The Close Button is part of the content, according to styling. So changing the custom property `--sk-dialog-margin` will not affect the position of the close button.
+>
+> To move it further away, adjust the `--sk-dialog-inner-content-margin` custom property.
 
 ### Positioning
 
@@ -181,7 +202,7 @@ By default, the Dialog is placed in the center of the screen.
 
 ### Content Shadow
 
-The Dialog does not come with a Shadow for the content. However, you can add it yourself.
+The Dialog does not come with a Shadow for the content. However, you can add one yourself.
 
 If you have a wrapper class for your actual content (which is recommended), you can add a `box-shadow` and, depending on how large it is, a `margin` to have enough space for the shadow.
 

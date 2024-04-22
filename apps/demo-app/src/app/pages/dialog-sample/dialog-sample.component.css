@@ -14,8 +14,8 @@ button {
 
 sk-dialog {
   --sk-dialog-width: 100%;
-  --sk-dialog-margin: 50px 100px;
+  --sk-dialog-margin: 50px;
+  --sk-dialog-inner-content-margin: 20px;
   --sk-dialog-background: rgb(92 107 192 / 50%);
   --sk-dialog-background-blur: 2px;
-  --sk-dialog-inner-content-margin: 20px;
 }
