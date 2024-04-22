@@ -12,7 +12,7 @@ button {
   padding: 10px;
 }
 
-::part(dialog) {
+sk-dialog {
   --sk-dialog-background: rgb(92 107 192 / 40%);
   --sk-dialog-background-blur: 2px;
 }

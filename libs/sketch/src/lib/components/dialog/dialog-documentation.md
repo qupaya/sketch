@@ -148,15 +148,20 @@ As you see in the table, none of the options are required. You can adjust one, t
 ### Backdrop
 
 The Backdrop is the area around the content that covers the whole screen. When you click on it, it will close the Dialog.
-By default, it is black with an opacity of 0.5 (as `rgba()` value) and has no blur.
+By default, it is black with an opacity of 50% (as `rgb()` value) and has no blur.
 
-To change the color, opacity and blur, you need to target the pseudo class `::part` with the `dialog and overwrite the default custom properties `--sk-dialog-background`and`--sk-dialog-background-blur`.
+To change the color, opacity and blur, you need to target the the `sk-dialog` and overwrite the default custom properties `--sk-dialog-background`and`--sk-dialog-background-blur`.
 
 Here is an example:
 
 ```css
-::part(dialog) {
-  --sk-dialog-background: rgba(92, 107, 192, 0.4); /*hsla(231, 44%, 56%, 0.4) or hex: #5c6bc066*/
+sk-dialog {
+  --sk-dialog-background: rgba(
+    92,
+    107,
+    192,
+    0.4
+  ); /*rgb(92 107 192 / 40%) or hsl(231, 44%, 56% / 40%) or hsla(231, 44%, 56%, 0.4) or hex: #5c6bc066*/
   --sk-dialog-background-blur: 2px;
 }
 ```
