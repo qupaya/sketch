@@ -26,8 +26,8 @@ dialog::backdrop {
 }
 
 .inner-close-button {
-  top: 10px;
-  right: 10px;
+  top: var(--sk-dialog-inner-close-button-space, 15px);
+  right: var(--sk-dialog-inner-close-button-space, 15px);
 }
 
 .sk-wrapper {

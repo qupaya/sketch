@@ -191,6 +191,7 @@ You have some other options for the styling and positioning of your content.
 - To change the width, target the `sk-dialog` and overwrite the default custom property `--sk-dialog-width`. The default is `auto` so you can freely decide what you need. When you don't overwrite it, it takes the full width of the screen.
 - To have a proper spacing to the sides, overwrite `--sk-dialog-margin` and set the margin as wanted. By default, this is `0`.
 - When the [Close Button](#close-button) is outside the content, you can define the margin of the actual content to the close button. In this way, you can move it further away if wanted. Just overwrite the `--sk-dialog-inner-content-margin` in the `sk-dialog`. It has a default of `20px`. If `innerCloseButton` is false, this is getting ignored. It is recommended to have at least the same inner content margin as the size of the close button icon.
+- When the [Close Button](#close-button) is inside the content, use `--sk-dialog-inner-close-button-space` to define the spacing from your content wrapper. It will move the button proportionally.
 
 > The Close Button is part of the content, according to styling. So changing the custom property `--sk-dialog-margin` will not affect the position of the close button.
 >
@@ -461,7 +462,7 @@ None of these are required. All of them need to be changed in `sk-dialog {...}` 
 `--sk-dialog-width`
 
 </td>
-<td> Define the width of your content. (including background/wrapper) </td>
+<td> Defines the width of your content. (including background/wrapper) </td>
 <td>
 
 `auto`
@@ -479,7 +480,7 @@ None of these are required. All of them need to be changed in `sk-dialog {...}` 
 `--sk-dialog-margin`
 
 </td>
-<td> Define the margin/spacing of your content (including background/wrapper) to the sides. </td>
+<td> Defines the margin/spacing of your content (including background/wrapper) to the sides. </td>
 <td>
 
 `0`
@@ -499,12 +500,34 @@ None of these are required. All of them need to be changed in `sk-dialog {...}` 
 </td>
 <td>
 
-Define the margin/spacing of your content to the close button. Only works with `[innerCloseButton]="false"`
+Defines the margin/spacing of your content to the close button. Only works with `[innerCloseButton]="false"`
 
 </td>
 <td>
 
 `0`
+
+</td>
+<td>
+
+[Content](#content)
+
+</td>
+</tr>
+<tr>
+<td>
+
+`--sk-dialog-inner-close-button-space`
+
+</td>
+<td>
+
+Defines the spacing of the inner close button to the content wrapper. Only works with `[innerCloseButton]="true"`
+
+</td>
+<td>
+
+`15px`
 
 </td>
 <td>
