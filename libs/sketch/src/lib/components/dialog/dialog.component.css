@@ -13,7 +13,7 @@ dialog:has(::backdrop) {
   align-items: center;
 }
 
-button {
+.close-button {
   position: absolute;
   cursor: pointer;
   top: 0;
