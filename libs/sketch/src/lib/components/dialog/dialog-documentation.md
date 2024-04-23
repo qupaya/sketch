@@ -205,14 +205,13 @@ By default, the Dialog is placed in the center of the screen.
 
 The Dialog does not come with a Shadow for the content. However, you can add one yourself.
 
-If you have a wrapper class for your actual content (which is recommended), you can add a `box-shadow` and, depending on how large it is, a `margin` to have enough space for the shadow.
+If you have a wrapper class for your actual content (which is recommended), you can add a `box-shadow`. It will be displayed in the margin set in `--sk-dialog-inner-content-margin`, so kep this in mind to avoid cutting the shadow.
 
 Here is an example:
 
 ```css
 .styled-wrapper {
   box-shadow: rgba(0, 0, 0, 0.2) 0 10px 25px;
-  margin: 30px;
 }
 ```
 
@@ -246,8 +245,8 @@ Make sure to add another variable that handles the state. Here is an example:
         <p>here comes some content inside the nested dialog</p>
       </div>
     </sk-dialog>
-  </div></sk-dialog
->
+  </div>
+</sk-dialog>
 ```
 
 You can add as many nested Dialogs as you want, but it is recommended to nest only one of them.
