@@ -45,7 +45,7 @@ const initialButtonProperties: CloseButtonProperties = {
 };
 
 @Component({
-  selector: 'sk-dialog[dialogId]',
+  selector: 'sk-dialog',
   standalone: true,
   imports: [ClickBackdropDirective, NgClass],
   templateUrl: './dialog.component.html',
@@ -54,16 +54,6 @@ const initialButtonProperties: CloseButtonProperties = {
 })
 export class DialogComponent {
   open = model(false);
-
-  /**
-   * It will be appended to the rendered overlay in this way:
-   * ```
-   * [dialogId]="my-tag-name"
-   *
-   * <div data-q-dialog-tag="my-tag-name">
-   * ```
-   */
-  dialogId = input('');
 
   showCloseButton = input<boolean>(false);
 
