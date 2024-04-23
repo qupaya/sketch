@@ -10,7 +10,12 @@ import { CloseButtonProperties, DialogComponent } from '@qupaya/sketch';
   styleUrl: './dialog-sample.component.css',
 })
 export class DialogSampleComponent {
-  isDialogOpen = false;
+  isUnstyledBasicDialogOpen = false;
+  isStyledBasicDialogOpen = false;
+  isDialogWithOuterCloseButtonOpen = false;
+  isDialogWithInnerCloseButtonOpen = false;
+  isDialogWithStyledOuterCloseButtonOpen = false;
+  isDialogWithStyledInnerCloseButtonOpen = false;
 
   closeButtonProperties: CloseButtonProperties = {
     title: 'Close me',
@@ -18,9 +23,10 @@ export class DialogSampleComponent {
     styles: {
       iconWidth: 20,
       iconHeight: 20,
-      backgroundColor: 'transparent',
+      backgroundColor: 'coral',
+      borderRadius: 10,
       border: 'none',
-      padding: '0',
+      padding: '10px',
       margin: '0',
     },
   };

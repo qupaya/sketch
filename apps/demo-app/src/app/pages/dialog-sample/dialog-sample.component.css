@@ -20,3 +20,9 @@ sk-dialog {
   --sk-dialog-background: rgb(92 107 192 / 50%);
   --sk-dialog-background-blur: 2px;
 }
+
+.layout {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}

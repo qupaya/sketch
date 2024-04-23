@@ -1,15 +1,105 @@
-<button (click)="isDialogOpen = true">open Dialog!</button>
+<div class="layout">
+  <div>
+    <button (click)="isUnstyledBasicDialogOpen = true">
+      open unstyled basic Dialog
+    </button>
 
-<sk-dialog
-  [(open)]="isDialogOpen"
-  (closeRequested)="isDialogOpen = false"
-  [showCloseButton]="true"
-  [closeButtonProperties]="closeButtonProperties"
-  [innerCloseButton]="false"
->
-  <div class="my-super-styling-class">
-    <div>here comes some content</div>
-    <div>here comes some content</div>
-    <div>here comes some content</div>
+    <sk-dialog
+      [(open)]="isUnstyledBasicDialogOpen"
+      (closeRequested)="isUnstyledBasicDialogOpen = false"
+    >
+      <div>here comes some content.</div>
+    </sk-dialog>
   </div>
-</sk-dialog>
+
+  <div>
+    <button (click)="isStyledBasicDialogOpen = true">
+      open styled basic Dialog
+    </button>
+
+    <sk-dialog
+      [(open)]="isStyledBasicDialogOpen"
+      (closeRequested)="isStyledBasicDialogOpen = false"
+    >
+      <div class="my-super-styling-class">
+        <div>here comes some content.</div>
+      </div>
+    </sk-dialog>
+  </div>
+
+  <div>
+    <button (click)="isDialogWithOuterCloseButtonOpen = true">
+      open Dialog with default outer Close Button
+    </button>
+
+    <sk-dialog
+      [(open)]="isDialogWithOuterCloseButtonOpen"
+      (closeRequested)="isDialogWithOuterCloseButtonOpen = false"
+      [showCloseButton]="true"
+    >
+      <div class="my-super-styling-class">
+        <div>here comes some content. show close button true</div>
+      </div>
+    </sk-dialog>
+  </div>
+
+  <div>
+    <button (click)="isDialogWithInnerCloseButtonOpen = true">
+      open Dialog with default inner Close Button
+    </button>
+
+    <sk-dialog
+      [(open)]="isDialogWithInnerCloseButtonOpen"
+      (closeRequested)="isDialogWithInnerCloseButtonOpen = false"
+      [showCloseButton]="true"
+      [innerCloseButton]="true"
+    >
+      <div class="my-super-styling-class">
+        <div>
+          here comes some content. show close button true + inner close button
+        </div>
+      </div>
+    </sk-dialog>
+  </div>
+
+  <div>
+    <button (click)="isDialogWithStyledOuterCloseButtonOpen = true">
+      open Dialog with styled outer Close Button
+    </button>
+
+    <sk-dialog
+      [(open)]="isDialogWithStyledOuterCloseButtonOpen"
+      (closeRequested)="isDialogWithStyledOuterCloseButtonOpen = false"
+      [showCloseButton]="true"
+      [closeButtonProperties]="closeButtonProperties"
+    >
+      <div class="my-super-styling-class">
+        <div>
+          here comes some content. show close button true +
+          closeButtonProperties
+        </div>
+      </div>
+    </sk-dialog>
+  </div>
+
+  <div>
+    <button (click)="isDialogWithStyledInnerCloseButtonOpen = true">
+      open Dialog with styled inner Close Button
+    </button>
+
+    <sk-dialog
+      [(open)]="isDialogWithStyledInnerCloseButtonOpen"
+      (closeRequested)="isDialogWithStyledInnerCloseButtonOpen = false"
+      [showCloseButton]="true"
+      [innerCloseButton]="true"
+      [closeButtonProperties]="closeButtonProperties"
+    >
+      <div class="my-super-styling-class">
+        <div>
+          here comes some content. show close button true +
+          closeButtonProperties
+        </div>
+      </div>
+    </sk-dialog>
+  </div>
+</div>
