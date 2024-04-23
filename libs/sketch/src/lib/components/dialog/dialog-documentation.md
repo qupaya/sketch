@@ -251,3 +251,312 @@ Make sure to add another variable that handles the state. Here is an example:
 
 You can add as many nested Dialogs as you want, but it is recommended to nest only one of them.
 Clicking `Escape` when multiple Overlays are open will close all of them.
+
+## Properties Overview
+
+### Inputs/Outputs
+
+<table>
+<tr>
+<td> Name </td> <td> Type </td> <td> Required </td> <td> Description </td> <td> Default Value </td>
+</tr>
+<tr>
+<td>
+
+`[(open)]`
+
+</td>
+<td>
+
+`boolean`
+
+</td>
+<td> yes </td>
+<td> Determines if the Dialog is open. </td>
+<td>
+
+`false`
+
+</td>
+</tr>
+<tr>
+<td>
+
+`[showCloseButton]`
+
+</td>
+<td>
+
+`boolean`
+
+</td>
+<td> no/optional </td>
+<td> Determines if the Close Button is displayed. </td>
+<td>
+
+`false`
+
+</td>
+</tr>
+<tr>
+<td>
+
+`[innerCloseButton]`
+
+</td>
+<td>
+
+`boolean`
+
+</td>
+<td> no/optional </td>
+<td> Determines if the Close Button is shown inside your Content. </td>
+<td>
+
+`false`
+
+</td>
+</tr>
+<tr>
+<td>
+
+`[closeButtonProperties]`
+
+</td>
+<td>
+
+[`CloseButtonProperties`](#closebuttonproperties)
+
+</td>
+<td> no/optional </td>
+<td>
+
+Makes the title, icon source and icon/button styles adjustable.
+
+</td>
+<td>
+
+`false`
+
+</td>
+</tr>
+</table
+
+<table>
+<tr>
+<td> Name </td> <td> Required </td> <td> Description </td>
+</tr>
+<tr>
+<td>
+
+`(closeRequested)`
+
+</td>
+<td> yes </td>
+<td> Handles the closing of the dialog. </td>
+</tr>
+</table>
+
+### CloseButtonProperties
+
+<table>
+<tr>
+<td> Key </td> <td> Type </td> <td> Required </td> <td> Description </td> <td> Default Value </td>
+</tr>
+<tr>
+<td>
+
+`title`
+
+</td>
+<td>
+
+`string`
+
+</td>
+<td> no/optional </td>
+<td> The title for the Button and the description for the alt tag of the image </td>
+<td>
+
+`Close`
+
+</td>
+</tr>
+<tr>
+<td>
+
+`iconSrc`
+
+</td>
+<td>
+
+`string`
+
+</td>
+<td> no/optional </td>
+<td> If you want to change the icon, add the path to the new icon here </td>
+<td>
+
+the black cross: `'../../../assets/cross.svg'`
+
+</td>
+</tr>
+<tr>
+<td>
+
+`styles`
+
+</td>
+<td>
+
+`CloseButtonStyles`
+
+These are all options:
+
+```ts
+{
+  buttonWidth?: number | string;
+  buttonHeight?: number | string;
+  borderRadius?: number;
+  backgroundColor?: string;
+  border?: string;
+  iconWidth?: number | string;
+  iconHeight?: number | string;
+  padding?: string;
+  margin?: string;
+}
+```
+
+</td>
+<td> no/optional </td>
+<td> You can change different styles for the button and the icon here </td>
+<td>
+
+```ts
+{
+  iconWidth: 20,
+  iconHeight: 20,
+  backgroundColor: 'transparent',
+  border: 'none',
+  padding: '0',
+  margin: '0',
+}
+```
+
+</td>
+</tr>
+</table>
+
+### Styles
+
+None of these are required. All of them need to be changed in `sk-dialog {...}` in your css file.
+
+<table>
+<tr>
+<td> Name </td> <td> Description </td> <td> Default Value </td> <td> Further info </td>
+</tr>
+<tr>
+<td>
+
+`--sk-dialog-width`
+
+</td>
+<td> Define the width of your content. (including background/wrapper) </td>
+<td>
+
+`auto`
+
+</td>
+<td>
+
+[Content](#content)
+
+</td>
+</tr>
+<tr>
+<td>
+
+`--sk-dialog-margin`
+
+</td>
+<td> Define the margin/spacing of your content (including background/wrapper) to the sides. </td>
+<td>
+
+`0`
+
+</td>
+<td>
+
+[Content](#content)
+
+</td>
+</tr>
+<tr>
+<td>
+
+`--sk-dialog-inner-content-margin`
+
+</td>
+<td>
+
+Define the margin/spacing of your content to the close button. Only works with `[innerCloseButton]="false"`
+
+</td>
+<td>
+
+`0`
+
+</td>
+<td>
+
+[Content](#content)
+
+</td>
+</tr>
+<tr>
+<td>
+
+`--sk-dialog-background`
+
+</td>
+<td>
+
+Defines the Color and Opacity of the backdrop.
+Must have a color value with opcaity, otherwise it covers the background completely.
+`rgb/rgba` or `hsl/hsla` are recommended, `hex` (with alpha value) is possible.
+
+</td>
+<td>
+
+`rgb(0 0 0 / 50%)`
+
+</td>
+<td>
+
+[Backdrop](#backdrop)
+
+</td>
+</tr>
+<tr>
+<td>
+
+`--sk-dialog-background-blur`
+
+</td>
+<td>
+
+Defines the blur of the backdrop. A number not higher than `5px` is recommended.
+
+</td>
+<td>
+
+`0`
+
+</td>
+<td>
+
+[Backdrop](#backdrop)
+
+</td>
+</tr>
+</table>
