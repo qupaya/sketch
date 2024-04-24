@@ -32,8 +32,8 @@ dialog::backdrop {
 }
 
 .inner-close-button {
-  top: var(--sk-dialog-inner-close-button-space, 15px);
-  right: var(--sk-dialog-inner-close-button-space, 15px);
+  top: var(--sk-dialog-inner-close-button-space, 10px);
+  right: var(--sk-dialog-inner-close-button-space, 10px);
 }
 
 .sk-wrapper {
@@ -46,7 +46,7 @@ dialog::backdrop {
 }
 
 .sk-inner-content-wrapper {
-  padding: var(--sk-dialog-inner-content-padding, 0);
+  padding: var(--sk-dialog-inner-content-padding, 40px);
   height: calc(
     100% - (var(--sk-dialog-inner-content-margin) * 2) -
       (var(--sk-dialog-inner-content-padding) * 2)
