@@ -12,9 +12,7 @@ First, let's have a look at the basic structure of the Dialog:
 <button (click)="isDialogOpen = true">open Dialog!</button>
 
 <sk-dialog [(open)]="isDialogOpen" (closeRequested)="isDialogOpen = false">
-  <div class="styled-wrapper">
-    <p>here comes some content</p>
-  </div>
+  <p>here comes some content</p>
 </sk-dialog>
 ```
 
@@ -22,24 +20,21 @@ This is all you need to get started! But let's have a closer look at the options
 
 > It is recommended to place the dialog at the end of your code since it is not connected to anything.
 
-### open Dialog
+### Opening the Dialog
 
-To open the Dialog just create a starting point (a button for example) with a function that toggles a variable. For example:
-
-```ts
-isDialogOpen = false;
-```
+To open the Dialog, just create a starting point (a button for example) with a function that toggles a variable. For example: `isDialogOpen = false;`
 
 Use this variable in the model (`[(open)]="isDialogOpen"`) to bring your Dialog to life.
-Once the dialog is open, you can't interact with the underlying page, so pressing buttons or scrolling behind the dialog is not possible.
-When it is closed, you can interact with the page again.
 
-### close Dialog
+> Once the dialog is open, you can't interact with the underlying page, so pressing buttons or scrolling behind the dialog is not possible.
+> When it is closed, you can interact with the page again.
+
+### Closing the Dialog
 
 Closing can be performed in three different ways:
 
 1. Clicking the [Backdrop](#backdrop)
-2. Pressing Escape on the keyboard
+2. Pressing `Escape` on the keyboard
 3. Clicking the [Close button](#close-button)
 
 All of these options are getting recognized by `(closeRequested)`. So just set your variable to `false` here and the Dialog will be closed.
@@ -48,12 +43,12 @@ All of these options are getting recognized by `(closeRequested)`. So just set y
 
 ### Close Button
 
-The close button is not shown by default. To show it, set `[showCloseButton]` to true.
+The close button is not shown by default. To show it, set `[showCloseButton]` to `true`.
 
-If you want to show it, you can decide if the button is placed inside or outside your content.
+If you want to show it, you can decide if the button is placed inside or outside your Container.
 By default, it is placed outside. To place it within the content set `[innerCloseButton]` to `true`.
 
-> When the Close Button is outside the content, you can define the margin of the actual content to the close button. Look at the [Content Section](#content) to see how.
+> You can define the space of the actual content to the Close Button (inside) and the space of the Container to the Close Button (outside). Look at the [Content Section - Spacing](#content) to see how.
 
 It is a transparent button positioned in the top right corner with a black cross in it.
 You can also adjust the styling of the button and the svg icon for your needs.
@@ -157,43 +152,53 @@ As you see in the table, none of the options are required. You can adjust one, t
 The Backdrop is the area around the content that covers the whole screen. When you click on it, it will close the Dialog.
 By default, it is black with an opacity of 50% (as `rgb()` value) and has no blur.
 
-To change the color, opacity and blur, you need to target the `sk-dialog` and overwrite the default custom properties `--sk-dialog-background`and`--sk-dialog-background-blur`.
+To change the color, opacity and blur, you need to target the `sk-dialog` and overwrite the default custom properties `--sk-dialog-backdrop`and`--sk-dialog-backdrop-blur`.
 
 Here is an example:
 
 ```css
 sk-dialog {
-  --sk-dialog-background: rgb(92, 107, 192 / 40%);
+  --sk-dialog-backdrop: rgb(92, 107, 192 / 40%);
   /* 
     other possible values:
     rgba(92 107 192, 0.4) or 
     hsl(231, 44%, 56% / 40%) / hsla(231, 44%, 56%, 0.4) or 
     hex: #5c6bc066
-    */
-  --sk-dialog-background-blur: 2px;
+  */
+  --sk-dialog-backdrop-blur: 2px;
 }
 ```
 
-You can also use different color values like `rgba`, `hsl/hsla` or `hex` to define your color. It is just important to use a value where you can define the opacity.
-`rgb/rgba` or `hsl/hsla` are recommended here, since it is easier to adjust the opacity.
+You can also use different color values like `rgba`, `hsl/hsla` or `hex` to define your color. Also gradients are possible.
 
-For the blur, a value up to `5px` is recommended because more make the background nearly invisible.
+> It is important to use a value where you can define the opacity.
+> `rgb/rgba` or `hsl/hsla` are recommended here, since it is easier to adjust the opacity.
+
+For the blur, a value up to `5px` is recommended, because more make the background nearly invisible.
 
 ### Content
 
 The Content and the styling of it is completely up to you. It can be basic text or complex components.
-Wrapping your content with a styled container is recommended, because otherwise the content is displayed on a transparent background.
+You don't need a styling wrapper for your content, you style the container with provided custom properties. To do so, target the `sk-dialog {...}` in your css file and adjust the desired custom properties.
 
-Some basic styling could be a `background-color`, `padding` and `border-radius`. Of course you can also use `display: flex` to adjust the layout for your needs and everything else possible with css.
+You have some other options for the styling and positioning of your content. (See [Styling with custom properties](#styling-with-custom-properties) for a quick overview)
 
-You have some other options for the styling and positioning of your content.
+#### Container Style
 
-- To change the width, target the `sk-dialog` and overwrite the default custom property `--sk-dialog-width`. The default is `auto` so you can freely decide what you need. When you don't overwrite it, it takes the full width of the screen.
+- To change the width and height of the container, change the custom properties `--sk-dialog-width` and `--sk-dialog-height` (or only one of them). By default the container takes the full width and fit the height of the content.
+- It is recommended to add a background, because by default the container is transparent and the backdrop will shine through. You can adjust it by changing the `--sk-dialog-background` custom property. You can do gradients, solid colors, images etc.
+- The edges are not rounded by default. If you want to have a border-radius, change the `--sk-dialog-border-radius` custom property.
+- By default, the overflow of the container is `auto`, if you'd like to change this behavior, adjust the `--sk-dialog-overflow` custom property.
+- If you want to have a shadow around the container, set `[contentShadow]` to true and adjust `--sk-dialog-content-shadow` if you'd like to change the default shadow. Just keep in mind that should not be larger than the shadow should not be larger than the `--sk-dialog-inner-content-margin` since it would be cut.
+
+#### Container Spacing
+
 - To have a proper spacing to the sides, overwrite `--sk-dialog-margin` and set the margin as wanted. By default, this is `0`.
-- When the [Close Button](#close-button) is outside the content, you can define the margin of the actual content to the close button. In this way, you can move it further away if wanted. Just overwrite the `--sk-dialog-inner-content-margin` in the `sk-dialog`. It has a default of `20px`. If `innerCloseButton` is false, this is getting ignored. It is recommended to have at least the same inner content margin as the size of the close button icon.
-- When the [Close Button](#close-button) is inside the content, use `--sk-dialog-inner-close-button-space` to define the spacing from your content wrapper. It will move the button proportionally.
+- To archive a good spacing from your content to the container edges, adjust `--sk-dialog-inner-content-padding`, otherwise it will stick to the sides.
+- When the [Close Button](#close-button) is outside the content, you can define the margin of the Container to the Close Button. In this way, you can move it further away if wanted. Just overwrite the `--sk-dialog-inner-content-margin`. It has a default of `20px`. If `innerCloseButton` is `true`, this is getting ignored. It is recommended to have at least the same inner content margin as the size of the close button icon.
+- When the [Close Button](#close-button) is inside the content, use `--sk-dialog-inner-close-button-space` to define the spacing from your content wrapper. It will move the button proportionally. `innerCloseButton` must be `true`, otherwise it is getting ignored.
 
-> The Close Button is part of the content, according to styling. So changing the custom property `--sk-dialog-margin` will not affect the position of the close button.
+> In terms of styling, the Close Button is part of the Container. So changing the custom property `--sk-dialog-margin` will not affect the position of the Close Button.
 >
 > To move it further away, adjust the `--sk-dialog-inner-content-margin` custom property.
 
@@ -203,21 +208,17 @@ By default, the Dialog is placed in the center of the screen.
 
 ### Content Shadow
 
-The Dialog does not come with a Shadow for the content. However, you can add one yourself.
+You can add a Shadow to the dialog. By default, it is disabled. To add one, set `[contentShadow]` to true.
 
-If you have a wrapper class for your actual content (which is recommended), you can add a `box-shadow`. It will be displayed in the margin set in `--sk-dialog-inner-content-margin`, so kep this in mind to avoid cutting the shadow.
+The default value for the shadow is `rgb(0 0 0 / 20%) 0 10px 20px`. If you'd like to change it, change the `--sk-dialog-content-shadow` custom property in `sk-dialog` in your css file to your desired shadow.
 
-Here is an example:
-
-```css
-.styled-wrapper {
-  box-shadow: rgba(0, 0, 0, 0.2) 0 10px 25px;
-}
-```
+> Keep in mind that your shadow should not be larger than the `--sk-dialog-inner-content-margin` to avoid cutting the shadow.
 
 ### Scrolling
 
-If you have more content than the height of the content box, just add `overflow: scroll` to the wrapper class and you are able to scroll within the Dialog.
+If you have more content than the height of the content box, it will automatically be able to scroll to the bottom of the content.
+
+If you'd like to change this behavior, change the `--sk-dialog-overflow` custom property in `sk-dialog` in your css file to adjust the overflow behavior on the y-axis.
 
 ## Accessibility
 
@@ -232,25 +233,22 @@ Make sure to add another variable that handles the state. Here is an example:
 <button (click)="isDialogOpen = true">open Dialog!</button>
 
 <sk-dialog [(open)]="isDialogOpen" (closeRequested)="isDialogOpen = false">
-  <div class="styled-wrapper">
-    <p>here comes some content</p>
+  <p>here comes some content</p>
 
-    <button (click)="isSecondDialogOpen = true">open second Dialog!</button>
+  <button (click)="isSecondDialogOpen = true">open second Dialog!</button>
 
-    <sk-dialog
-      [(open)]="isSecondDialogOpen"
-      (closeRequested)="isSecondDialogOpen = false"
-    >
-      <div class="second-styled-wrapper">
-        <p>here comes some content inside the nested dialog</p>
-      </div>
-    </sk-dialog>
-  </div>
+  <sk-dialog
+    [(open)]="isSecondDialogOpen"
+    (closeRequested)="isSecondDialogOpen = false"
+  >
+    <p>here comes some content inside the nested dialog</p>
+  </sk-dialog>
 </sk-dialog>
 ```
 
 You can add as many nested Dialogs as you want, but it is recommended to nest only one of them.
-Clicking `Escape` when multiple Overlays are open will close all of them.
+
+> Clicking `Escape` when multiple Overlays are open will close all of them.
 
 ## Properties Overview
 
@@ -325,7 +323,8 @@ Clicking `Escape` when multiple Overlays are open will close all of them.
 </td>
 <td>
 
-[`CloseButtonProperties`](#closebuttonproperties)
+[`CloseButtonProperties`](#closebuttonproperties) <br>
+(See below)
 
 </td>
 <td> no/optional </td>
@@ -340,7 +339,53 @@ Makes the title, icon source and icon/button styles adjustable.
 
 </td>
 </tr>
-</table
+<tr>
+<td>
+
+`[fullscreen]`
+
+</td>
+<td>
+
+`boolean`
+
+</td>
+<td> no/optional </td>
+<td>
+
+Makes the Dialog grow to full width and height.
+
+</td>
+<td>
+
+`false`
+
+</td>
+</tr>
+<tr>
+<td>
+
+`[contentShadow]`
+
+</td>
+<td>
+
+`boolean`
+
+</td>
+<td> no/optional </td>
+<td>
+
+Adds a Shadow to the Dialog.
+
+</td>
+<td>
+
+`false`
+
+</td>
+</tr>
+</table>
 
 <table>
 <tr>
@@ -447,7 +492,7 @@ These are all options:
 </tr>
 </table>
 
-### Styles
+### Styling with custom properties
 
 None of these are required. All of them need to be changed in `sk-dialog {...}` in your css file.
 
@@ -455,13 +500,21 @@ None of these are required. All of them need to be changed in `sk-dialog {...}` 
 <tr>
 <td> Name </td> <td> Description </td> <td> Default Value </td> <td> Further info </td>
 </tr>
+
+<tr>
+<td colspan="4" style="text-align: center">Container</td>
+</tr>
 <tr>
 <td>
 
 `--sk-dialog-width`
 
 </td>
-<td> Defines the width of your content. (including background/wrapper) </td>
+<td>
+
+Defines the `width` of the Container.
+
+</td>
 <td>
 
 `auto`
@@ -469,17 +522,43 @@ None of these are required. All of them need to be changed in `sk-dialog {...}` 
 </td>
 <td>
 
-[Content](#content)
+[Content - Container Style](#container-style)
 
 </td>
 </tr>
 <tr>
 <td>
 
-`--sk-dialog-margin`
+`--sk-dialog-height`
 
 </td>
-<td> Defines the margin/spacing of your content (including background/wrapper) to the sides. </td>
+<td>
+
+Defines the `height` of the Container.
+
+</td>
+<td>
+
+`fit-content`
+
+</td>
+<td>
+
+[Content - Container Style](#container-style)
+
+</td>
+</tr>
+<tr>
+<td>
+
+`--sk-dialog-border-radius`
+
+</td>
+<td>
+
+Defines the `borderRadius` of the Container.
+
+</td>
 <td>
 
 `0`
@@ -487,7 +566,99 @@ None of these are required. All of them need to be changed in `sk-dialog {...}` 
 </td>
 <td>
 
-[Content](#content)
+[Content - Container Style](#container-style)
+
+</td>
+</tr>
+<tr>
+<td>
+
+`--sk-dialog-background`
+
+</td>
+<td>
+
+Defines the `background` style of the Container.
+
+</td>
+<td>
+
+`transparent`
+
+</td>
+<td>
+
+[Content - Container Style](#container-style)
+
+</td>
+</tr>
+<tr>
+<td>
+
+`--sk-dialog-content-shadow`
+
+</td>
+<td>
+
+Defines the `box-shadow` of the Container.
+
+</td>
+<td>
+
+`rgb(0 0 0 / 20%) 0 10px 20px`
+
+</td>
+<td>
+
+[Content - Container Style](#container-style)
+
+</td>
+</tr>
+<tr>
+<td>
+
+`--sk-dialog-overflow`
+
+</td>
+<td>
+
+Defines the `overflow` behavior of the Container.
+
+</td>
+<td>
+
+`auto`
+
+</td>
+<td>
+
+[Content - Container Style](#container-style)
+
+</td>
+</tr>
+
+<tr>
+<td colspan="4" style="text-align: center">Spacing</td>
+</tr>
+<tr>
+<td>
+
+`--sk-dialog-margin`
+
+</td>
+<td>
+
+Defines the `margin` of the Container (including Close Button) to the sides.
+
+</td>
+<td>
+
+`0`
+
+</td>
+<td>
+
+[Content - Container Spacing](#container-spacing)
 
 </td>
 </tr>
@@ -499,17 +670,44 @@ None of these are required. All of them need to be changed in `sk-dialog {...}` 
 </td>
 <td>
 
-Defines the margin/spacing of your content to the close button. Only works with `[innerCloseButton]="false"`
+Defines the `margin` of the Container to the close button.
+
+Only works with `[innerCloseButton]="false"` <br>
+Should have at least the size of the Close Button Icon size.
 
 </td>
 <td>
 
-`0`
+`20px`
 
 </td>
 <td>
 
-[Content](#content)
+[Content - Container Spacing](#container-spacing)
+
+</td>
+</tr>
+<tr>
+<td>
+
+`--sk-dialog-inner-content-padding`
+
+</td>
+<td>
+
+Defines the `padding` of your content to the container.
+
+Should have at least `30px` more than `--sk-dialog-inner-close-button-space` (with `[innerCloseButton]="true"`) to avoid the Close Button overlapping the Content.
+
+</td>
+<td>
+
+`40px`
+
+</td>
+<td>
+
+[Content - Container Spacing](#container-spacing)
 
 </td>
 </tr>
@@ -521,24 +719,30 @@ Defines the margin/spacing of your content to the close button. Only works with 
 </td>
 <td>
 
-Defines the spacing of the inner close button to the content wrapper. Only works with `[innerCloseButton]="true"`
+Defines the spacing of the inner Close Button to the Container.
+
+Only works with `[innerCloseButton]="true"`
 
 </td>
 <td>
 
-`15px`
+`10px`
 
 </td>
 <td>
 
-[Content](#content)
+[Content - Container Spacing](#container-spacing)
 
 </td>
+</tr>
+
+<tr>
+<td colspan="4" style="text-align: center">Backdrop</td>
 </tr>
 <tr>
 <td>
 
-`--sk-dialog-background`
+`--sk-dialog-backdrop`
 
 </td>
 <td>
@@ -562,7 +766,7 @@ Must have a color value with opcaity, otherwise it covers the background complet
 <tr>
 <td>
 
-`--sk-dialog-background-blur`
+`--sk-dialog-backdrop-blur`
 
 </td>
 <td>
