@@ -1,6 +1,8 @@
 dialog {
   width: var(--sk-dialog-width, auto);
+  height: var(--sk-dialog-height, fit-content);
   max-width: 100%;
+  max-height: 100%;
   padding: 0;
   border: none;
   outline: none;
@@ -21,8 +23,8 @@ dialog:has(::backdrop) {
 }
 
 dialog::backdrop {
-  background-color: var(--sk-dialog-background, rgb(0 0 0 / 50%));
-  backdrop-filter: blur(var(--sk-dialog-background-blur, 0));
+  background-color: var(--sk-dialog-backdrop, rgb(0 0 0 / 50%));
+  backdrop-filter: blur(var(--sk-dialog-backdrop-blur, 0));
 }
 
 .inner-close-button {
@@ -35,10 +37,24 @@ dialog::backdrop {
   overflow: hidden;
   display: block;
   margin: var(--sk-dialog-margin, 0);
+  height: calc(100% - (var(--sk-dialog-margin) * 2));
+  max-height: calc(100svh - (var(--sk-dialog-margin) * 2));
 }
 
 .sk-inner-content-wrapper {
+  padding: var(--sk-dialog-inner-content-padding, 0);
+  height: calc(
+    100% - (var(--sk-dialog-inner-content-margin) * 2) -
+      (var(--sk-dialog-inner-content-padding) * 2)
+  );
   margin: var(--sk-dialog-inner-content-margin, 20px);
+  overflow-y: var(--sk-dialog-overflow, auto);
+  max-height: calc(
+    100svh - (var(--sk-dialog-margin) * 2) -
+      (var(--sk-dialog-inner-content-margin) * 2)
+  );
+  border-radius: var(--sk-dialog-border-radius, 0);
+  background: var(--sk-dialog-background, transparent);
 }
 
 .sk-dialog-no-margin {

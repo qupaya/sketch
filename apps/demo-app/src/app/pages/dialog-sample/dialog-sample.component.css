@@ -6,19 +6,18 @@ button {
   cursor: pointer;
 }
 
-.my-super-styling-class {
-  background-color: lightblue;
-  border-radius: 20px;
-  padding: 20px;
-}
-
 sk-dialog {
   --sk-dialog-width: 100%;
+  --sk-dialog-height: 100%;
+  --sk-dialog-border-radius: 20px;
+  --sk-dialog-background: lightblue;
   --sk-dialog-margin: 50px;
+  --sk-dialog-inner-content-padding: 40px;
   --sk-dialog-inner-content-margin: 20px;
-  --sk-dialog-inner-close-button-space: 15px;
-  --sk-dialog-background: rgb(92 107 192 / 50%);
-  --sk-dialog-background-blur: 2px;
+  --sk-dialog-inner-close-button-space: 15 px;
+  --sk-dialog-overflow: scroll;
+  --sk-dialog-backdrop: rgb(92 107 192 / 50%);
+  --sk-dialog-backdrop-blur: 2px;
 }
 
 .layout {
