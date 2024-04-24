@@ -34,7 +34,10 @@
     </button>
     }
     <div
-      [ngClass]="{ 'sk-dialog-no-margin': innerCloseButton() }"
+      [ngClass]="{
+        'sk-dialog-no-margin': innerCloseButton(),
+        'sk-dialog-content-shadow': contentShadow()
+      }"
       class="sk-inner-content-wrapper"
     >
       <ng-content></ng-content>

@@ -63,7 +63,7 @@ export class DialogComponent {
 
   fullscreen = input<boolean>(false);
 
-  // contentShadow = input<boolean>(true);
+  contentShadow = input<boolean>(false);
 
   closeRequested = output<void>();
 
