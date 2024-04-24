@@ -3,6 +3,7 @@
   skClickBackdrop
   (clickedBackdrop)="closeRequested.emit()"
   (keydown.escape)="closeRequested.emit()"
+  [ngClass]="{ 'fullscreen-dialog': fullscreen() }"
 >
   <div class="sk-wrapper">
     @if (showCloseButton()) {

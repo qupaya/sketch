@@ -61,9 +61,9 @@ export class DialogComponent {
 
   closeButtonProperties = input<CloseButtonProperties>();
 
-  // contentShadow = input<boolean>(true);
+  fullscreen = input<boolean>(false);
 
-  //fullscreen = input<boolean>(false);
+  // contentShadow = input<boolean>(true);
 
   closeRequested = output<void>();
 
