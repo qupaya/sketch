@@ -23,7 +23,7 @@ dialog:has(::backdrop) {
 }
 
 dialog::backdrop {
-  background-color: var(--sk-dialog-backdrop, rgb(0 0 0 / 50%));
+  background: var(--sk-dialog-backdrop, rgb(0 0 0 / 50%));
   backdrop-filter: blur(var(--sk-dialog-backdrop-blur, 0));
 }
 
