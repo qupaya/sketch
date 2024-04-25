@@ -176,7 +176,7 @@ You can also use different color values like `rgba`, `hsl/hsla` or `hex` to defi
 
 For the blur, a value up to `5px` is recommended, because more make the background nearly invisible.
 
-### Content
+### Container and Content
 
 The Content and the styling of it is completely up to you. It can be basic text or complex components.
 You don't need a styling wrapper for your content, you style the container with provided custom properties. To do so, target the `sk-dialog {...}` in your css file and adjust the desired custom properties.
@@ -185,7 +185,7 @@ You have some other options for the styling and positioning of your content. (Se
 
 #### Container Style
 
-- To change the width and height of the container, change the custom properties `--sk-dialog-width` and `--sk-dialog-height` (or only one of them). By default the container takes the full width and fit the height of the content.
+- To change the width and height of the container, change the custom properties `--sk-dialog-width` and `--sk-dialog-height` (or only one of them). By default, the container takes the full width and fits the height of the content. If you want to have a fullscreen Dialog, set `[fullscreen]` to true, you don't need to anything for height and width custom properties.
 - It is recommended to add a background, because by default the container is transparent and the backdrop will shine through. You can adjust it by changing the `--sk-dialog-background` custom property. You can do gradients, solid colors, images etc.
 - The edges are not rounded by default. If you want to have a border-radius, change the `--sk-dialog-border-radius` custom property.
 - By default, the overflow of the container is `auto`, if you'd like to change this behavior, adjust the `--sk-dialog-overflow` custom property.
