@@ -35,7 +35,8 @@
     }
     <div
       [ngClass]="{
-        'sk-dialog-no-margin': innerCloseButton(),
+        'sk-dialog-no-margin':
+          !showCloseButton() || (showCloseButton() && innerCloseButton()),
         'sk-dialog-content-shadow': contentShadow()
       }"
       class="sk-inner-content-wrapper"
