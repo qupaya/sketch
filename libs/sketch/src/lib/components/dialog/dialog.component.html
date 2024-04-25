@@ -3,13 +3,13 @@
   skClickBackdrop
   (clickedBackdrop)="close.emit()"
   (keydown.escape)="close.emit()"
-  [ngClass]="{ 'fullscreen-dialog': fullscreen() }"
+  [ngClass]="{ 'sk-dialog-fullscreen-dialog': fullscreen() }"
 >
-  <div class="sk-wrapper">
+  <div class="sk-dialog-wrapper">
     @if (showCloseButton()) {
     <button
-      class="close-button"
-      [ngClass]="{ 'inner-close-button': innerCloseButton() }"
+      class="sk-dialog-close-button"
+      [ngClass]="{ 'sk-dialog-inner-close-button': innerCloseButton() }"
       type="button"
       [title]="defaultCloseButtonProperties().title"
       (click)="close.emit()"
@@ -18,9 +18,7 @@
       [style.borderRadius.px]="
         defaultCloseButtonProperties().styles?.borderRadius
       "
-      [style.backgroundColor]="
-        defaultCloseButtonProperties().styles?.backgroundColor
-      "
+      [style.background]="defaultCloseButtonProperties().styles?.background"
       [style.border]="defaultCloseButtonProperties().styles?.border"
       [style.padding]="defaultCloseButtonProperties().styles?.padding"
       [style.margin]="defaultCloseButtonProperties().styles?.margin"
@@ -39,7 +37,7 @@
           !showCloseButton() || (showCloseButton() && innerCloseButton()),
         'sk-dialog-content-shadow': contentShadow()
       }"
-      class="sk-inner-content-wrapper"
+      class="sk-dialog-content-container"
     >
       <ng-content></ng-content>
     </div>

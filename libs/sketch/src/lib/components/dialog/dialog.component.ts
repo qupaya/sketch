@@ -17,7 +17,7 @@ interface CloseButtonStyles {
   buttonWidth?: number | string;
   buttonHeight?: number | string;
   borderRadius?: number;
-  backgroundColor?: string;
+  background?: string;
   border?: string;
   iconWidth?: number | string;
   iconHeight?: number | string;
@@ -37,7 +37,7 @@ const initialButtonProperties: CloseButtonProperties = {
   styles: {
     iconWidth: 20,
     iconHeight: 20,
-    backgroundColor: 'transparent',
+    background: 'transparent',
     border: 'none',
     padding: '0',
     margin: '0',

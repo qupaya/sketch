@@ -55,97 +55,9 @@ You can also adjust the styling of the button and the svg icon for your needs.
 
 To customize the styling, create a variable of type `CloseButtonProperties` and assign the variable to this optional input in the template: `[closeButtonProperties]`.
 
-You have different options here:
+You can adjust the title, the icon source and the styles (like background, border, width, height, etc.). See [Close Button Properties](#closebuttonproperties) for more information.
 
-<table>
-<tr>
-<td> Key </td> <td> Type </td> <td> Required </td> <td> Description </td> <td> Default Value </td>
-</tr>
-<tr>
-<td>
-
-`title`
-
-</td>
-<td>
-
-`string`
-
-</td>
-<td> no/optional </td>
-<td> The title for the Button and the description for the alt tag of the image </td>
-<td>
-
-`Close`
-
-</td>
-</tr>
-<tr>
-<td>
-
-`iconSrc`
-
-</td>
-<td>
-
-`string`
-
-</td>
-<td> no/optional </td>
-<td> If you want to change the icon, add the path to the new icon here </td>
-<td>
-
-the black cross: `'../../../assets/cross.svg'`
-
-</td>
-</tr>
-<tr>
-<td>
-
-`styles`
-
-</td>
-<td>
-
-`CloseButtonStyles`
-
-These are all options:
-
-```ts
-{
-  buttonWidth?: number | string;
-  buttonHeight?: number | string;
-  borderRadius?: number;
-  backgroundColor?: string;
-  border?: string;
-  iconWidth?: number | string;
-  iconHeight?: number | string;
-  padding?: string;
-  margin?: string;
-}
-```
-
-</td>
-<td> no/optional </td>
-<td> You can change different styles for the button and the icon here </td>
-<td>
-
-```ts
-{
-  iconWidth: 20,
-  iconHeight: 20,
-  backgroundColor: 'transparent',
-  border: 'none',
-  padding: '0',
-  margin: '0',
-}
-```
-
-</td>
-</tr>
-</table>
-
-As you see in the table, none of the options are required. You can adjust one, two or all of them - only the value you change will replace the default.
+> If you change one property, the rest will keep their default values. So you can adjust the values as you want.
 
 ### Backdrop
 
@@ -161,9 +73,12 @@ sk-dialog {
   --sk-dialog-backdrop: rgb(92, 107, 192 / 40%);
   /* 
     other possible values:
-    rgba(92 107 192, 0.4) or 
-    hsl(231, 44%, 56% / 40%) / hsla(231, 44%, 56%, 0.4) or 
-    hex: #5c6bc066
+    - rgba(92 107 192, 0.4) 
+    - hsl(231, 44%, 56% / 40%) / hsla(231, 44%, 56%, 0.4) 
+    - hex: #5c6bc066
+    - gradients:
+        radial-gradient(circle, rgba(238, 174, 202, 0.4) 0%, rgba(148, 187, 233, 0.4) 100%); or
+        linear-gradient(0deg, rgba(34,193,195,1) 0%, rgba(253,187,45,1) 100%);
   */
   --sk-dialog-backdrop-blur: 2px;
 }
@@ -189,18 +104,18 @@ You have some other options for the styling and positioning of your content. (Se
 - It is recommended to add a background, because by default the container is transparent and the backdrop will shine through. You can adjust it by changing the `--sk-dialog-background` custom property. You can do gradients, solid colors, images etc.
 - The edges are not rounded by default. If you want to have a border-radius, change the `--sk-dialog-border-radius` custom property.
 - By default, the overflow of the container is `auto`, if you'd like to change this behavior, adjust the `--sk-dialog-overflow` custom property.
-- If you want to have a shadow around the container, set `[contentShadow]` to true and adjust `--sk-dialog-content-shadow` if you'd like to change the default shadow. Just keep in mind that should not be larger than the shadow should not be larger than the `--sk-dialog-inner-content-margin` since it would be cut.
+- If you want to have a shadow around the container, set `[contentShadow]` to true and adjust `--sk-dialog-content-shadow` if you'd like to change the default shadow. Just keep in mind that should not be larger than the shadow should not be larger than the `--sk-dialog-container-margin` since it would be cut.
 
 #### Container Spacing
 
 - To have a proper spacing to the sides, overwrite `--sk-dialog-margin` and set the margin as wanted. By default, this is `0`.
-- To archive a good spacing from your content to the container edges, adjust `--sk-dialog-inner-content-padding`, otherwise it will stick to the sides.
-- When the [Close Button](#close-button) is outside the content, you can define the margin of the Container to the Close Button. In this way, you can move it further away if wanted. Just overwrite the `--sk-dialog-inner-content-margin`. It has a default of `20px`. If `innerCloseButton` is `true`, this is getting ignored. It is recommended to have at least the same inner content margin as the size of the close button icon.
+- To archive a good spacing from your content to the container edges, adjust `--sk-dialog-container-padding`, otherwise it will stick to the sides.
+- When the [Close Button](#close-button) is outside the content, you can define the margin of the Container to the Close Button. In this way, you can move it further away if wanted. Just overwrite the `--sk-dialog-container-margin`. It has a default of `20px`. If `innerCloseButton` is `true`, this is getting ignored. It is recommended to have at least the same inner content margin as the size of the close button icon.
 - When the [Close Button](#close-button) is inside the content, use `--sk-dialog-inner-close-button-space` to define the spacing from your content wrapper. It will move the button proportionally. `innerCloseButton` must be `true`, otherwise it is getting ignored.
 
 > In terms of styling, the Close Button is part of the Container. So changing the custom property `--sk-dialog-margin` will not affect the position of the Close Button.
 >
-> To move it further away, adjust the `--sk-dialog-inner-content-margin` custom property.
+> To move it further away, adjust the `--sk-dialog-container-margin` custom property.
 
 ### Positioning
 
@@ -212,7 +127,7 @@ You can add a Shadow to the dialog. By default, it is disabled. To add one, set 
 
 The default value for the shadow is `rgb(0 0 0 / 20%) 0 10px 20px`. If you'd like to change it, change the `--sk-dialog-content-shadow` custom property in `sk-dialog` in your css file to your desired shadow.
 
-> Keep in mind that your shadow should not be larger than the `--sk-dialog-inner-content-margin` to avoid cutting the shadow.
+> Keep in mind that your shadow should not be larger than the `--sk-dialog-container-margin` to avoid cutting the shadow.
 
 ### Scrolling
 
@@ -460,7 +375,7 @@ These are all options:
   buttonWidth?: number | string;
   buttonHeight?: number | string;
   borderRadius?: number;
-  backgroundColor?: string;
+  background?: string;
   border?: string;
   iconWidth?: number | string;
   iconHeight?: number | string;
@@ -478,7 +393,7 @@ These are all options:
 {
   iconWidth: 20,
   iconHeight: 20,
-  backgroundColor: 'transparent',
+  background: 'transparent',
   border: 'none',
   padding: '0',
   margin: '0',
@@ -662,7 +577,7 @@ Defines the `margin` of the Container (including Close Button) to the sides.
 <tr>
 <td>
 
-`--sk-dialog-inner-content-margin`
+`--sk-dialog-container-margin`
 
 </td>
 <td>
@@ -687,7 +602,7 @@ Should have at least the size of the Close Button Icon size.
 <tr>
 <td>
 
-`--sk-dialog-inner-content-padding`
+`--sk-dialog-container-padding`
 
 </td>
 <td>
