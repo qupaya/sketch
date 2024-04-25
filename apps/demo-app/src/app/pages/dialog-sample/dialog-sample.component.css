@@ -1,27 +1,64 @@
-.my-backdrop {
-  background-color: green;
-}
-
 button {
   cursor: pointer;
-}
-
-sk-dialog {
-  --sk-dialog-width: 100%;
-  --sk-dialog-height: 100%;
-  --sk-dialog-border-radius: 20px;
-  --sk-dialog-background: lightblue;
-  --sk-dialog-margin: 50px;
-  --sk-dialog-inner-content-padding: 40px;
-  --sk-dialog-inner-content-margin: 20px;
-  --sk-dialog-inner-close-button-space: 15 px;
-  --sk-dialog-overflow: scroll;
-  --sk-dialog-backdrop: rgb(92 107 192 / 50%);
-  --sk-dialog-backdrop-blur: 2px;
 }
 
 .layout {
   display: flex;
   flex-direction: column;
   gap: 20px;
+}
+
+/* default styles to see results better */
+div:nth-child(n + 3) sk-dialog {
+  --sk-dialog-margin: 50px;
+  --sk-dialog-background: lightblue;
+}
+
+/* fully styled Dialog */
+div:nth-child(2) sk-dialog {
+  --sk-dialog-width: 70%;
+  --sk-dialog-height: 50%;
+  --sk-dialog-margin: 50px;
+  --sk-dialog-container-margin: 30px;
+  --sk-dialog-container-padding: 40px;
+  --sk-dialog-inner-close-button-space: 15px;
+  --sk-dialog-border-radius: 20px;
+  --sk-dialog-background: lightblue;
+  --sk-dialog-content-shadow: rgb(0 0 0 / 20%) 0 10px 20px;
+  --sk-dialog-overflow: scroll;
+  --sk-dialog-backdrop: rgb(92 107 192 / 50%);
+  --sk-dialog-backdrop-blur: 2px;
+}
+
+/* Dialog with styled close button */
+div:nth-child(5) sk-dialog {
+  --sk-dialog-container-margin: 40px;
+}
+
+/* Dialog with shadow */
+div:nth-child(6) sk-dialog {
+  --sk-dialog-content-shadow: rgb(255 255 255 / 40%) 0 10px 20px;
+  --sk-dialog-container-margin: 30px;
+}
+
+/* Dialog with overflow */
+div:nth-child(8) sk-dialog {
+  _--sk-dialog-height: 60%;
+}
+
+/* Dialog with fancy colors */
+div:nth-child(9) sk-dialog {
+  --sk-dialog-background: radial-gradient(
+    circle,
+    rgb(238 174 202 / 100%) 0%,
+    rgb(148 187 233 / 100%) 100%
+  );
+  --sk-dialog-backdrop: linear-gradient(
+      217deg,
+      rgb(255 0 0 / 80%),
+      rgb(255 0 0 / 0%) 70%
+    ),
+    linear-gradient(127deg, rgb(0 255 0 / 80%), rgb(0 255 0 / 0%) 70%),
+    linear-gradient(336deg, rgb(0 0 255 / 80%), rgb(0 0 255 / 0%) 70%);
+  --sk-dialog-backdrop-blur: 3px;
 }

@@ -1,104 +1,354 @@
 <div class="layout">
   <div>
-    <button (click)="isUnstyledBasicDialogOpen = true">
-      open unstyled basic Dialog
-    </button>
+    <button (click)="isBasicDialogOpen = true">open basic Dialog</button>
 
-    <sk-dialog
-      [(open)]="isUnstyledBasicDialogOpen"
-      (closeRequested)="isUnstyledBasicDialogOpen = false"
-    >
-      <div>here comes some content.</div>
-    </sk-dialog>
-  </div>
-
-  <div>
-    <button (click)="isStyledBasicDialogOpen = true">
-      open styled basic Dialog
-    </button>
-
-    <sk-dialog
-      [(open)]="isStyledBasicDialogOpen"
-      (closeRequested)="isStyledBasicDialogOpen = false"
-    >
-      <div class="my-super-styling-class">
-        <div>here comes some content.</div>
+    <sk-dialog [(open)]="isBasicDialogOpen" (close)="isBasicDialogOpen = false">
+      <div>
+        here comes some content. This is the most basic dialog, no styling, no
+        spacing.
       </div>
     </sk-dialog>
   </div>
 
   <div>
-    <button (click)="isDialogWithOuterCloseButtonOpen = true">
-      open Dialog with default outer Close Button
+    <button (click)="isCompletelyStyledDialogOpen = true">
+      open completely styled Dialog
     </button>
 
     <sk-dialog
-      [(open)]="isDialogWithOuterCloseButtonOpen"
-      (closeRequested)="isDialogWithOuterCloseButtonOpen = false"
+      [(open)]="isCompletelyStyledDialogOpen"
+      (close)="isCompletelyStyledDialogOpen = false"
+      [showCloseButton]="true"
+      [contentShadow]="true"
+    >
+      <div>
+        here comes some content. This is a dialog with height/width,
+        border-radius, background, shadow, margin, padding and a custom backdrop
+        with blur.
+      </div>
+    </sk-dialog>
+  </div>
+
+  <div>
+    <button (click)="isDialogWithOuterButtonOpen = true">
+      open Dialog with outer button
+    </button>
+
+    <sk-dialog
+      [(open)]="isDialogWithOuterButtonOpen"
+      (close)="isDialogWithOuterButtonOpen = false"
       [showCloseButton]="true"
     >
-      <div class="my-super-styling-class">
-        <div>here comes some content. show close button true</div>
+      <div>
+        here comes some content. This is a dialog with the Close Button outside
+        of the container (default) and a default container margin.
       </div>
     </sk-dialog>
   </div>
 
   <div>
-    <button (click)="isDialogWithInnerCloseButtonOpen = true">
-      open Dialog with default inner Close Button
+    <button (click)="isDialogWithInnerButtonOpen = true">
+      open Dialog with inner button
     </button>
 
     <sk-dialog
-      [(open)]="isDialogWithInnerCloseButtonOpen"
-      (closeRequested)="isDialogWithInnerCloseButtonOpen = false"
+      [(open)]="isDialogWithInnerButtonOpen"
+      (close)="isDialogWithInnerButtonOpen = false"
       [showCloseButton]="true"
       [innerCloseButton]="true"
     >
-      <div class="my-super-styling-class">
-        <div>
-          here comes some content. show close button true + inner close button
-        </div>
+      <div>
+        here comes some content. This is a dialog with the Close Button inside
+        of the container.
       </div>
     </sk-dialog>
   </div>
 
   <div>
-    <button (click)="isDialogWithStyledOuterCloseButtonOpen = true">
-      open Dialog with styled outer Close Button
+    <button (click)="isDialogWithStyledButtonOpen = true">
+      open Dialog with styled outside close button
     </button>
 
     <sk-dialog
-      [(open)]="isDialogWithStyledOuterCloseButtonOpen"
-      (closeRequested)="isDialogWithStyledOuterCloseButtonOpen = false"
+      [(open)]="isDialogWithStyledButtonOpen"
+      (close)="isDialogWithStyledButtonOpen = false"
       [showCloseButton]="true"
       [closeButtonProperties]="closeButtonProperties"
     >
-      <div class="my-super-styling-class">
-        <div>
-          here comes some content. show close button true +
-          closeButtonProperties
-        </div>
+      <div>
+        here comes some content. This is a dialog with a styled Close Button. If
+        padding is added, increase margin to avoid overlapping with the
+        Container.
       </div>
     </sk-dialog>
   </div>
 
   <div>
-    <button (click)="isDialogWithStyledInnerCloseButtonOpen = true">
-      open Dialog with styled inner Close Button
+    <button (click)="isDialogWithShadowOpen = true">
+      open Dialog with custom shadow
     </button>
 
     <sk-dialog
-      [(open)]="isDialogWithStyledInnerCloseButtonOpen"
-      (closeRequested)="isDialogWithStyledInnerCloseButtonOpen = false"
-      [showCloseButton]="true"
-      [innerCloseButton]="true"
-      [closeButtonProperties]="closeButtonProperties"
+      [(open)]="isDialogWithShadowOpen"
+      (close)="isDialogWithShadowOpen = false"
+      [contentShadow]="true"
     >
-      <div class="my-super-styling-class">
-        <div>
-          here comes some content. show close button true +
-          closeButtonProperties
-        </div>
+      <div>
+        here comes some content. This is a dialog with a custom shadow (white)
+        around the container. The margin is slightly increased to not cut the
+        shadow.
+      </div>
+    </sk-dialog>
+  </div>
+
+  <div>
+    <button (click)="isFullscreenDialogOpen = true">
+      open fullscreen Dialog
+    </button>
+
+    <sk-dialog
+      [(open)]="isFullscreenDialogOpen"
+      (close)="isFullscreenDialogOpen = false"
+      [fullscreen]="true"
+    >
+      <div>here comes some content. This is a fullscreen dialog.</div>
+    </sk-dialog>
+  </div>
+
+  <div>
+    <button (click)="isDialogWithOverflowOpen = true">
+      open overflow Dialog
+    </button>
+
+    <sk-dialog
+      [(open)]="isDialogWithOverflowOpen"
+      (close)="isDialogWithOverflowOpen = false"
+    >
+      <div>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+        tempor incididunt ut labore et dolore magna aliqua. Eget nunc
+        scelerisque viverra mauris in aliquam sem fringilla. Odio euismod
+        lacinia at quis. A pellentesque sit amet porttitor eget dolor morbi non.
+        Sagittis purus sit amet volutpat consequat mauris. Tristique
+        sollicitudin nibh sit amet commodo nulla facilisi nullam. Erat velit
+        scelerisque in dictum non consectetur a. Risus viverra adipiscing at in
+        tellus integer feugiat. Odio morbi quis commodo odio aenean sed
+        adipiscing diam. Odio tempor orci dapibus ultrices in iaculis nunc sed
+        augue. Adipiscing vitae proin sagittis nisl rhoncus mattis rhoncus.
+        Metus dictum at tempor commodo. Quis eleifend quam adipiscing vitae. Id
+        aliquet risus feugiat in. Amet cursus sit amet dictum sit amet justo.
+        <br />
+        <br />
+        Erat imperdiet sed euismod nisi porta lorem mollis aliquam. Mauris nunc
+        congue nisi vitae suscipit tellus mauris a diam. Urna et pharetra
+        pharetra massa massa. Nunc congue nisi vitae suscipit tellus mauris a
+        diam maecenas. Viverra maecenas accumsan lacus vel. In metus vulputate
+        eu scelerisque. Vitae congue eu consequat ac. Iaculis at erat
+        pellentesque adipiscing commodo elit. A erat nam at lectus urna duis
+        convallis. Vitae aliquet nec ullamcorper sit amet risus. Mauris augue
+        neque gravida in fermentum et sollicitudin. Facilisi cras fermentum odio
+        eu feugiat pretium nibh ipsum consequat. Sollicitudin nibh sit amet
+        commodo nulla facilisi nullam vehicula ipsum. Sed egestas egestas
+        fringilla phasellus. Nibh tellus molestie nunc non blandit massa
+        enim.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+        eiusmod tempor incididunt ut labore et dolore magna aliqua. Eget nunc
+        scelerisque viverra mauris in aliquam sem fringilla. Odio euismod
+        lacinia at quis. A pellentesque sit amet porttitor eget dolor morbi non.
+        <br />
+        <br />
+        Sagittis purus sit amet volutpat consequat mauris. Tristique
+        sollicitudin nibh sit amet commodo nulla facilisi nullam. Erat velit
+        scelerisque in dictum non consectetur a. Risus viverra adipiscing at in
+        tellus integer feugiat. Odio morbi quis commodo odio aenean sed
+        adipiscing diam. Odio tempor orci dapibus ultrices in iaculis nunc sed
+        augue. Adipiscing vitae proin sagittis nisl rhoncus mattis rhoncus.
+        Metus dictum at tempor commodo. Quis eleifend quam adipiscing vitae. Id
+        aliquet risus feugiat in. Amet cursus sit amet dictum sit amet justo.
+        Erat imperdiet sed euismod nisi porta lorem mollis aliquam. Mauris nunc
+        congue nisi vitae suscipit tellus mauris a diam. Urna et pharetra
+        pharetra massa massa. Nunc congue nisi vitae suscipit tellus mauris a
+        diam maecenas. Viverra maecenas accumsan lacus vel. In metus vulputate
+        eu scelerisque. Vitae congue eu consequat ac. Iaculis at erat
+        pellentesque adipiscing commodo elit. A erat nam at lectus urna duis
+        convallis. Vitae aliquet nec ullamcorper sit amet risus. Mauris augue
+        neque gravida in fermentum et sollicitudin. Facilisi cras fermentum odio
+        eu feugiat pretium nibh ipsum consequat. Sollicitudin nibh sit amet
+        commodo nulla facilisi nullam vehicula ipsum. Sed egestas egestas
+        fringilla phasellus. Nibh tellus molestie nunc non blandit massa
+        enim.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+        eiusmod tempor incididunt ut labore et dolore magna aliqua. Eget nunc
+        scelerisque viverra mauris in aliquam sem fringilla. Odio euismod
+        lacinia at quis. A pellentesque sit amet porttitor eget dolor morbi non.
+        <br />
+        <br />
+        Sagittis purus sit amet volutpat consequat mauris. Tristique
+        sollicitudin nibh sit amet commodo nulla facilisi nullam. Erat velit
+        scelerisque in dictum non consectetur a. Risus viverra adipiscing at in
+        tellus integer feugiat. Odio morbi quis commodo odio aenean sed
+        adipiscing diam. Odio tempor orci dapibus ultrices in iaculis nunc sed
+        augue. Adipiscing vitae proin sagittis nisl rhoncus mattis rhoncus.
+        Metus dictum at tempor commodo. Quis eleifend quam adipiscing vitae. Id
+        aliquet risus feugiat in. Amet cursus sit amet dictum sit amet justo.
+        Erat imperdiet sed euismod nisi porta lorem mollis aliquam. Mauris nunc
+        congue nisi vitae suscipit tellus mauris a diam. Urna et pharetra
+        pharetra massa massa. Nunc congue nisi vitae suscipit tellus mauris a
+        diam maecenas. Viverra maecenas accumsan lacus vel. In metus vulputate
+        eu scelerisque. Vitae congue eu consequat ac. Iaculis at erat
+        pellentesque adipiscing commodo elit. A erat nam at lectus urna duis
+        convallis. Vitae aliquet nec ullamcorper sit amet risus. Mauris augue
+        neque gravida in fermentum et sollicitudin. Facilisi cras fermentum odio
+        eu feugiat pretium nibh ipsum consequat. Sollicitudin nibh sit amet
+        commodo nulla facilisi nullam vehicula ipsum. Sed egestas egestas
+        fringilla phasellus. Nibh tellus molestie nunc non blandit massa
+        enim.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+        eiusmod tempor incididunt ut labore et dolore magna aliqua. Eget nunc
+        scelerisque viverra mauris in aliquam sem fringilla. Odio euismod
+        lacinia at quis. A pellentesque sit amet porttitor eget dolor morbi non.
+        <br />
+        <br />
+        Sagittis purus sit amet volutpat consequat mauris. Tristique
+        sollicitudin nibh sit amet commodo nulla facilisi nullam. Erat velit
+        scelerisque in dictum non consectetur a. Risus viverra adipiscing at in
+        tellus integer feugiat. Odio morbi quis commodo odio aenean sed
+        adipiscing diam. Odio tempor orci dapibus ultrices in iaculis nunc sed
+        augue. Adipiscing vitae proin sagittis nisl rhoncus mattis rhoncus.
+        Metus dictum at tempor commodo. Quis eleifend quam adipiscing vitae. Id
+        aliquet risus feugiat in. Amet cursus sit amet dictum sit amet justo.
+        Erat imperdiet sed euismod nisi porta lorem mollis aliquam. Mauris nunc
+        congue nisi vitae suscipit tellus mauris a diam. Urna et pharetra
+        pharetra massa massa. Nunc congue nisi vitae suscipit tellus mauris a
+        diam maecenas. Viverra maecenas accumsan lacus vel. In metus vulputate
+        eu scelerisque. Vitae congue eu consequat ac. Iaculis at erat
+        pellentesque adipiscing commodo elit. A erat nam at lectus urna duis
+        convallis. Vitae aliquet nec ullamcorper sit amet risus. Mauris augue
+        neque gravida in fermentum et sollicitudin. Facilisi cras fermentum odio
+        eu feugiat pretium nibh ipsum consequat. Sollicitudin nibh sit amet
+        commodo nulla facilisi nullam vehicula ipsum. Sed egestas egestas
+        fringilla phasellus. Nibh tellus molestie nunc non blandit massa enim.
+        In ante metus dictum at tempor. Pretium vulputate sapien nec sagittis
+        aliquam malesuada bibendum arcu. Eget aliquet nibh praesent tristique
+        magna sit amet purus gravida. Massa sapien faucibus et molestie ac
+        feugiat. Pellentesque massa placerat duis ultricies lacus sed turpis
+        tincidunt. Dapibus ultrices in iaculis nunc sed augue lacus viverra.
+        <br />
+        <br />
+        Volutpat sed cras ornare arcu. Diam in arcu cursus euismod quis viverra
+        nibh cras. Risus nec feugiat in fermentum. Amet cursus sit amet dictum
+        sit amet. Dui vivamus arcu felis bibendum ut tristique. Commodo viverra
+        maecenas accumsan lacus. Tortor id aliquet lectus proin nibh nisl
+        condimentum id venenatis. Lacinia quis vel eros donec ac odio tempor
+        orci. Vestibulum rhoncus est pellentesque elit ullamcorper dignissim
+        cras tincidunt. Est lorem ipsum dolor sit amet consectetur adipiscing.
+        Ut eu sem integer vitae justo eget magna. Odio ut enim blandit volutpat.
+        Duis at consectetur lorem donec massa sapien faucibus et. In eu mi
+        bibendum neque egestas. Commodo ullamcorper a lacus vestibulum sed arcu.
+        Sed felis eget velit aliquet. Varius morbi enim nunc faucibus a
+        pellentesque sit amet porttitor. Sit amet massa vitae tortor
+        condimentum. Ornare massa eget egestas purus viverra accumsan in nisl.
+        Lacus sed viverra tellus in. In metus vulputate eu scelerisque.
+        Pellentesque sit amet porttitor eget dolor morbi non. Laoreet
+        suspendisse interdum consectetur libero id faucibus nisl tincidunt eget.
+        Dui vivamus arcu felis bibendum ut tristique et egestas quis. Id neque
+        aliquam vestibulum morbi blandit cursus risus at. Sodales ut eu sem
+        integer vitae justo eget magna. Sit amet consectetur adipiscing elit
+        pellentesque habitant. Nunc non blandit massa enim. Odio ut sem nulla
+        pharetra. Faucibus interdum posuere lorem ipsum. Posuere lorem ipsum
+        dolor sit amet consectetur adipiscing elit. Odio ut sem nulla pharetra
+        diam sit amet. Ut ornare lectus sit amet est placerat in egestas. Lorem
+        ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+        incididunt ut labore et dolore magna aliqua. Eget nunc scelerisque
+        viverra mauris in aliquam sem fringilla. Odio euismod lacinia at quis. A
+        pellentesque sit amet porttitor eget dolor morbi non. Sagittis purus sit
+        amet volutpat consequat mauris. Tristique sollicitudin nibh sit amet
+        commodo nulla facilisi nullam. Erat velit scelerisque in dictum non
+        consectetur a. Risus viverra adipiscing at in tellus integer feugiat.
+        <br />
+        <br />
+        Odio morbi quis commodo odio aenean sed adipiscing diam. Odio tempor
+        orci dapibus ultrices in iaculis nunc sed augue. Adipiscing vitae proin
+        sagittis nisl rhoncus mattis rhoncus.Lorem ipsum dolor sit amet,
+        consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
+        et dolore magna aliqua. Eget nunc scelerisque viverra mauris in aliquam
+        sem fringilla. Odio euismod lacinia at quis. A pellentesque sit amet
+        porttitor eget dolor morbi non. Sagittis purus sit amet volutpat
+        consequat mauris. Tristique sollicitudin nibh sit amet commodo nulla
+        facilisi nullam. Erat velit scelerisque in dictum non consectetur a.
+        Risus viverra adipiscing at in tellus integer feugiat. Odio morbi quis
+        commodo odio aenean sed adipiscing diam. Odio tempor orci dapibus
+        ultrices in iaculis nunc sed augue. Adipiscing vitae proin sagittis nisl
+        rhoncus mattis rhoncus. Pretium lectus quam id leo in vitae. Neque
+        convallis a cras semper auctor neque vitae. Vitae tortor condimentum
+        lacinia quis vel eros donec. Tincidunt lobortis feugiat vivamus at augue
+        eget arcu dictum varius. Et netus et malesuada fames ac turpis egestas
+        sed. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+        eiusmod tempor incididunt ut labore et dolore magna aliqua. Eget nunc
+        scelerisque viverra mauris in aliquam sem fringilla. Odio euismod
+        lacinia at quis. A pellentesque sit amet porttitor eget dolor morbi non.
+        <br />
+        <br />
+        Sagittis purus sit amet volutpat consequat mauris. Tristique
+        sollicitudin nibh sit amet commodo nulla facilisi nullam. Erat velit
+        scelerisque in dictum non consectetur a. Risus viverra adipiscing at in
+        tellus integer feugiat. Odio morbi quis commodo odio aenean sed
+        adipiscing diam. Odio tempor orci dapibus ultrices in iaculis nunc sed
+        augue. Adipiscing vitae proin sagittis nisl rhoncus mattis rhoncus.
+        Metus dictum at tempor commodo. Quis eleifend quam adipiscing vitae. Id
+        aliquet risus feugiat in. Amet cursus sit amet dictum sit amet justo.
+        Erat imperdiet sed euismod nisi porta lorem mollis aliquam. Mauris nunc
+        congue nisi vitae suscipit tellus mauris a diam. Urna et pharetra
+        pharetra massa massa. Nunc congue nisi vitae suscipit tellus mauris a
+        diam maecenas. Viverra maecenas accumsan lacus vel. In metus vulputate
+        eu scelerisque. Vitae congue eu consequat ac. Iaculis at erat
+        pellentesque adipiscing commodo elit. A erat nam at lectus urna duis
+        convallis. Vitae aliquet nec ullamcorper sit amet risus. Mauris augue
+        neque gravida in fermentum et sollicitudin. Facilisi cras fermentum odio
+        eu feugiat pretium nibh ipsum consequat. Sollicitudin nibh sit amet
+        commodo nulla facilisi nullam vehicula ipsum. Sed egestas egestas
+        fringilla phasellus. Nibh tellus molestie nunc non blandit massa enim.
+      </div>
+    </sk-dialog>
+  </div>
+
+  <div>
+    <button (click)="isDialogWithFancyColorsOpen = true">
+      open Dialog with fancy colors
+    </button>
+
+    <sk-dialog
+      [(open)]="isDialogWithFancyColorsOpen"
+      (close)="isDialogWithFancyColorsOpen = false"
+    >
+      <div>
+        here comes some content. This is a dialog with colored gradients in the
+        Backdrop and Container.
+      </div>
+    </sk-dialog>
+  </div>
+
+  <div>
+    <button (click)="isDialogWithNestedDialogOpen = true">
+      open Dialog with nested Dialog
+    </button>
+
+    <sk-dialog
+      [(open)]="isDialogWithNestedDialogOpen"
+      (close)="isDialogWithNestedDialogOpen = false"
+    >
+      <div>
+        here comes some content. This button will open another dialog. <br />
+
+        <button (click)="isNestedDialogOpen = true">open nested Dialog</button>
+
+        <sk-dialog
+          [(open)]="isNestedDialogOpen"
+          (close)="isNestedDialogOpen = false"
+          [showCloseButton]="true"
+        >
+          <div>
+            This is the content of the nested Dialog! This one has the close
+            button.
+          </div>
+        </sk-dialog>
       </div>
     </sk-dialog>
   </div>
