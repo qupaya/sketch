@@ -19,10 +19,11 @@ div:nth-child(2) sk-dialog {
   --sk-dialog-width: 70%;
   --sk-dialog-height: 50%;
   --sk-dialog-margin: 50px;
-  --sk-dialog-container-margin: 30px;
+  --sk-dialog-container-margin: 40px;
   --sk-dialog-container-padding: 40px;
   --sk-dialog-inner-close-button-space: 15px;
   --sk-dialog-border-radius: 20px;
+  --sk-dialog-border: 5px solid cornflowerblue;
   --sk-dialog-background: lightblue;
   --sk-dialog-content-shadow: rgb(0 0 0 / 20%) 0 10px 20px;
   --sk-dialog-overflow: scroll;

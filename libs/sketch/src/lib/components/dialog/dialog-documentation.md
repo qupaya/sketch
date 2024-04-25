@@ -105,6 +105,7 @@ You have some other options for the styling and positioning of your content. (Se
 - The edges are not rounded by default. If you want to have a border-radius, change the `--sk-dialog-border-radius` custom property.
 - By default, the overflow of the container is `auto`, if you'd like to change this behavior, adjust the `--sk-dialog-overflow` custom property.
 - If you want to have a shadow around the container, set `[contentShadow]` to true and adjust `--sk-dialog-content-shadow` if you'd like to change the default shadow. Just keep in mind that should not be larger than the shadow should not be larger than the `--sk-dialog-container-margin` since it would be cut.
+- You can also add a border if you'd like to by adjusting `--sk-dialog-border`. Keep in mind that you might adjust the `--sk-dialog-container-margin` because the size of the border is added.
 
 #### Container Spacing
 
@@ -518,6 +519,28 @@ Defines the `box-shadow` of the Container.
 <td>
 
 `rgb(0 0 0 / 20%) 0 10px 20px`
+
+</td>
+<td>
+
+[Content - Container Style](#container-style)
+
+</td>
+</tr>
+<tr>
+<td>
+
+`--sk-dialog-border`
+
+</td>
+<td>
+
+Defines the `border` of the Container.
+
+</td>
+<td>
+
+`0`
 
 </td>
 <td>

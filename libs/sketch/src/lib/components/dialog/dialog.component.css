@@ -8,6 +8,7 @@
   --sk-dialog-background: transparent;
   --sk-dialog-border-radius: 0;
   --sk-dialog-content-shadow: rgb(0 0 0 / 20%) 0 10px 20px;
+  --sk-dialog-border: 0;
   --sk-dialog-overflow: auto;
   --sk-dialog-backdrop: rgb(0 0 0 / 50%);
   --sk-dialog-backdrop-blur: 0;
@@ -74,6 +75,7 @@ dialog::backdrop {
   );
   border-radius: var(--sk-dialog-border-radius);
   background: var(--sk-dialog-background);
+  border: var(--sk-dialog-border);
 }
 
 .sk-dialog-content-shadow {
