@@ -1,8 +1,8 @@
 <dialog
   #dialogElement
   skClickBackdrop
-  (clickedBackdrop)="closeRequested.emit()"
-  (keydown.escape)="closeRequested.emit()"
+  (clickedBackdrop)="close.emit()"
+  (keydown.escape)="close.emit()"
   [ngClass]="{ 'fullscreen-dialog': fullscreen() }"
 >
   <div class="sk-wrapper">
@@ -12,7 +12,7 @@
       [ngClass]="{ 'inner-close-button': innerCloseButton() }"
       type="button"
       [title]="defaultCloseButtonProperties().title"
-      (click)="closeRequested.emit()"
+      (click)="close.emit()"
       [style.width.px]="defaultCloseButtonProperties().styles?.buttonWidth"
       [style.height.px]="defaultCloseButtonProperties().styles?.buttonHeight"
       [style.borderRadius.px]="

@@ -65,7 +65,7 @@ export class DialogComponent {
 
   contentShadow = input<boolean>(false);
 
-  closeRequested = output<void>();
+  close = output<void>();
 
   private readonly dialogElement =
     viewChild.required<ElementRef<HTMLDialogElement>>('dialogElement');

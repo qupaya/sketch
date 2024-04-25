@@ -11,7 +11,7 @@ First, let's have a look at the basic structure of the Dialog:
 ```html
 <button (click)="isDialogOpen = true">open Dialog!</button>
 
-<sk-dialog [(open)]="isDialogOpen" (closeRequested)="isDialogOpen = false">
+<sk-dialog [(open)]="isDialogOpen" (close)="isDialogOpen = false">
   <p>here comes some content</p>
 </sk-dialog>
 ```
@@ -37,7 +37,7 @@ Closing can be performed in three different ways:
 2. Pressing `Escape` on the keyboard
 3. Clicking the [Close button](#close-button)
 
-All of these options are getting recognized by `(closeRequested)`. So just set your variable to `false` here and the Dialog will be closed.
+All of these options are getting recognized by `(close)`. So just set your variable to `false` here and the Dialog will be closed.
 
 ## Styling
 
@@ -232,15 +232,12 @@ Make sure to add another variable that handles the state. Here is an example:
 ```html
 <button (click)="isDialogOpen = true">open Dialog!</button>
 
-<sk-dialog [(open)]="isDialogOpen" (closeRequested)="isDialogOpen = false">
+<sk-dialog [(open)]="isDialogOpen" (close)="isDialogOpen = false">
   <p>here comes some content</p>
 
   <button (click)="isSecondDialogOpen = true">open second Dialog!</button>
 
-  <sk-dialog
-    [(open)]="isSecondDialogOpen"
-    (closeRequested)="isSecondDialogOpen = false"
-  >
+  <sk-dialog [(open)]="isSecondDialogOpen" (close)="isSecondDialogOpen = false">
     <p>here comes some content inside the nested dialog</p>
   </sk-dialog>
 </sk-dialog>
@@ -394,7 +391,7 @@ Adds a Shadow to the Dialog.
 <tr>
 <td>
 
-`(closeRequested)`
+`(close)`
 
 </td>
 <td> yes </td>
