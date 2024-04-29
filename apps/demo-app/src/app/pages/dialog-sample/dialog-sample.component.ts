@@ -29,6 +29,7 @@ export class DialogSampleComponent {
       iconWidth: 20,
       iconHeight: 20,
       background: 'coral',
+      buttonHeight: 40,
       borderRadius: 10,
       border: 'none',
       padding: '10px',
