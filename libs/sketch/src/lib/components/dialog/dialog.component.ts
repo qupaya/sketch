@@ -31,6 +31,11 @@ export interface CloseButtonProperties {
   styles?: CloseButtonStyles;
 }
 
+export enum CloseButtonPosition {
+  Left = 'left',
+  Right = 'right',
+}
+
 const initialButtonProperties: CloseButtonProperties = {
   title: 'Close',
   iconSrc: '../../../assets/cross.svg',
@@ -61,9 +66,13 @@ export class DialogComponent {
 
   closeButtonProperties = input<CloseButtonProperties>();
 
+  closeButtonPosition = input<CloseButtonPosition>(CloseButtonPosition.Right);
+
   fullscreen = input<boolean>(false);
 
   contentShadow = input<boolean>(false);
+
+  readonly CloseButtonPosition = CloseButtonPosition;
 
   close = output<void>();
 

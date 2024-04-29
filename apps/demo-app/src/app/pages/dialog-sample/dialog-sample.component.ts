@@ -1,6 +1,10 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { CloseButtonProperties, DialogComponent } from '@qupaya/sketch';
+import {
+  CloseButtonPosition,
+  CloseButtonProperties,
+  DialogComponent,
+} from '@qupaya/sketch';
 
 @Component({
   selector: 'app-dialog-sample',
@@ -14,6 +18,8 @@ export class DialogSampleComponent {
   isCompletelyStyledDialogOpen = false;
   isDialogWithOuterButtonOpen = false;
   isDialogWithInnerButtonOpen = false;
+  isDialogWithOuterButtonLeftOpen = false;
+  isDialogWithInnerButtonLeftOpen = false;
   isDialogWithStyledButtonOpen = false;
   isDialogWithShadowOpen = false;
   isFullscreenDialogOpen = false;
@@ -22,6 +28,8 @@ export class DialogSampleComponent {
   isDialogWithNestedDialogOpen = false;
   isNestedDialogOpen = false;
   isDefaultContentShadowOpen = false;
+
+  readonly CloseButtonPosition = CloseButtonPosition;
 
   closeButtonProperties: CloseButtonProperties = {
     title: 'Close me',

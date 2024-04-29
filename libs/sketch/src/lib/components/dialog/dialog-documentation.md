@@ -53,11 +53,12 @@ By default, it is placed outside. To place it within the content set `[innerClos
 It is a transparent button positioned in the top right corner with a black cross in it.
 You can also adjust the styling of the button and the svg icon for your needs.
 
-To customize the styling, create a variable of type `CloseButtonProperties` and assign the variable to this optional input in the template: `[closeButtonProperties]`.
-
+To customize the styling, create a variable of type `CloseButtonProperties` and assign the variable to this optional input in the template: `[closeButtonProperties]`. <br>
 You can adjust the title, the icon source and the styles (like background, border, width, height, etc.). See [Close Button Properties](#closebuttonproperties) for more information.
 
 > If you change one property, the rest will keep their default values. So you can adjust the values as you want.
+
+By default, the Close Button is positioned on the right side. If you want to have it on the left side (inner/outer) add this: `[closeButtonPosition]="CloseButtonPosition.Left"`.
 
 ### Backdrop
 
@@ -248,9 +249,32 @@ You can add as many nested Dialogs as you want, but it is recommended to nest on
 Makes the title, icon source and icon/button styles adjustable.
 
 </td>
+<td>/</td>
+</tr>
+<tr>
 <td>
 
-`false`
+`[closeButtonPosition]`
+
+</td>
+<td>
+
+`CloseButtonPosition` <br>
+
+```ts
+(Left = 'left'), (Right = 'right');
+```
+
+</td>
+<td> no/optional </td>
+<td>
+
+Defines if the Close Button (inner/outer) is positioned left or right.
+
+</td>
+<td>
+
+`CloseButtonPosition.Right`
 
 </td>
 </tr>

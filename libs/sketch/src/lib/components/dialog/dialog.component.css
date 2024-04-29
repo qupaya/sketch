@@ -44,9 +44,19 @@ dialog::backdrop {
   right: var(--sk-dialog-outer-close-button-space);
 }
 
+.sk-dialog-close-button-left {
+  left: var(--sk-dialog-outer-close-button-space);
+  right: auto;
+}
+
 .sk-dialog-inner-close-button {
   top: var(--sk-dialog-inner-close-button-space);
   right: var(--sk-dialog-inner-close-button-space);
+}
+
+.sk-dialog-inner-close-button-left {
+  left: var(--sk-dialog-inner-close-button-space);
+  right: auto;
 }
 
 .sk-dialog-fullscreen-dialog {

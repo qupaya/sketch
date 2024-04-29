@@ -33,23 +33,23 @@ div:nth-child(2) sk-dialog {
 }
 
 /* Dialog with styled close button */
-div:nth-child(5) sk-dialog {
+div:nth-child(7) sk-dialog {
   --sk-dialog-container-margin: 40px;
 }
 
-/* Dialog with shadow */
-div:nth-child(6) sk-dialog {
+/* Dialog with custom shadow */
+div:nth-child(9) sk-dialog {
   --sk-dialog-content-shadow: rgb(255 255 255 / 40%) 0 10px 20px;
   --sk-dialog-container-margin: 30px;
 }
 
 /* Dialog with overflow */
-div:nth-child(8) sk-dialog {
+div:nth-child(11) sk-dialog {
   --sk-dialog-height: 50%;
 }
 
 /* Dialog with fancy colors */
-div:nth-child(9) sk-dialog {
+div:nth-child(12) sk-dialog {
   --sk-dialog-background: radial-gradient(
     circle,
     rgb(238 174 202 / 100%) 0%,

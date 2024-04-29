@@ -9,7 +9,12 @@
     @if (showCloseButton()) {
     <button
       class="sk-dialog-close-button"
-      [ngClass]="{ 'sk-dialog-inner-close-button': innerCloseButton() }"
+      [ngClass]="{
+        'sk-dialog-inner-close-button': innerCloseButton(),
+        'sk-dialog-close-button-left':
+          closeButtonPosition() === CloseButtonPosition.Left,
+          'sk-dialog-inner-close-button-left': innerCloseButton() && closeButtonPosition() === CloseButtonPosition.Left,
+      }"
       type="button"
       [title]="defaultCloseButtonProperties().title"
       (click)="close.emit()"
