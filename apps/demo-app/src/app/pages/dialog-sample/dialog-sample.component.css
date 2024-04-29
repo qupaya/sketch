@@ -45,7 +45,7 @@ div:nth-child(6) sk-dialog {
 
 /* Dialog with overflow */
 div:nth-child(8) sk-dialog {
-  _--sk-dialog-height: 60%;
+  --sk-dialog-height: 50%;
 }
 
 /* Dialog with fancy colors */

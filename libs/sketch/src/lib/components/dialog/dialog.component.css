@@ -3,7 +3,7 @@
   --sk-dialog-height: fit-content;
   --sk-dialog-margin: 0;
   --sk-dialog-container-padding: 40px;
-  --sk-dialog-container-margin: 20px;
+  --sk-dialog-container-margin: 30px;
   --sk-dialog-outer-close-button-space: 0;
   --sk-dialog-inner-close-button-space: 10px;
   --sk-dialog-background: transparent;
@@ -72,18 +72,20 @@ dialog::backdrop {
   overflow-y: var(--sk-dialog-overflow);
   max-height: calc(
     100svh - (var(--sk-dialog-margin) * 2) -
-      (var(--sk-dialog-container-margin) * 2)
+      (var(--sk-dialog-container-margin) * 2) -
+      (var(--sk-dialog-container-padding) * 2)
   );
   border-radius: var(--sk-dialog-border-radius);
   background: var(--sk-dialog-background);
   border: var(--sk-dialog-border);
 }
 
-.sk-dialog-content-shadow {
+.sk-dialog-content-container-shadow {
   box-shadow: var(--sk-dialog-content-shadow);
 }
 
-.sk-dialog-no-margin {
+.sk-dialog-content-container-no-margin {
   margin: 0;
   height: calc(100% - (var(--sk-dialog-container-padding) * 2));
+  max-height: calc(100svh - (var(--sk-dialog-container-padding) * 5));
 }

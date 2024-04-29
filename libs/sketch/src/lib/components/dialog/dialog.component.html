@@ -33,10 +33,10 @@
     }
     <div
       [ngClass]="{
-        'sk-dialog-no-margin':
+        'sk-dialog-content-container-no-margin':
           (!showCloseButton() && !contentShadow()) ||
           (showCloseButton() && innerCloseButton()),
-        'sk-dialog-content-shadow': contentShadow()
+        'sk-dialog-content-container-shadow': contentShadow()
       }"
       class="sk-dialog-content-container"
     >

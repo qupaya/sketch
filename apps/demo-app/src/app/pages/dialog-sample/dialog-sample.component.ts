@@ -21,6 +21,7 @@ export class DialogSampleComponent {
   isDialogWithFancyColorsOpen = false;
   isDialogWithNestedDialogOpen = false;
   isNestedDialogOpen = false;
+  isDefaultContentShadowOpen = false;
 
   closeButtonProperties: CloseButtonProperties = {
     title: 'Close me',

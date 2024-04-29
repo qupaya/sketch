@@ -123,6 +123,7 @@
     <sk-dialog
       [(open)]="isDialogWithOverflowOpen"
       (close)="isDialogWithOverflowOpen = false"
+      [showCloseButton]="true"
     >
       <div>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
@@ -349,6 +350,23 @@
             button.
           </div>
         </sk-dialog>
+      </div>
+    </sk-dialog>
+  </div>
+
+  <div>
+    <button (click)="isDefaultContentShadowOpen = true">
+      open Dialog with default shadow
+    </button>
+
+    <sk-dialog
+      [(open)]="isDefaultContentShadowOpen"
+      (close)="isDefaultContentShadowOpen = false"
+      [contentShadow]="true"
+    >
+      <div>
+        here comes some content. This is a dialog with colored gradients in the
+        Backdrop and Container.
       </div>
     </sk-dialog>
   </div>
