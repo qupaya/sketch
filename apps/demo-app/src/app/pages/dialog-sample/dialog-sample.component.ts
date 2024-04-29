@@ -1,10 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {
-  CloseButtonPosition,
-  CloseButtonProperties,
-  DialogComponent,
-} from '@qupaya/sketch';
+import { CloseButtonPosition, DialogComponent } from '@qupaya/sketch';
 
 @Component({
   selector: 'app-dialog-sample',
@@ -30,19 +26,4 @@ export class DialogSampleComponent {
   isDefaultContentShadowOpen = false;
 
   readonly CloseButtonPosition = CloseButtonPosition;
-
-  closeButtonProperties: CloseButtonProperties = {
-    title: 'Close me',
-    iconSrc: '../../../assets/cross.svg',
-    styles: {
-      iconWidth: 20,
-      iconHeight: 20,
-      background: 'coral',
-      buttonHeight: 40,
-      borderRadius: 10,
-      border: 'none',
-      padding: '10px',
-      margin: '0',
-    },
-  };
 }

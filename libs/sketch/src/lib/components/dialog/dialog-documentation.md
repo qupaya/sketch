@@ -48,17 +48,24 @@ The close button is not shown by default. To show it, set `[showCloseButton]` to
 If you want to show it, you can decide if the button is placed inside or outside your Container.
 By default, it is placed outside. To place it within the content set `[innerCloseButton]` to `true`.
 
+It is positioned on the right side by default. If you want to have it on the left side (inner/outer) add this: `[closeButtonPosition]="CloseButtonPosition.Left"`.
+
+To add your own button, place the HTML button tag or your component within the `sk-dialog` and add `closeButton` to it to get recognized as such. Also set the variable for the open state to false on click.
+
+Here is an example:
+
+```html
+<button (click)="isDialogOpen = true">open Dialog!</button>
+
+<sk-dialog [(open)]="isDialogOpen" (close)="isDialogOpen = false">
+  <button closeButton (click)="isDialogOpen = false">x</button>
+  <p>here comes some content</p>
+</sk-dialog>
+```
+
 > You can define the space of the actual content to the Close Button (inside) and the space of the Container to the Close Button (outside). Look at the [Content Section - Spacing](#content) to see how.
 
-It is a transparent button positioned in the top right corner with a black cross in it.
-You can also adjust the styling of the button and the svg icon for your needs.
-
-To customize the styling, create a variable of type `CloseButtonProperties` and assign the variable to this optional input in the template: `[closeButtonProperties]`. <br>
-You can adjust the title, the icon source and the styles (like background, border, width, height, etc.). See [Close Button Properties](#closebuttonproperties) for more information.
-
-> If you change one property, the rest will keep their default values. So you can adjust the values as you want.
-
-By default, the Close Button is positioned on the right side. If you want to have it on the left side (inner/outer) add this: `[closeButtonPosition]="CloseButtonPosition.Left"`.
+[comment]: <> (TODO: ADJUST WHEN NG-CONTENT HAS DEFAULT OPTION! The placeholder transparent button positioned in the top right corner with a black cross in it.)
 
 ### Backdrop
 
@@ -234,26 +241,6 @@ You can add as many nested Dialogs as you want, but it is recommended to nest on
 <tr>
 <td>
 
-`[closeButtonProperties]`
-
-</td>
-<td>
-
-[`CloseButtonProperties`](#closebuttonproperties) <br>
-(See below)
-
-</td>
-<td> no/optional </td>
-<td>
-
-Makes the title, icon source and icon/button styles adjustable.
-
-</td>
-<td>/</td>
-</tr>
-<tr>
-<td>
-
 `[closeButtonPosition]`
 
 </td>
@@ -338,96 +325,6 @@ Adds a Shadow to the Dialog.
 </td>
 <td> yes </td>
 <td> Handles the closing of the dialog. </td>
-</tr>
-</table>
-
-### CloseButtonProperties
-
-<table>
-<tr>
-<td> Key </td> <td> Type </td> <td> Required </td> <td> Description </td> <td> Default Value </td>
-</tr>
-<tr>
-<td>
-
-`title`
-
-</td>
-<td>
-
-`string`
-
-</td>
-<td> no/optional </td>
-<td> The title for the Button and the description for the alt tag of the image </td>
-<td>
-
-`Close`
-
-</td>
-</tr>
-<tr>
-<td>
-
-`iconSrc`
-
-</td>
-<td>
-
-`string`
-
-</td>
-<td> no/optional </td>
-<td> If you want to change the icon, add the path to the new icon here </td>
-<td>
-
-the black cross: `'../../../assets/cross.svg'`
-
-</td>
-</tr>
-<tr>
-<td>
-
-`styles`
-
-</td>
-<td>
-
-`CloseButtonStyles`
-
-These are all options:
-
-```ts
-{
-  buttonWidth?: number | string;
-  buttonHeight?: number | string;
-  borderRadius?: number;
-  background?: string;
-  border?: string;
-  iconWidth?: number | string;
-  iconHeight?: number | string;
-  padding?: string;
-  margin?: string;
-}
-```
-
-</td>
-<td> no/optional </td>
-<td> You can change different styles for the button and the icon here </td>
-<td>
-
-```ts
-{
-  iconWidth: 20,
-  iconHeight: 20,
-  background: 'transparent',
-  border: 'none',
-  padding: '0',
-  margin: '0',
-}
-```
-
-</td>
 </tr>
 </table>
 

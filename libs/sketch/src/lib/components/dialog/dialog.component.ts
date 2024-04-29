@@ -8,46 +8,14 @@ import {
   ViewEncapsulation,
   untracked,
   ElementRef,
-  signal,
 } from '@angular/core';
 import { ClickBackdropDirective } from './directive/click-backdrop.directive';
 import { NgClass } from '@angular/common';
-
-interface CloseButtonStyles {
-  buttonWidth?: number | string;
-  buttonHeight?: number | string;
-  borderRadius?: number;
-  background?: string;
-  border?: string;
-  iconWidth?: number | string;
-  iconHeight?: number | string;
-  padding?: string;
-  margin?: string;
-}
-
-export interface CloseButtonProperties {
-  title?: string;
-  iconSrc?: string;
-  styles?: CloseButtonStyles;
-}
 
 export enum CloseButtonPosition {
   Left = 'left',
   Right = 'right',
 }
-
-const initialButtonProperties: CloseButtonProperties = {
-  title: 'Close',
-  iconSrc: '../../../assets/cross.svg',
-  styles: {
-    iconWidth: 20,
-    iconHeight: 20,
-    background: 'transparent',
-    border: 'none',
-    padding: '0',
-    margin: '0',
-  },
-};
 
 @Component({
   selector: 'sk-dialog',
@@ -64,8 +32,6 @@ export class DialogComponent {
 
   innerCloseButton = input<boolean>(false);
 
-  closeButtonProperties = input<CloseButtonProperties>();
-
   closeButtonPosition = input<CloseButtonPosition>(CloseButtonPosition.Right);
 
   fullscreen = input<boolean>(false);
@@ -78,21 +44,6 @@ export class DialogComponent {
 
   private readonly dialogElement =
     viewChild.required<ElementRef<HTMLDialogElement>>('dialogElement');
-
-  readonly defaultCloseButtonProperties = signal<CloseButtonProperties>(
-    initialButtonProperties
-  );
-
-  protected buttonPropsChanged = effect(
-    () => {
-      const newButtonProperties = this.closeButtonProperties();
-      this.defaultCloseButtonProperties.update((defaultProps) => ({
-        ...defaultProps,
-        ...newButtonProperties,
-      }));
-    },
-    { allowSignalWrites: true }
-  );
 
   protected readonly openEvents = effect(
     () => {

@@ -21,6 +21,13 @@
       [showCloseButton]="true"
       [contentShadow]="true"
     >
+      <button
+        class="custom-close-button-style"
+        closeButton
+        (click)="isCompletelyStyledDialogOpen = false"
+      >
+        x
+      </button>
       <div>
         here comes some content. This is a dialog with height/width,
         border-radius, background, shadow, margin, padding and a custom backdrop
@@ -39,6 +46,13 @@
       (close)="isDialogWithOuterButtonOpen = false"
       [showCloseButton]="true"
     >
+      <button
+        class="normal-close-button"
+        closeButton
+        (click)="isDialogWithOuterButtonOpen = false"
+      >
+        x
+      </button>
       <div>
         here comes some content. This is a dialog with the Close Button outside
         of the container (default) and a default container margin.
@@ -57,6 +71,13 @@
       [showCloseButton]="true"
       [innerCloseButton]="true"
     >
+      <button
+        class="normal-close-button"
+        closeButton
+        (click)="isDialogWithInnerButtonOpen = false"
+      >
+        x
+      </button>
       <div>
         here comes some content. This is a dialog with the Close Button inside
         of the container.
@@ -75,6 +96,13 @@
       [showCloseButton]="true"
       [closeButtonPosition]="CloseButtonPosition.Left"
     >
+      <button
+        class="normal-close-button"
+        closeButton
+        (click)="isDialogWithOuterButtonLeftOpen = false"
+      >
+        x
+      </button>
       <div>
         here comes some content. This is a dialog with the Close Button outside
         of the container (default) and a default container margin.
@@ -94,28 +122,16 @@
       [innerCloseButton]="true"
       [closeButtonPosition]="CloseButtonPosition.Left"
     >
+      <button
+        class="normal-close-button"
+        closeButton
+        (click)="isDialogWithInnerButtonLeftOpen = false"
+      >
+        x
+      </button>
       <div>
         here comes some content. This is a dialog with the Close Button inside
         of the container.
-      </div>
-    </sk-dialog>
-  </div>
-
-  <div>
-    <button (click)="isDialogWithStyledButtonOpen = true">
-      open Dialog with styled outside close button
-    </button>
-
-    <sk-dialog
-      [(open)]="isDialogWithStyledButtonOpen"
-      (close)="isDialogWithStyledButtonOpen = false"
-      [showCloseButton]="true"
-      [closeButtonProperties]="closeButtonProperties"
-    >
-      <div>
-        here comes some content. This is a dialog with a styled Close Button. If
-        padding is added, increase margin to avoid overlapping with the
-        Container.
       </div>
     </sk-dialog>
   </div>
@@ -177,7 +193,6 @@
     <sk-dialog
       [(open)]="isDialogWithOverflowOpen"
       (close)="isDialogWithOverflowOpen = false"
-      [showCloseButton]="true"
     >
       <div>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
@@ -399,6 +414,13 @@
           (close)="isNestedDialogOpen = false"
           [showCloseButton]="true"
         >
+          <button
+            class="normal-close-button"
+            closeButton
+            (click)="isNestedDialogOpen = false"
+          >
+            x
+          </button>
           <div>
             This is the content of the nested Dialog! This one has the close
             button.

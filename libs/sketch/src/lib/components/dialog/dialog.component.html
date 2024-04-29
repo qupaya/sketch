@@ -7,7 +7,7 @@
 >
   <div class="sk-dialog-wrapper">
     @if (showCloseButton()) {
-    <button
+    <div
       class="sk-dialog-close-button"
       [ngClass]="{
         'sk-dialog-inner-close-button': innerCloseButton(),
@@ -15,26 +15,15 @@
           closeButtonPosition() === CloseButtonPosition.Left,
           'sk-dialog-inner-close-button-left': innerCloseButton() && closeButtonPosition() === CloseButtonPosition.Left,
       }"
-      type="button"
-      [title]="defaultCloseButtonProperties().title"
-      (click)="close.emit()"
-      [style.width.px]="defaultCloseButtonProperties().styles?.buttonWidth"
-      [style.height.px]="defaultCloseButtonProperties().styles?.buttonHeight"
-      [style.borderRadius.px]="
-        defaultCloseButtonProperties().styles?.borderRadius
-      "
-      [style.background]="defaultCloseButtonProperties().styles?.background"
-      [style.border]="defaultCloseButtonProperties().styles?.border"
-      [style.padding]="defaultCloseButtonProperties().styles?.padding"
-      [style.margin]="defaultCloseButtonProperties().styles?.margin"
     >
-      <img
-        [src]="defaultCloseButtonProperties().iconSrc"
-        [alt]="defaultCloseButtonProperties().title"
-        [style.width.px]="defaultCloseButtonProperties().styles?.iconWidth"
-        [style.height.px]="defaultCloseButtonProperties().styles?.iconHeight"
-      />
-    </button>
+      <!--
+      TODO: add default button when ng-content allows default value!
+      <button title="Close">
+        <img src="../../../assets/cross.svg" alt="Close Button Icon" />
+      </button>
+      -->
+      <ng-content select="[closeButton]"></ng-content>
+    </div>
     }
     <div
       [ngClass]="{

@@ -8,6 +8,29 @@ button {
   gap: 20px;
 }
 
+.normal-close-button {
+  border: none;
+  padding: 10px;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent;
+}
+
+.custom-close-button-style {
+  border-radius: 100px;
+  background-color: aquamarine;
+  border: none;
+  padding: 10px;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 /* default styles to see results better */
 div:nth-child(n + 3) sk-dialog {
   --sk-dialog-margin: 50px;
@@ -21,7 +44,7 @@ div:nth-child(2) sk-dialog {
   --sk-dialog-margin: 50px;
   --sk-dialog-container-margin: 40px;
   --sk-dialog-container-padding: 40px;
-  --sk-dialog-outer-close-button-space: 20px;
+  --sk-dialog-outer-close-button-space: 10px;
   --sk-dialog-inner-close-button-space: 15px;
   --sk-dialog-border-radius: 20px;
   --sk-dialog-border: 5px solid cornflowerblue;
@@ -32,24 +55,19 @@ div:nth-child(2) sk-dialog {
   --sk-dialog-backdrop-blur: 2px;
 }
 
-/* Dialog with styled close button */
-div:nth-child(7) sk-dialog {
-  --sk-dialog-container-margin: 40px;
-}
-
 /* Dialog with custom shadow */
-div:nth-child(9) sk-dialog {
+div:nth-child(8) sk-dialog {
   --sk-dialog-content-shadow: rgb(255 255 255 / 40%) 0 10px 20px;
   --sk-dialog-container-margin: 30px;
 }
 
 /* Dialog with overflow */
-div:nth-child(11) sk-dialog {
+div:nth-child(10) sk-dialog {
   --sk-dialog-height: 50%;
 }
 
 /* Dialog with fancy colors */
-div:nth-child(12) sk-dialog {
+div:nth-child(11) sk-dialog {
   --sk-dialog-background: radial-gradient(
     circle,
     rgb(238 174 202 / 100%) 0%,
