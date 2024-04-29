@@ -111,7 +111,7 @@ You have some other options for the styling and positioning of your content. (Se
 
 - To have a proper spacing to the sides, overwrite `--sk-dialog-margin` and set the margin as wanted. By default, this is `0`.
 - To archive a good spacing from your content to the container edges, adjust `--sk-dialog-container-padding`, otherwise it will stick to the sides.
-- When the [Close Button](#close-button) is outside the content, you can define the margin of the Container to the Close Button. In this way, you can move it further away if wanted. Just overwrite the `--sk-dialog-container-margin`. It has a default of `20px`. If `innerCloseButton` is `true`, this is getting ignored. It is recommended to have at least the same inner content margin as the size of the close button icon.
+- When the [Close Button](#close-button) is outside the content, you can define the margin of the Container to the Close Button. In this way, you can move it further away if wanted. Just overwrite the `--sk-dialog-container-margin`. It has a default of `20px`. If `innerCloseButton` is `true`, this is getting ignored. It is recommended to have at least the same inner content margin as the size of the close button icon. If you want to place the icon independently form the margin, change `--sk-dialog-outer-close-button-space`. This will move it proportionally closer to the Container (if it has a positive value).
 - When the [Close Button](#close-button) is inside the content, use `--sk-dialog-inner-close-button-space` to define the spacing from your content wrapper. It will move the button proportionally. `innerCloseButton` must be `true`, otherwise it is getting ignored.
 
 > In terms of styling, the Close Button is part of the Container. So changing the custom property `--sk-dialog-margin` will not affect the position of the Close Button.
@@ -129,6 +129,8 @@ You can add a Shadow to the dialog. By default, it is disabled. To add one, set 
 The default value for the shadow is `rgb(0 0 0 / 20%) 0 10px 20px`. If you'd like to change it, change the `--sk-dialog-content-shadow` custom property in `sk-dialog` in your css file to your desired shadow.
 
 > Keep in mind that your shadow should not be larger than the `--sk-dialog-container-margin` to avoid cutting the shadow.
+
+> If your margin moves the close button too far away from the container, use `--sk-dialog-outer-close-button-space` to move it proportionally closer to the container.
 
 ### Scrolling
 
@@ -638,6 +640,30 @@ Should have at least `30px` more than `--sk-dialog-inner-close-button-space` (wi
 <td>
 
 `40px`
+
+</td>
+<td>
+
+[Content - Container Spacing](#container-spacing)
+
+</td>
+</tr>
+<tr>
+<td>
+
+`--sk-dialog-outer-close-button-space`
+
+</td>
+<td>
+
+Defines the spacing of the outer Close Button to the Container in case you want to be independent from the margin.
+
+Only works with `[innerCloseButton]="false"`
+
+</td>
+<td>
+
+`0`
 
 </td>
 <td>

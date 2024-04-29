@@ -4,6 +4,7 @@
   --sk-dialog-margin: 0;
   --sk-dialog-container-padding: 40px;
   --sk-dialog-container-margin: 20px;
+  --sk-dialog-outer-close-button-space: 0;
   --sk-dialog-inner-close-button-space: 10px;
   --sk-dialog-background: transparent;
   --sk-dialog-border-radius: 0;
@@ -39,8 +40,8 @@ dialog::backdrop {
 .sk-dialog-close-button {
   position: absolute;
   cursor: pointer;
-  top: 0;
-  right: 0;
+  top: var(--sk-dialog-outer-close-button-space);
+  right: var(--sk-dialog-outer-close-button-space);
 }
 
 .sk-dialog-inner-close-button {

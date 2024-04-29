@@ -21,6 +21,7 @@ div:nth-child(2) sk-dialog {
   --sk-dialog-margin: 50px;
   --sk-dialog-container-margin: 40px;
   --sk-dialog-container-padding: 40px;
+  --sk-dialog-outer-close-button-space: 20px;
   --sk-dialog-inner-close-button-space: 15px;
   --sk-dialog-border-radius: 20px;
   --sk-dialog-border: 5px solid cornflowerblue;
