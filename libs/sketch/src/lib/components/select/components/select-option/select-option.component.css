@@ -1,0 +1,21 @@
+:host {
+  --sk-select-option-background: white;
+  --sk-select-option-color: #000;
+  --sk-select-option-border-color: white;
+  --sk-select-option-selected-color: deeppink;
+  --sk-select-option-focus-color: deeppink;
+
+  background: var(--sk-select-option-background);
+  color: var(--sk-select-option-color);
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+}
+
+:host.sk-selected {
+  color: var(--sk-select-option-selected-color);
+}
+
+:host:focus {
+  outline: none;
+  background: rgb(255 255 255 / 60%);
+}

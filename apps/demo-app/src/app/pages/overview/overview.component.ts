@@ -23,6 +23,17 @@ export class OverviewComponent {
     },
   ];
 
+  readonly selectRoutes = [
+    {
+      route: '/select/with-style',
+      label: 'Select Sample with styling',
+    },
+    {
+      route: '/select',
+      label: 'Select Sample Headless Default',
+    },
+  ];
+
   readonly widgetLinks = [
     {
       route: '/widget-sample',

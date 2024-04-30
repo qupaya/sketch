@@ -1,11 +1,15 @@
+@import url('@angular/cdk/overlay-prebuilt.css');
+
 /* You can add global styles to this file, and also import other style files */
 :root {
   --sk-top-bar-height: 84px;
-  --sk-font-family: Montserrat, 'Helevetika Neue', sans-serif;
+  --sk-font-family: 'Montserrat', 'Helevetika Neue', sans-serif;
   --sk-primary-color-rgb: 252, 0, 84;
   --sk-primary-color: rgb(var(--sk-primary-color-rgb));
   --sk-secondary-color-rgb: 59, 61, 64;
   --sk-secondary-color: rgb(var(--sk-secondary-color-rgb));
+  --sk-light-color-rgb: 255, 255, 255;
+  --sk-gray-color-rgb: 59, 61, 64;
 }
 
 * {
@@ -17,12 +21,12 @@
 html,
 body {
   font-family: var(--sk-font-family);
-  color: rgb(255, 255, 255);
-  background: rgb(59, 61, 64);
+  color: rgb(var(--sk-light-color-rgb));
+  background: rgb(var(--sk-secondary-color-rgb));
   background: linear-gradient(
     149deg,
-    rgba(var(--sk-secondary-color-rgb), 1) 0%,
-    rgba(var(--sk-primary-color-rgb), 1) 100%
+    rgb(var(--sk-secondary-color-rgb)) 0%,
+    rgb(var(--sk-primary-color-rgb)) 100%
   );
   background-repeat: no-repeat;
   height: 100svh;

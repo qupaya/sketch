@@ -1,0 +1,9 @@
+<sk-select [(ngModel)]="selectedValue">
+  <span skSelectPlaceholder>Select option</span>
+  <span skSelectLabel>{{ selectedValue?.label }}</span>
+  @for (option of options; track option.value) {
+  <sk-select-option [value]="option">
+    {{ option.label }}
+  </sk-select-option>
+  }
+</sk-select>

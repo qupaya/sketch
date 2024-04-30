@@ -1,0 +1,22 @@
+:host {
+  --sk-select-label-background: #fff;
+  --sk-select-label-color: #000;
+  --sk-select-label-padding: 0.5rem 1rem;
+  --sk-select-label-border-radius: 8px;
+  --sk-select-label-border-color: transparent;
+  --sk-select-label-border-focus-color: deeppink;
+}
+
+.sk-select-trigger {
+  background: var(--sk-select-label-background);
+  color: var(--sk-select-label-color);
+  padding: var(--sk-select-label-padding);
+  border: 1px solid var(--sk-select-label-border-color);
+  border-radius: var(--sk-select-label-border-radius);
+  cursor: pointer;
+}
+
+.sk-select-trigger:focus {
+  outline: none;
+  border: 1px solid var(--sk-select-label-border-focus-color);
+}

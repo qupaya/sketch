@@ -1,0 +1,6 @@
+@for (option of options(); track option.value) {
+<sk-select-option [value]="option.value">
+  <fa-icon [icon]="option.icon"></fa-icon>
+  <span>{{ option.label }}</span>
+</sk-select-option>
+}
