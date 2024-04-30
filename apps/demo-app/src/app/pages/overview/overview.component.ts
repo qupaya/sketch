@@ -42,6 +42,13 @@ export class OverviewComponent {
     },
   ];
 
+  readonly dialogLinks = [
+    {
+      route: '/dialog-sample',
+      label: 'Dialog Sample',
+    },
+  ];
+
   private randomListSampleRoute(): string {
     let route = 'list-sample/with-styles';
     let random = Math.floor(Math.random() * SAMPLE_DATA.length);
