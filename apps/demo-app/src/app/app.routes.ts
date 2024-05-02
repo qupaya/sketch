@@ -66,4 +66,11 @@ export const appRoutes: Route[] = [
       },
     ],
   },
+  {
+    path: 'gantt-sample',
+    loadComponent: () =>
+      import('./pages/gantt-sample/gantt-sample.component').then(
+        (m) => m.GanttSampleComponent
+      ),
+  },
 ];

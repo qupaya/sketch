@@ -1,0 +1,11 @@
+:host {
+  position: relative;
+  display: flex;
+}
+
+.row-content-wrapper {
+  flex-grow: 1;
+  display: flex;
+  justify-content: flex-start;
+  position: relative;
+}

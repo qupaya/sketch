@@ -34,6 +34,13 @@ export class OverviewComponent {
     },
   ];
 
+  readonly ganttLinks = [
+    {
+      route: '/gantt-sample',
+      label: 'Gantt Sample',
+    },
+  ];
+
   readonly widgetLinks = [
     {
       route: '/widget-sample',

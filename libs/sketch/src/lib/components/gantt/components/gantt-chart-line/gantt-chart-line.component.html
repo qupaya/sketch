@@ -1,0 +1,10 @@
+<div
+  class="row-title-wrapper"
+  #rowTitleWrapper
+  [style.width.px]="targetTitleWidth()"
+>
+  <ng-content select="[skTitle]"></ng-content>
+</div>
+<div class="row-content-wrapper">
+  <ng-content></ng-content>
+</div>
