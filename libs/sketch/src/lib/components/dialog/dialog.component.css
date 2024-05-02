@@ -97,5 +97,8 @@ dialog::backdrop {
 .sk-dialog-content-container-no-margin {
   margin: 0;
   height: calc(100% - (var(--sk-dialog-container-padding) * 2));
-  max-height: calc(100svh - (var(--sk-dialog-container-padding) * 5));
+  max-height: calc(
+    100svh - (var(--sk-dialog-margin) * 2) -
+      (var(--sk-dialog-container-padding) * 2)
+  );
 }
