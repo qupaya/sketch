@@ -5,6 +5,8 @@ import { InputSignal } from '@angular/core';
 
 const meta: Meta<DialogComponent> = {
   component: DialogComponent,
+  tags: ['autodocs'],
+  parameters: {},
   title: 'DialogComponent',
   decorators: [
     moduleMetadata({
@@ -15,6 +17,9 @@ const meta: Meta<DialogComponent> = {
 export default meta;
 type Story = StoryObj<DialogComponent>;
 
+/**
+ * This is the default Dialog with all controls.
+ */
 export const Default: Story = {
   render: (args) => ({
     props: args,
@@ -72,12 +77,33 @@ Default.args = {
     CloseButtonPosition.Right as unknown as InputSignal<CloseButtonPosition>,
 };
 Default.argTypes = {
+  fullscreen: {
+    description: 'the option to take full width and height of viewport',
+    defaultValue: { summary: false },
+  },
+  contentShadow: {
+    description: 'the option to show a shadow (default or custom)',
+    defaultValue: { summary: false },
+  },
+  showCloseButton: {
+    description: 'the option to show or hide the close button',
+    defaultValue: { summary: false },
+  },
+  innerCloseButton: {
+    description: 'the option show the close button inside the container',
+    defaultValue: { summary: false },
+  },
   closeButtonPosition: {
     options: [CloseButtonPosition.Right, CloseButtonPosition.Left],
     control: { type: 'radio' },
+    description: 'the position of the close button',
+    defaultValue: { summary: CloseButtonPosition.Right },
   },
 };
 
+/**
+ * This is one unstyled Dialog and one completely styled Dialog. **Custom Properties** are used to style it.
+ */
 export const Styling: Story = {
   render: (args) => ({
     props: args,
@@ -156,6 +182,9 @@ Styling.args = {
   showCloseButton: false as unknown as InputSignal<boolean>,
 };
 
+/**
+ * Here are all options for the Close Button.
+ */
 export const CloseButton: Story = {
   render: (args) => ({
     props: args,
@@ -205,6 +234,9 @@ CloseButton.argTypes = {
   },
 };
 
+/**
+ * This is a Dialog with a nested Dialog in it. It's possible to show/hide each Close Button.
+ */
 export const NestedDialog: StoryObj<
   DialogComponent & { showNestedCloseButton: boolean }
 > = {
