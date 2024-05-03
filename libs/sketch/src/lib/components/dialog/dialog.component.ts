@@ -26,21 +26,23 @@ export enum CloseButtonPosition {
   encapsulation: ViewEncapsulation.ShadowDom,
 })
 export class DialogComponent {
-  open = model(false);
+  readonly open = model(false);
 
-  showCloseButton = input<boolean>(false);
+  readonly showCloseButton = input<boolean>(false);
 
-  innerCloseButton = input<boolean>(false);
+  readonly innerCloseButton = input<boolean>(false);
 
-  closeButtonPosition = input<CloseButtonPosition>(CloseButtonPosition.Right);
+  readonly closeButtonPosition = input<CloseButtonPosition>(
+    CloseButtonPosition.Right
+  );
 
-  fullscreen = input<boolean>(false);
+  readonly fullscreen = input<boolean>(false);
 
-  contentShadow = input<boolean>(false);
+  readonly contentShadow = input<boolean>(false);
 
   readonly CloseButtonPosition = CloseButtonPosition;
 
-  close = output<void>();
+  readonly close = output<void>();
 
   private readonly dialogElement =
     viewChild.required<ElementRef<HTMLDialogElement>>('dialogElement');
