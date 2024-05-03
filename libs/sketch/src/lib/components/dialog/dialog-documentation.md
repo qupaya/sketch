@@ -108,7 +108,7 @@ You have some other options for the styling and positioning of your content. (Se
 
 #### Container Style
 
-- To change the width and height of the container, change the custom properties `--sk-dialog-width` and `--sk-dialog-height` (or only one of them). By default, the container takes the full width and fits the height of the content. If you want to have a fullscreen Dialog, set `[fullscreen]` to true, you don't need to anything for height and width custom properties.
+- To change the width and height of the container, change the custom properties `--sk-dialog-width` and `--sk-dialog-height` (or only one of them). By default, the container takes the full width and fits the height of the content. If you want to have a fullscreen Dialog, set `[fullscreen]` to true, you don't need to anything for height and width custom properties. If you have set the `--sk-dialog-width` to a custom value, the container with `[fullscreen]="true"` will only grow to full height. Remove the width to have an actual fullscreen.
 - It is recommended to add a background, because by default the container is transparent and the backdrop will shine through. You can adjust it by changing the `--sk-dialog-background` custom property. You can do gradients, solid colors, images etc.
 - The edges are not rounded by default. If you want to have a border-radius, change the `--sk-dialog-border-radius` custom property.
 - By default, the overflow of the container is `auto`, if you'd like to change this behavior, adjust the `--sk-dialog-overflow` custom property.
