@@ -65,14 +65,14 @@ dialog::backdrop {
 
 .sk-dialog-wrapper {
   position: relative;
-  overflow: hidden;
-  display: block;
+  display: flex;
   margin: var(--sk-dialog-margin);
   height: calc(100% - (var(--sk-dialog-margin) * 2));
   max-height: calc(100svh - (var(--sk-dialog-margin) * 2));
 }
 
 .sk-dialog-content-container {
+  flex-grow: 1;
   padding: var(--sk-dialog-container-padding);
   height: calc(
     100% - (var(--sk-dialog-container-margin) * 2) -
