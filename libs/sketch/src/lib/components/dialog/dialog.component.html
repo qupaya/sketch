@@ -16,12 +16,6 @@
           'sk-dialog-inner-close-button-left': innerCloseButton() && closeButtonPosition() === CloseButtonPosition.Left,
       }"
     >
-      <!--
-      TODO: add default button when ng-content allows default value!
-      <button title="Close">
-        <img src="../../../assets/cross.svg" alt="Close Button Icon" />
-      </button>
-      -->
       <ng-content select="[closeButton]"></ng-content>
     </div>
     }
