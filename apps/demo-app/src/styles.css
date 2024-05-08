@@ -1,6 +1,7 @@
 @import url('@angular/cdk/overlay-prebuilt.css');
 
 /* You can add global styles to this file, and also import other style files */
+
 :root {
   --sk-top-bar-height: 84px;
   --sk-font-family: 'Montserrat', 'Helevetika Neue', sans-serif;

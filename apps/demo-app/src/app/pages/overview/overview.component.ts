@@ -3,11 +3,12 @@ import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { CardComponent } from '../../components/card/card.component';
 import { SAMPLE_DATA } from '../list-sample/list-sample.data';
+import { DialogComponent } from '@qupaya/sketch';
 
 @Component({
   selector: 'app-overview',
   standalone: true,
-  imports: [CommonModule, RouterLink, CardComponent],
+  imports: [CommonModule, RouterLink, CardComponent, DialogComponent],
   templateUrl: './overview.component.html',
   styleUrl: './overview.component.css',
 })
@@ -38,6 +39,13 @@ export class OverviewComponent {
     {
       route: '/widget-sample',
       label: 'Widget Sample',
+    },
+  ];
+
+  readonly dialogLinks = [
+    {
+      route: '/dialog-sample',
+      label: 'Dialog Sample',
     },
   ];
 

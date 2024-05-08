@@ -66,4 +66,12 @@ export const appRoutes: Route[] = [
       },
     ],
   },
+  {
+    path: 'dialog-sample',
+    loadComponent: () =>
+      import('./pages/dialog-sample/dialog-sample.component').then(
+        (m) => m.DialogSampleComponent
+      ),
+  },
+  // TODO: Add routes for the other samples
 ];

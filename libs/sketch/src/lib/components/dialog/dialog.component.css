@@ -1,0 +1,104 @@
+:host {
+  --sk-dialog-width: auto;
+  --sk-dialog-height: fit-content;
+  --sk-dialog-margin: 0;
+  --sk-dialog-container-padding: 40px;
+  --sk-dialog-container-margin: 30px;
+  --sk-dialog-outer-close-button-space: 0;
+  --sk-dialog-inner-close-button-space: 10px;
+  --sk-dialog-background: transparent;
+  --sk-dialog-border-radius: 0;
+  --sk-dialog-content-shadow: rgb(0 0 0 / 20%) 0 10px 20px;
+  --sk-dialog-border: 0;
+  --sk-dialog-overflow: auto;
+  --sk-dialog-backdrop: rgb(0 0 0 / 50%);
+  --sk-dialog-backdrop-blur: 0;
+}
+
+.sk-dialog {
+  width: var(--sk-dialog-width);
+  height: var(--sk-dialog-height);
+  max-width: 100%;
+  max-height: 100%;
+  padding: 0;
+  border: none;
+  outline: none;
+  background-color: transparent;
+}
+
+.sk-dialog:has(::backdrop) {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.sk-dialog::backdrop {
+  background: var(--sk-dialog-backdrop);
+  backdrop-filter: blur(var(--sk-dialog-backdrop-blur));
+}
+
+.sk-dialog-close-button {
+  position: absolute;
+  cursor: pointer;
+  top: var(--sk-dialog-outer-close-button-space);
+  right: var(--sk-dialog-outer-close-button-space);
+}
+
+.sk-dialog-close-button-left {
+  left: var(--sk-dialog-outer-close-button-space);
+  right: auto;
+}
+
+.sk-dialog-inner-close-button {
+  top: var(--sk-dialog-inner-close-button-space);
+  right: var(--sk-dialog-inner-close-button-space);
+}
+
+.sk-dialog-inner-close-button-left {
+  left: var(--sk-dialog-inner-close-button-space);
+  right: auto;
+}
+
+.sk-dialog-fullscreen-dialog {
+  height: 100%;
+}
+
+.sk-dialog-wrapper {
+  position: relative;
+  display: flex;
+  margin: var(--sk-dialog-margin);
+  height: calc(100% - (var(--sk-dialog-margin) * 2));
+  max-height: calc(100svh - (var(--sk-dialog-margin) * 2));
+}
+
+.sk-dialog-content-container {
+  flex-grow: 1;
+  padding: var(--sk-dialog-container-padding);
+  height: calc(
+    100% - (var(--sk-dialog-container-margin) * 2) -
+      (var(--sk-dialog-container-padding) * 2)
+  );
+  margin: var(--sk-dialog-container-margin);
+  overflow-y: var(--sk-dialog-overflow);
+  max-height: calc(
+    100svh - (var(--sk-dialog-margin) * 2) -
+      (var(--sk-dialog-container-margin) * 2) -
+      (var(--sk-dialog-container-padding) * 2)
+  );
+  border-radius: var(--sk-dialog-border-radius);
+  background: var(--sk-dialog-background);
+  border: var(--sk-dialog-border);
+}
+
+.sk-dialog-content-container-shadow {
+  box-shadow: var(--sk-dialog-content-shadow);
+}
+
+.sk-dialog-content-container-no-margin {
+  margin: 0;
+  height: calc(100% - (var(--sk-dialog-container-padding) * 2));
+  max-height: calc(
+    100svh - (var(--sk-dialog-margin) * 2) -
+      (var(--sk-dialog-container-padding) * 2)
+  );
+}
