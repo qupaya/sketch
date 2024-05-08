@@ -15,7 +15,7 @@
   --sk-dialog-backdrop-blur: 0;
 }
 
-dialog {
+.sk-dialog {
   width: var(--sk-dialog-width);
   height: var(--sk-dialog-height);
   max-width: 100%;
@@ -26,13 +26,13 @@ dialog {
   background-color: transparent;
 }
 
-dialog:has(::backdrop) {
+.sk-dialog:has(::backdrop) {
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-dialog::backdrop {
+.sk-dialog::backdrop {
   background: var(--sk-dialog-backdrop);
   backdrop-filter: blur(var(--sk-dialog-backdrop-blur));
 }
