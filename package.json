@@ -90,5 +90,11 @@
   },
   "nx": {
     "includedScripts": []
+  },
+  "engines": {
+    "node": ">=22.0.0"
+  },
+  "volta": {
+    "node": "22.3.0"
   }
 }
