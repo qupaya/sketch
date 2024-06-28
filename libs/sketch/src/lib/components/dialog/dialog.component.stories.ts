@@ -1,7 +1,6 @@
-import { Meta, moduleMetadata, StoryObj } from '@storybook/angular';
+import { ArgTypes, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
 import { CommonModule } from '@angular/common';
 import { CloseButtonPosition, DialogComponent } from './dialog.component';
-import { InputSignal } from '@angular/core';
 
 const meta: Meta<DialogComponent> = {
   component: DialogComponent,
@@ -69,12 +68,11 @@ export const Default: Story = {
   }),
 };
 Default.args = {
-  fullscreen: false as unknown as InputSignal<boolean>,
-  contentShadow: false as unknown as InputSignal<boolean>,
-  showCloseButton: false as unknown as InputSignal<boolean>,
-  innerCloseButton: false as unknown as InputSignal<boolean>,
-  closeButtonPosition:
-    CloseButtonPosition.Right as unknown as InputSignal<CloseButtonPosition>,
+  fullscreen: false,
+  contentShadow: false,
+  showCloseButton: false,
+  innerCloseButton: false,
+  closeButtonPosition: CloseButtonPosition.Right,
 };
 Default.argTypes = {
   fullscreen: {
@@ -99,7 +97,7 @@ Default.argTypes = {
     description: 'the position of the close button',
     defaultValue: { summary: CloseButtonPosition.Right },
   },
-};
+} satisfies ArgTypes;
 
 /**
  * This is one unstyled Dialog and one completely styled Dialog. **Custom Properties** are used to style it.
@@ -177,9 +175,9 @@ export const Styling: Story = {
   }),
 };
 Styling.args = {
-  fullscreen: false as unknown as InputSignal<boolean>,
-  contentShadow: false as unknown as InputSignal<boolean>,
-  showCloseButton: false as unknown as InputSignal<boolean>,
+  fullscreen: false,
+  contentShadow: false,
+  showCloseButton: false,
 };
 
 /**
@@ -222,10 +220,9 @@ export const CloseButton: Story = {
   }),
 };
 CloseButton.args = {
-  showCloseButton: true as unknown as InputSignal<boolean>,
-  innerCloseButton: false as unknown as InputSignal<boolean>,
-  closeButtonPosition:
-    CloseButtonPosition.Right as unknown as InputSignal<CloseButtonPosition>,
+  showCloseButton: true,
+  innerCloseButton: false,
+  closeButtonPosition: CloseButtonPosition.Right,
 };
 CloseButton.argTypes = {
   closeButtonPosition: {
@@ -288,6 +285,6 @@ export const NestedDialog: StoryObj<
   }),
 };
 NestedDialog.args = {
-  showCloseButton: false as unknown as InputSignal<boolean>,
+  showCloseButton: false,
   showNestedCloseButton: false,
 };
