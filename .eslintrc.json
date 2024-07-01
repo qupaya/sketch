@@ -166,7 +166,9 @@
           {
             "argsIgnorePattern": "^_"
           }
-        ]
+        ],
+        "@typescript-eslint/no-extra-semi": "error",
+        "no-extra-semi": "off"
       }
     },
     // ngrx stores
@@ -201,7 +203,9 @@
         "no-var": "error",
         "prefer-const": "error",
         "prefer-template": "error",
-        "unused-imports/no-unused-imports-ts": 2
+        "unused-imports/no-unused-imports-ts": 2,
+        "@typescript-eslint/no-extra-semi": "error",
+        "no-extra-semi": "off"
       }
     },
     // All test related files
@@ -211,15 +215,10 @@
         "*.cy.ts",
         "*.integration-spec.ts",
         "*.po.ts",
-        // cypress page objects
         "**/support/*.ts",
-        // cypress commands, e2e etc
         "**/fixtures/**/*",
-        // cypress fixtures,
         "**/e2e/**/*.ts",
-        // cypress fixtures,
         "**/global.setup.ts",
-        // cypress fixtures,
         "*.stories.ts",
         "**/test-setup.ts",
         "**/setup-app.ts"
@@ -245,8 +244,6 @@
                 "sourceTag": "*",
                 "onlyDependOnLibsWithTags": ["*"]
               },
-              // Dimension: CONTEXT
-              // Available contexts: node, nestjs, angular, typescript, native-mobile, cypress
               {
                 "sourceTag": "context:node",
                 "bannedExternalImports": [
