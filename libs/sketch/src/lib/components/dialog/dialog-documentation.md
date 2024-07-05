@@ -45,6 +45,8 @@ All of these options are getting recognized by `(close)`. So just set your varia
 
 The close button is not shown by default. To show it, set `[showCloseButton]` to `true`.
 
+> If you set `[showCloseButton]` to `true` but don't provide a close button, a default button will be shown in the top right corner outside the container.
+
 If you want to show it, you can decide if the button is placed inside or outside your Container.
 By default, it is placed outside. To place it within the content set `[innerCloseButton]` to `true`.
 
@@ -64,8 +66,6 @@ Here is an example:
 ```
 
 > You can define the space of the actual content to the Close Button (inside) and the space of the Container to the Close Button (outside). Look at the [Content Section - Spacing](#content) to see how.
-
-[comment]: <> (TODO: ADJUST WHEN NG-CONTENT HAS DEFAULT OPTION! The placeholder transparent button positioned in the top right corner with a black cross in it.)
 
 ### Backdrop
 
