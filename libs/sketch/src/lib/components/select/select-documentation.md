@@ -29,11 +29,7 @@ A placeholder tagged with `skSelectPlaceholder` and an element holding the label
 ```html
 Multiple: <input type="checkbox" (change)="multiSelect($event)" />
 
-<sk-select
-  [(ngModel)]="value"
-  (ngModelChange)="valueChanged($event)"
-  [multiple]="multiple()"
->
+<sk-select [multiple]="multiple()">
   <span skSelectPlaceholder>Select option</span>
   <div skSelectLabel>
     @for (item of selectedValues(); track item.value) { {{ item.label }} }
@@ -48,24 +44,19 @@ Multiple: <input type="checkbox" (change)="multiSelect($event)" />
 
 Multi selecting is a bit more complex but not so complicated. Let's break it down.
 
+1. First add a boolean value for the multiple selection input (it doesn't matter if it's a signal, observable, property, etc.)
+2. the value for the select option is an array (since you can add multiple options)
+3. (it is not recommended to set closeOnSelect to true since you would need to open the select options again and again to select more.)
+
+That's it, your multi selection is ready to go!
+
+Here is another breakdown of the provided example:
+
 1. First add signals for multiple selection (boolean) and selectedValues (Array) and a normal variable for a value (like `selectedValue` for single selection).
 2. Then add a checkbox input to activate the multiple selection. Assign a function on the change event and set the event target to the multiple signal. (`this.multiple.set(event.target.checked`)
 3. In the `sk-select` assign the `value` to the `ngModel`, add the input `[multiple]` and assign the signal.
 4. To the `(ngModelChange)` event assign a function for the value change. There you set the passed event to the selectedValues signal and assign it to the value variable. (Of course you can add conditions and exceptions to the function.)
 5. Add a loop of the selectedValues signal to the element with `skSelectLabel`.
-
-That's it, your multi selection is ready to go!
-
-## Select/Unselect and Sorting of Selection
-
-To select one or more items, just click it. To unselect it, click it again, and it will be removed from the selection.
-The component is also fully accessible, you can use `Tab` to go through the list and `Enter` or `Space` to select/deselect.
-
-> You can add a button with a small function to deselect all if you want to.
-
-The selected items that appear in the `skSelectLabel` are sorted in the order in which they are displayed in the list.
-
-It's not possible to type something to search for an option. Use the Autocomplete component in the `skSelectLabel` to do so.
 
 ## Properties Overview
 
@@ -232,7 +223,7 @@ Determines the unique value for each item.
 
 </td>
 <td> no/optional </td>
-<td> Determines what should happen when opening. </td>
+<td> Determines if the panel is open. </td>
 </tr>
 </table>
 
