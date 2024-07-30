@@ -37,4 +37,4 @@ jobs:
       - uses: nrwl/nx-set-shas@v4
 
       - run: npx nx format:check
-      - run: npx nx affected -t lint test build e2e-ci build-storybook
+      - run: npx nx affected -t lint test build e2e build-storybook
