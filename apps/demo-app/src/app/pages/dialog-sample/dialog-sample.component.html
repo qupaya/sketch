@@ -61,6 +61,23 @@
   </div>
 
   <div>
+    <button (click)="isDialogWithFallbackButtonOpen = true">
+      open Dialog with fallback outer button right
+    </button>
+
+    <sk-dialog
+      [(open)]="isDialogWithFallbackButtonOpen"
+      (close)="isDialogWithFallbackButtonOpen = false"
+      [showCloseButton]="true"
+    >
+      <div>
+        here comes some content. This is a dialog with the a fallback Close
+        Button. (when the user don't have a close button)
+      </div>
+    </sk-dialog>
+  </div>
+
+  <div>
     <button (click)="isDialogWithInnerButtonOpen = true">
       open Dialog with inner button right (default)
     </button>
