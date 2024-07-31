@@ -5,7 +5,6 @@ import {
   output,
   viewChild,
   model,
-  ViewEncapsulation,
   untracked,
   ElementRef,
 } from '@angular/core';
@@ -23,7 +22,6 @@ export enum CloseButtonPosition {
   imports: [ClickBackdropDirective, NgClass],
   templateUrl: './dialog.component.html',
   styleUrl: './dialog.component.css',
-  encapsulation: ViewEncapsulation.ShadowDom,
 })
 export class DialogComponent {
   readonly open = model(false);

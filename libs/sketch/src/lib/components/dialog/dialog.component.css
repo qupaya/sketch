@@ -15,15 +15,22 @@
   --sk-dialog-backdrop-blur: 0;
 }
 
+.display-flex {
+  display: flex;
+}
+
 .sk-dialog {
-  width: var(--sk-dialog-width);
-  height: var(--sk-dialog-height);
+  width: 100vw;
+  height: 100vh;
   max-width: 100%;
   max-height: 100%;
   padding: 0;
   border: none;
   outline: none;
   background-color: transparent;
+  position: relative;
+  align-items: center;
+  justify-content: center;
 }
 
 .sk-dialog:has(::backdrop) {
@@ -59,16 +66,13 @@
   right: auto;
 }
 
-.sk-dialog-fullscreen-dialog {
-  height: 100%;
-}
-
 .sk-dialog-wrapper {
   position: relative;
   display: flex;
+  inset: auto;
   margin: var(--sk-dialog-margin);
-  height: calc(100% - (var(--sk-dialog-margin) * 2));
-  max-height: calc(100svh - (var(--sk-dialog-margin) * 2));
+  width: var(--sk-dialog-width);
+  height: var(--sk-dialog-height);
 }
 
 .sk-dialog-content-container {
@@ -101,4 +105,11 @@
     100svh - (var(--sk-dialog-margin) * 2) -
       (var(--sk-dialog-container-padding) * 2)
   );
+}
+
+.sk-dialog-fullscreen-dialog {
+  height: calc(100% - (var(--sk-dialog-margin) * 2));
+  max-height: calc(100svh - (var(--sk-dialog-margin) * 2));
+  width: calc(100% - (var(--sk-dialog-margin) * 2));
+  max-width: calc(100svw - (var(--sk-dialog-margin) * 2));
 }
