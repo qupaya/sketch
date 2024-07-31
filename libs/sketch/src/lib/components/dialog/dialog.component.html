@@ -4,9 +4,12 @@
   skClickBackdrop
   (clickedBackdrop)="close.emit()"
   (keydown.escape)="close.emit()"
-  [ngClass]="{ 'sk-dialog-fullscreen-dialog': fullscreen() }"
+  [class.display-flex]="open()"
 >
-  <div class="sk-dialog-wrapper">
+  <div
+    class="sk-dialog-wrapper"
+    [ngClass]="{ 'sk-dialog-fullscreen-dialog': fullscreen() }"
+  >
     @if (showCloseButton()) {
     <div
       class="sk-dialog-close-button"
