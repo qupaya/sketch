@@ -10,7 +10,7 @@
     "prepare": "husky install",
     "storybook": "nx run sketch:storybook"
   },
-  "private": false,
+  "private": true,
   "dependencies": {
     "@angular/animations": "18.1.2",
     "@angular/cdk": "18.1.2",
