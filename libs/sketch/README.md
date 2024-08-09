@@ -1,3 +1,5 @@
+![npm](https://img.shields.io/npm/v/@qupaya/ng-sketch)
+
 # sketch
 
 This library was generated with [Nx](https://nx.dev).
