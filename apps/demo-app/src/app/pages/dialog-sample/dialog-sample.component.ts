@@ -1,11 +1,15 @@
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { CloseButtonPosition, DialogComponent } from '@qupaya/sketch';
+import {
+  CloseButtonPosition,
+  DialogComponent,
+  SelectComponent,
+  SelectOptionComponent,
+} from '@qupaya/sketch';
 
 @Component({
   selector: 'app-dialog-sample',
   standalone: true,
-  imports: [CommonModule, DialogComponent],
+  imports: [DialogComponent, SelectComponent, SelectOptionComponent],
   templateUrl: './dialog-sample.component.html',
   styleUrl: './dialog-sample.component.css',
 })
@@ -24,6 +28,7 @@ export class DialogSampleComponent {
   isDialogWithNestedDialogOpen = false;
   isNestedDialogOpen = false;
   isDefaultContentShadowOpen = false;
+  isDialogWithSelectOpen = false;
 
   readonly CloseButtonPosition = CloseButtonPosition;
 }

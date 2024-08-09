@@ -1,5 +1,4 @@
 import { ArgTypes, Meta, moduleMetadata, StoryObj } from '@storybook/angular';
-import { CommonModule } from '@angular/common';
 import { CloseButtonPosition, DialogComponent } from './dialog.component';
 
 const meta: Meta<DialogComponent> = {
@@ -7,11 +6,7 @@ const meta: Meta<DialogComponent> = {
   tags: ['autodocs'],
   parameters: {},
   title: 'DialogComponent',
-  decorators: [
-    moduleMetadata({
-      imports: [CommonModule],
-    }),
-  ],
+  decorators: [moduleMetadata({})],
 };
 export default meta;
 type Story = StoryObj<DialogComponent>;

@@ -1,15 +1,17 @@
 import {
   Component,
-  effect,
   input,
   output,
   viewChild,
   model,
-  untracked,
   ElementRef,
+  effect,
+  untracked,
+  inject,
 } from '@angular/core';
 import { ClickBackdropDirective } from './directive/click-backdrop.directive';
 import { NgClass } from '@angular/common';
+import { SkOverlayContainer } from '../overlay/overlay-container';
 
 export enum CloseButtonPosition {
   Left = 'left',
@@ -24,6 +26,11 @@ export enum CloseButtonPosition {
   styleUrl: './dialog.component.css',
 })
 export class DialogComponent {
+  private readonly overlayContainer = inject(SkOverlayContainer);
+  private readonly dialogOverlayContainerRef = viewChild.required<
+    ElementRef<HTMLDivElement>
+  >('dialogOverlayContainer');
+
   readonly open = model(false);
 
   readonly showCloseButton = input<boolean>(false);
@@ -48,11 +55,14 @@ export class DialogComponent {
   protected readonly openEvents = effect(
     () => {
       const dialog = untracked(this.dialogElement);
+      const containerRef = untracked(this.dialogOverlayContainerRef);
 
       if (this.open()) {
         dialog.nativeElement.showModal();
+        this.overlayContainer.addContainer(containerRef.nativeElement);
       } else {
         dialog.nativeElement.close();
+        this.overlayContainer.removeContainer();
       }
     },
     { allowSignalWrites: true }

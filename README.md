@@ -4,6 +4,19 @@ ngSketch is an open-source headless library for Angular 18+. It peppers your app
 
 Get inspired by opinionated demos and use the theme that fits your application.
 
+## Use ngSketch
+
+In order for all features to work, you need to add the `SketchModule` to the `appConfig` of you application.
+
+```ts
+export const appConfig: ApplicationConfig = {
+  providers: [
+    // ...
+    importProvidersFrom(SketchModule),
+  ],
+};
+```
+
 ## Storybook
 
 Deployed from main: https://661d194a3f6d14d86c328554-yfvvdffiwi.chromatic.com/
