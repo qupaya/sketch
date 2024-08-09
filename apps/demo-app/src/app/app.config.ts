@@ -7,6 +7,7 @@ import {
 } from '@angular/router';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { SketchModule } from '@qupaya/sketch';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -17,5 +18,6 @@ export const appConfig: ApplicationConfig = {
     ),
     provideAnimations(),
     importProvidersFrom(FontAwesomeModule),
+    importProvidersFrom(SketchModule),
   ],
 };

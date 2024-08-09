@@ -1,4 +1,8 @@
+import { ConnectedPosition, Overlay, OverlayRef } from '@angular/cdk/overlay';
+import { CdkPortal } from '@angular/cdk/portal';
+import { DOCUMENT } from '@angular/common';
 import {
+  DestroyRef,
   Directive,
   effect,
   ElementRef,
@@ -6,11 +10,8 @@ import {
   input,
   output,
 } from '@angular/core';
-import { CdkPortal } from '@angular/cdk/portal';
-import { ConnectedPosition, Overlay, OverlayRef } from '@angular/cdk/overlay';
-import { DOCUMENT } from '@angular/common';
+import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
 import { debounceTime, fromEvent, merge } from 'rxjs';
-import { toSignal } from '@angular/core/rxjs-interop';
 
 export const DEFAULT_POSITIONS: ConnectedPosition[] = [
   { originX: 'end', originY: 'bottom', overlayX: 'end', overlayY: 'top' },
@@ -23,48 +24,54 @@ export const DEFAULT_POSITIONS: ConnectedPosition[] = [
 export class CdkOverlayDirective {
   private readonly overlay = inject(Overlay);
   private readonly elementRef = inject(ElementRef<HTMLElement>);
+  private readonly destroyRef = inject(DestroyRef);
   private readonly window = inject(DOCUMENT)?.defaultView;
 
   private readonly windowResize = this.window
     ? toSignal(fromEvent(this.window, 'resize').pipe(debounceTime(500)))
     : undefined;
 
-  portal = input<CdkPortal | undefined>(undefined, { alias: 'skCdkOverlay' });
-  showOverlay = input(false, { alias: 'skCdkOverlayShow' });
-  connectedPositions = input(DEFAULT_POSITIONS, {
+  readonly portal = input<CdkPortal | undefined>(undefined, {
+    alias: 'skCdkOverlay',
+  });
+  readonly showOverlay = input(false, { alias: 'skCdkOverlayShow' });
+  readonly connectedPositions = input(DEFAULT_POSITIONS, {
     alias: 'skCdkOverlayPositions',
   });
-  disposeDelay = input(0, { alias: 'skCdkOverlayDisposeDelay' });
-  relativeTo = input<HTMLElement | undefined>(undefined, {
+  readonly disposeDelay = input(0, { alias: 'skCdkOverlayDisposeDelay' });
+  readonly relativeTo = input<HTMLElement | undefined>(undefined, {
     alias: 'skCdkOverlayRelativeTo',
   });
-  backdropClass = input<string>('cdk-overlay-transparent-backdrop', {
+  readonly backdropClass = input<string>('cdk-overlay-transparent-backdrop', {
     alias: 'skCdkOverlayBackdropClass',
   });
-  panelClass = input<string>('cdk-overlay-panel', {
+  readonly panelClass = input<string>('cdk-overlay-panel', {
     alias: 'skCdkOverlayPanelClass',
   });
-  offsetX = input<number>(0, {
+  readonly offsetX = input<number>(0, {
     alias: 'skCdkOverlayOffsetX',
   });
-  offsetY = input<number>(0, {
+  readonly offsetY = input<number>(0, {
     alias: 'skCdkOverlayOffsetY',
   });
-  visible = output<boolean>({ alias: 'skCdkOverlayVisible' });
+  readonly visible = output<boolean>({ alias: 'skCdkOverlayVisible' });
 
   private _overlayRef?: OverlayRef;
   private _relatedElement?: HTMLElement =
     this.relativeTo() || this.elementRef.nativeElement;
 
-  protected readonly detectVisibleChange = effect(() => {
-    if (this._relatedElement) {
-      if (this.showOverlay()) {
-        this.createOverlay();
-      } else {
-        this.hide();
+  protected readonly detectVisibleChange = effect(
+    () => {
+      if (this._relatedElement) {
+        if (this.showOverlay()) {
+          this.createOverlay();
+        } else {
+          this.hide();
+        }
       }
-    }
-  });
+    },
+    { allowSignalWrites: true }
+  );
 
   protected readonly updateOverlayPortal = effect(() => {
     if (this.windowResize && this.windowResize()) {
@@ -77,6 +84,10 @@ export class CdkOverlayDirective {
       return;
     }
 
+    if (this._overlayRef?.hasAttached()) {
+      return;
+    }
+
     const positionStrategy = this.overlay
       .position()
       .flexibleConnectedTo(this._relatedElement)
@@ -86,20 +97,28 @@ export class CdkOverlayDirective {
       .withDefaultOffsetY(this.offsetY())
       .withFlexibleDimensions(false);
 
+    const scrollStrategy = this.overlay.scrollStrategies.reposition();
+
     this._overlayRef = this.overlay.create({
       hasBackdrop: true,
       backdropClass: this.backdropClass(),
       panelClass: this.panelClass(),
       positionStrategy,
+      scrollStrategy,
     });
 
     this.syncOverlayWidth();
 
+    this._overlayRef
+      .attachments()
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe(() => this.visible.emit(true));
+
+    merge(this._overlayRef.backdropClick(), this._overlayRef.detachments())
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe(() => this.hide());
+
     this._overlayRef.attach(this.portal());
-    merge(
-      this._overlayRef.backdropClick(),
-      this._overlayRef.detachments()
-    ).subscribe(() => this.hide());
   }
 
   private hide(): void {

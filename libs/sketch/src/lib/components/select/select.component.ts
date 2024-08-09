@@ -13,16 +13,15 @@ import {
   untracked,
   ViewEncapsulation,
 } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { CdkOverlayDirective } from './directives/overlay.directive';
 import { CdkPortal } from '@angular/cdk/portal';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { CdkTrapFocus } from '@angular/cdk/a11y';
+import { CdkOverlayDirective } from '../overlay/overlay.directive';
 
 @Component({
   selector: 'sk-select',
   standalone: true,
-  imports: [CommonModule, CdkOverlayDirective, CdkPortal, CdkTrapFocus],
+  imports: [CdkOverlayDirective, CdkPortal, CdkTrapFocus],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,

@@ -429,4 +429,30 @@
       </div>
     </sk-dialog>
   </div>
+
+  <div>
+    <button (click)="isDialogWithSelectOpen = true">
+      open Dialog with nested Dialog
+    </button>
+
+    <sk-dialog
+      [(open)]="isDialogWithSelectOpen"
+      (close)="isDialogWithSelectOpen = false"
+    >
+      <div>
+        Here is some Content.
+
+        <sk-select>
+          <span skSelectPlaceholder>Placeholder</span>
+          <span skSelectLabel>Selected Item</span>
+
+          <sk-select-option [value]="1">Option 1</sk-select-option>
+          <sk-select-option [value]="2">Option 2</sk-select-option>
+          <sk-select-option [value]="3">Option 3</sk-select-option>
+          <sk-select-option [value]="4">Option 4</sk-select-option>
+          <sk-select-option [value]="5">Option 5</sk-select-option>
+        </sk-select>
+      </div>
+    </sk-dialog>
+  </div>
 </div>
