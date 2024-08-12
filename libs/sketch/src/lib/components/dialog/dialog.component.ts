@@ -67,4 +67,11 @@ export class DialogComponent {
     },
     { allowSignalWrites: true }
   );
+
+  handleEscape(event: Event): void {
+    this.close.emit();
+
+    event.preventDefault();
+    event.stopImmediatePropagation();
+  }
 }
