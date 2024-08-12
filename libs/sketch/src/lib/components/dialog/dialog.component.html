@@ -3,7 +3,7 @@
   #dialogElement
   skClickBackdrop
   (clickedBackdrop)="close.emit()"
-  (keydown.escape)="close.emit()"
+  (keydown.escape)="handleEscape($event)"
   [class.display-flex]="open()"
 >
   <div
