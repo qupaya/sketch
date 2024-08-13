@@ -1,6 +1,6 @@
 {
   "name": "@qupaya/ng-sketch",
-  "version": "0.0.6",
+  "version": "0.0.8",
   "peerDependencies": {
     "@angular/cdk": ">=18.0.0",
     "@angular/common": ">=18.0.0",
