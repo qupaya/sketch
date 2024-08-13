@@ -28,7 +28,7 @@
   border: none;
   outline: none;
   background-color: transparent;
-  position: relative;
+  position: fixed;
   align-items: center;
   justify-content: center;
 }
