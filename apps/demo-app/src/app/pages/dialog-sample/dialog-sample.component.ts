@@ -21,6 +21,7 @@ export class DialogSampleComponent {
   isDialogWithOuterButtonLeftOpen = false;
   isDialogWithInnerButtonLeftOpen = false;
   isDialogWithFallbackButtonOpen = false;
+  isDialogWithInnerFallbackButtonOpen = false;
   isDialogWithShadowOpen = false;
   isFullscreenDialogOpen = false;
   isDialogWithOverflowOpen = false;
