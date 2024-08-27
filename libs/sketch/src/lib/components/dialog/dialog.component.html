@@ -20,7 +20,33 @@
           'sk-dialog-inner-close-button-left': innerCloseButton() && closeButtonPosition() === CloseButtonPosition.Left,
       }"
     >
-      <ng-content select="[closeButton]"></ng-content>
+      <ng-content select="[closeButton]">
+        <button (click)="close.emit()" class="fallback-close-button">
+          <svg
+            width="15px"
+            height="15px"
+            viewBox="0 0 100 100"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <line
+              x1="0"
+              y1="100"
+              x2="100"
+              y2="0"
+              stroke-width="15"
+              stroke="black"
+            />
+            <line
+              x1="0"
+              y1="0"
+              x2="100"
+              y2="100"
+              stroke-width="15"
+              stroke="black"
+            />
+          </svg>
+        </button>
+      </ng-content>
     </div>
     }
     <div

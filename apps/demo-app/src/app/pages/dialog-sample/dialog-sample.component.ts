@@ -20,7 +20,8 @@ export class DialogSampleComponent {
   isDialogWithInnerButtonOpen = false;
   isDialogWithOuterButtonLeftOpen = false;
   isDialogWithInnerButtonLeftOpen = false;
-  isDialogWithStyledButtonOpen = false;
+  isDialogWithFallbackButtonOpen = false;
+  isDialogWithInnerFallbackButtonOpen = false;
   isDialogWithShadowOpen = false;
   isFullscreenDialogOpen = false;
   isDialogWithOverflowOpen = false;

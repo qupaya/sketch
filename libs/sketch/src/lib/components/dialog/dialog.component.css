@@ -113,3 +113,15 @@
   width: calc(100% - (var(--sk-dialog-margin) * 2));
   max-width: calc(100svw - (var(--sk-dialog-margin) * 2));
 }
+
+.fallback-close-button {
+  border: none;
+  padding: 10px;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent;
+  cursor: pointer;
+}
