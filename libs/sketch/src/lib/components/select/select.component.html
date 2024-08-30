@@ -30,3 +30,48 @@
     <ng-content></ng-content>
   </div>
 </ng-template>
+
+<hr />
+
+<div
+  #selectedBox
+  role="textbox"
+  class="sk-select-trigger"
+  [skCdkOverlay]="overlay"
+  [skCdkOverlayShow]="panelIsVisible()"
+  [skCdkOverlayDisposeDelay]="animationDelay()"
+  [skCdkOverlayOffsetX]="panelOffsetX()"
+  [skCdkOverlayOffsetY]="panelOffsetY()"
+  [attr.tabindex]="tabIndex()"
+  [class.sk-is-valid]="isValid() !== undefined ? isValid() : ngIsValid()"
+  [class.sk-is-invalid]="
+    isValid() !== undefined ? isValid() === false : ngIsValid() === false
+  "
+  (click)="togglePanel(true)"
+  (keydown.enter)="togglePanel(!this.panelIsVisible())"
+  (keydown.space)="togglePanel(!this.panelIsVisible())"
+  (skCdkOverlayVisible)="panelStateChanged($event)"
+>
+  @if (showPlaceholder()) {
+  <ng-content select="[skSelectPlaceholder]"></ng-content>
+  } @else {
+  <ng-content select="[skSelectLabel]"></ng-content>
+  }
+</div>
+
+<ng-template cdkPortal #overlay="cdkPortal">
+  <div
+    #optionList
+    cdkTrapFocus
+    role="listbox"
+    tabindex="1"
+    style="width: 100%; display: flex; flex-direction: column"
+    (keydown.arrowUp)="keyArrowUp($event)"
+    (keydown.arrowDown)="keyArrowDown($event)"
+    (keydown.backspace)="deleteKey($event)"
+    (keydown.escape)="deleteKeys($event)"
+    (keydown)="logKey($event)"
+  >
+    <ng-content></ng-content>
+  </div>
+</ng-template>

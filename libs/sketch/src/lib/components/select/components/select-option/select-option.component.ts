@@ -1,6 +1,7 @@
 import {
   Component,
   effect,
+  ElementRef,
   HostBinding,
   HostListener,
   inject,
@@ -18,6 +19,7 @@ import { SelectComponent } from '../../select.component';
   styleUrl: './select-option.component.css',
 })
 export class SelectOptionComponent<T> {
+  private readonly elementRef = inject(ElementRef);
   private readonly parent = inject(SelectComponent);
   private tabIndexValue = 1;
   private selected = false;
@@ -59,4 +61,10 @@ export class SelectOptionComponent<T> {
   protected readonly updateTabIndex = effect(() => {
     this.tabIndexValue = this.tabIndex() ?? 1;
   });
+
+  focus(): void {
+    this.elementRef.nativeElement.focus();
+    // needs to haven in the next event stack slot, no time required:
+    setTimeout(() => this.elementRef.nativeElement.scrollIntoView());
+  }
 }
