@@ -1,3 +1,23 @@
+## 0.0.11 (2024-09-11)
+
+### 🚀 Features
+
+- support overlay containers in dialogs ([b421940](https://github.com/qupaya/sketch/commit/b421940))
+- published 0.0.6 ([12f7770](https://github.com/qupaya/sketch/commit/12f7770))
+- make dialog position fixed to keep it in view center ([bced5fc](https://github.com/qupaya/sketch/commit/bced5fc))
+- release sketch 0.0.8 ([bf36a16](https://github.com/qupaya/sketch/commit/bf36a16))
+- release sketch 0.0.9 ([69a7fe6](https://github.com/qupaya/sketch/commit/69a7fe6))
+- release sketch 0.0.10 ([6edabec](https://github.com/qupaya/sketch/commit/6edabec))
+
+### 🩹 Fixes
+
+- stop propagation on dialog escape ([5490883](https://github.com/qupaya/sketch/commit/5490883))
+
+### ❤️ Thank You
+
+- Andreas Tennert
+- Peter Müller @BaggersIO
+
 ## 0.0.4 (2024-08-01)
 
 Fixed deployed files
