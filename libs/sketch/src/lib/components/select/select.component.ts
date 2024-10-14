@@ -3,10 +3,10 @@ import {
   ChangeDetectorRef,
   Component,
   computed,
-  effect,
   forwardRef,
   HostListener,
   inject,
+  Input,
   input,
   output,
   signal,
@@ -36,11 +36,10 @@ import { CdkOverlayDirective } from '../overlay/overlay.directive';
 export class SelectComponent<T> implements ControlValueAccessor {
   private readonly changeDetectorRef = inject(ChangeDetectorRef);
 
-  animationDelay = input(0);
-  closeOnSelect = input(false);
-  panelOffsetX = input(0);
-  panelOffsetY = input(0);
-  multiple = input(false, { transform: booleanAttribute });
+  readonly animationDelay = input(0);
+  readonly closeOnSelect = input(false);
+  readonly panelOffsetX = input(0);
+  readonly panelOffsetY = input(0);
 
   readonly autoFocus = signal(true);
   readonly selectedValue = signal<T | T[] | undefined>(undefined);
@@ -53,6 +52,30 @@ export class SelectComponent<T> implements ControlValueAccessor {
     );
   });
 
+  private readonly isMultiple = signal(false);
+
+  @Input({ transform: booleanAttribute })
+  set multiple(value: boolean) {
+    this.isMultiple.set(value);
+
+    const selectedValue = untracked(this.selectedValue);
+    if (!value) {
+      this.selectedValue.set(
+        Array.isArray(selectedValue) ? selectedValue[0] : selectedValue
+      );
+    } else {
+      this.selectedValue.set(
+        Array.isArray(selectedValue)
+          ? selectedValue
+          : selectedValue
+          ? [selectedValue]
+          : undefined
+      );
+    }
+    this.onChange?.(this.selectedValue());
+    this.onTouched?.();
+  }
+
   readonly open = output<boolean>();
 
   @HostListener('document:keydown.escape')
@@ -62,35 +85,13 @@ export class SelectComponent<T> implements ControlValueAccessor {
     }
   }
 
-  protected readonly updateSelectionMode = effect(
-    () => {
-      const selectedValue = untracked(this.selectedValue);
-      if (!this.multiple()) {
-        this.selectedValue.set(
-          Array.isArray(selectedValue) ? selectedValue[0] : selectedValue
-        );
-      } else {
-        this.selectedValue.set(
-          Array.isArray(selectedValue)
-            ? selectedValue
-            : selectedValue
-            ? [selectedValue]
-            : undefined
-        );
-      }
-      this.onChange?.(this.selectedValue());
-      this.onTouched?.();
-    },
-    { allowSignalWrites: true }
-  );
-
   togglePanel(visible: boolean): void {
     this.panelIsVisible.set(visible);
     this.open.emit(visible);
   }
 
   selectionChanged(value: T): void {
-    if (this.multiple()) {
+    if (this.isMultiple()) {
       this.selectedValue.update((selected) => {
         if (Array.isArray(selected)) {
           return selected.includes(value)

@@ -1,4 +1,4 @@
-import { Component, effect, signal } from '@angular/core';
+import { Component, computed, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
   faArrowAltCircleDown,
@@ -55,7 +55,9 @@ import { FormsModule } from '@angular/forms';
 })
 export class SelectWithStyleComponent {
   readonly showAnimation = signal(false);
-  readonly animateOptions = signal<'hidden' | 'visible'>('hidden');
+  readonly animateOptions = computed<'hidden' | 'visible'>(() =>
+    this.showAnimation() ? 'visible' : 'hidden'
+  );
   readonly multiple = signal(false);
   readonly selectedValues = signal<SelectDemoOption[]>([]);
   readonly options: SelectDemoOption[] = [
@@ -93,11 +95,6 @@ export class SelectWithStyleComponent {
     }
     this.value = value;
   }
-
-  protected readonly runAnimation = effect(
-    () => this.animateOptions.set(this.showAnimation() ? 'visible' : 'hidden'),
-    { allowSignalWrites: true }
-  );
 
   protected readonly Array = Array;
 }
