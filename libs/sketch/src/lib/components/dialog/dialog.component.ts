@@ -52,21 +52,18 @@ export class DialogComponent {
   private readonly dialogElement =
     viewChild.required<ElementRef<HTMLDialogElement>>('dialogElement');
 
-  protected readonly openEvents = effect(
-    () => {
-      const dialog = untracked(this.dialogElement);
-      const containerRef = untracked(this.dialogOverlayContainerRef);
+  protected readonly openEvents = effect(() => {
+    const dialog = untracked(this.dialogElement);
+    const containerRef = untracked(this.dialogOverlayContainerRef);
 
-      if (this.open()) {
-        dialog.nativeElement.showModal();
-        this.overlayContainer.addContainer(containerRef.nativeElement);
-      } else {
-        dialog.nativeElement.close();
-        this.overlayContainer.removeContainer();
-      }
-    },
-    { allowSignalWrites: true }
-  );
+    if (this.open()) {
+      dialog.nativeElement.showModal();
+      this.overlayContainer.addContainer(containerRef.nativeElement);
+    } else {
+      dialog.nativeElement.close();
+      this.overlayContainer.removeContainer();
+    }
+  });
 
   handleEscape(event: Event): void {
     this.close.emit();

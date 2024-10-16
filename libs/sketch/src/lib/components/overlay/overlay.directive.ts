@@ -60,18 +60,15 @@ export class CdkOverlayDirective {
   private _relatedElement?: HTMLElement =
     this.relativeTo() || this.elementRef.nativeElement;
 
-  protected readonly detectVisibleChange = effect(
-    () => {
-      if (this._relatedElement) {
-        if (this.showOverlay()) {
-          this.createOverlay();
-        } else {
-          this.hide();
-        }
+  protected readonly detectVisibleChange = effect(() => {
+    if (this._relatedElement) {
+      if (this.showOverlay()) {
+        this.createOverlay();
+      } else {
+        this.hide();
       }
-    },
-    { allowSignalWrites: true }
-  );
+    }
+  });
 
   protected readonly updateOverlayPortal = effect(() => {
     if (this.windowResize && this.windowResize()) {
