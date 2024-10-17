@@ -4,14 +4,15 @@ import { DOCUMENT } from '@angular/common';
 import {
   DestroyRef,
   Directive,
-  effect,
   ElementRef,
+  EventEmitter,
   inject,
   input,
-  output,
+  Output,
+  OnInit,
 } from '@angular/core';
-import { takeUntilDestroyed, toSignal } from '@angular/core/rxjs-interop';
-import { debounceTime, fromEvent, merge } from 'rxjs';
+import { takeUntilDestroyed, toObservable } from '@angular/core/rxjs-interop';
+import { debounceTime, fromEvent, merge, NEVER } from 'rxjs';
 
 export const DEFAULT_POSITIONS: ConnectedPosition[] = [
   { originX: 'end', originY: 'bottom', overlayX: 'end', overlayY: 'top' },
@@ -21,20 +22,21 @@ export const DEFAULT_POSITIONS: ConnectedPosition[] = [
   selector: '[skCdkOverlay]',
   standalone: true,
 })
-export class CdkOverlayDirective {
+export class CdkOverlayDirective implements OnInit {
   private readonly overlay = inject(Overlay);
   private readonly elementRef = inject(ElementRef<HTMLElement>);
   private readonly destroyRef = inject(DestroyRef);
   private readonly window = inject(DOCUMENT)?.defaultView;
 
-  private readonly windowResize = this.window
-    ? toSignal(fromEvent(this.window, 'resize').pipe(debounceTime(500)))
-    : undefined;
+  private readonly windowResize$ = this.window
+    ? fromEvent(this.window, 'resize').pipe(debounceTime(500))
+    : NEVER;
 
   readonly portal = input<CdkPortal | undefined>(undefined, {
     alias: 'skCdkOverlay',
   });
   readonly showOverlay = input(false, { alias: 'skCdkOverlayShow' });
+  readonly showOverlay$ = toObservable(this.showOverlay);
   readonly connectedPositions = input(DEFAULT_POSITIONS, {
     alias: 'skCdkOverlayPositions',
   });
@@ -54,27 +56,37 @@ export class CdkOverlayDirective {
   readonly offsetY = input<number>(0, {
     alias: 'skCdkOverlayOffsetY',
   });
-  readonly visible = output<boolean>({ alias: 'skCdkOverlayVisible' });
+  @Output('skCdkOverlayVisible')
+  readonly visible = new EventEmitter<boolean>();
 
   private _overlayRef?: OverlayRef;
   private _relatedElement?: HTMLElement =
     this.relativeTo() || this.elementRef.nativeElement;
 
-  protected readonly detectVisibleChange = effect(() => {
-    if (this._relatedElement) {
-      if (this.showOverlay()) {
-        this.createOverlay();
-      } else {
-        this.hide();
-      }
-    }
-  });
+  ngOnInit(): void {
+    this.changeVisibility();
+    this.updateOverlayPortalWidth();
+  }
 
-  protected readonly updateOverlayPortal = effect(() => {
-    if (this.windowResize && this.windowResize()) {
-      this.syncOverlayWidth();
-    }
-  });
+  private updateOverlayPortalWidth(): void {
+    this.windowResize$
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe(() => this.syncOverlayWidth());
+  }
+
+  private changeVisibility(): void {
+    this.showOverlay$
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe((showOverlay) => {
+        if (this._relatedElement) {
+          if (showOverlay) {
+            this.createOverlay();
+          } else {
+            this.hide();
+          }
+        }
+      });
+  }
 
   private createOverlay(): void {
     if (!this._relatedElement) {
